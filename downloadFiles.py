@@ -6,7 +6,7 @@ import requests
 from datetime import datetime
 import pytz
 
-@pycron.cron('*/10 * * * *')
+@pycron.cron('*/5 * * * *')
 async def downloadFile(timestamp: datetime) -> None:
     sys.stdout = open("/var/pythonapps/_downloadFiles.out", 'a')
     print(f"Cron job running at {datetime.now(pytz.timezone('Europe/Vilnius')): %Y-%m-%d  %H:%M:%S}", end='   ')
@@ -16,7 +16,8 @@ async def downloadFile(timestamp: datetime) -> None:
         HOSTNAME = "18.195.203.145"
         USERNAME = "yht004"
         PASSWORD = "Hmyhv5pLA70Wbn732T4a"
-        ftp_server = ftplib.FTP(HOSTNAME, USERNAME, PASSWORD)
+        PORT = 22
+        ftp_server = ftplib.FTP(HOSTNAME, USERNAME, PASSWORD, PORT)
         ftp_server.encoding = "utf-8"
         filename = "pricelist-107377840.csv"
         os.chdir("/var/pythonapps/DataFiles")
@@ -33,7 +34,8 @@ async def downloadFile(timestamp: datetime) -> None:
         HOSTNAME = "194.163.128.173"
         USERNAME = "UABAdemi"
         PASSWORD = "uygvuyi*(YDuiouiy78cyc8T&***YD(*7867987yttTFDDS"
-        ftp_server = ftplib.FTP(HOSTNAME, USERNAME, PASSWORD)
+        PORT = 21
+        ftp_server = ftplib.FTP(HOSTNAME, USERNAME, PASSWORD, PORT)
         ftp_server.encoding = "utf-8"
         filename = "KARTOTEKI.XML"
         os.chdir("/var/pythonapps/DataFiles")
@@ -50,9 +52,10 @@ async def downloadFile(timestamp: datetime) -> None:
         HOSTNAME = "ftp.eetgroup.com"
         USERNAME = "Ledynas"
         PASSWORD = "I1Um77Ignl9Fh172y7DPRjMf"
-        ftp_server = ftplib.FTP(HOSTNAME, USERNAME, PASSWORD)
+        PORT = 22
+        ftp_server = ftplib.FTP(HOSTNAME, USERNAME, PASSWORD, PORT)
         ftp_server.encoding = "utf-8"
-        filename = "KARTOTEKI.XML"
+        filename = "eeteuroparts.csv"
         os.chdir("/var/pythonapps/DataFiles")
         with open(filename, "wb") as file:
             ftp_server.retrbinary(f"RETR {filename}", file.write)
