@@ -1,6 +1,7 @@
 /DataFiles
 /ModDataFiles
-*.out
+_downloadFiles.out
+nohup.out
 .venv/lib/python3.10/site-packages/distutils-precedence.pth
 .venv/lib/python3.10/site-packages/six.py
 .venv/lib/python3.10/site-packages/__pycache__/six.cpython-310.pyc
@@ -2171,5 +2172,3 @@
 .venv/bin/python3
 .venv/bin/python3.10
 .vscode/launch.json
-_downloadFiles.out
-nohup.out
