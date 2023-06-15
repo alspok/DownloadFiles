@@ -2171,3 +2171,5 @@
 .venv/bin/python3
 .venv/bin/python3.10
 .vscode/launch.json
+_downloadFiles.out
+nohup.out
