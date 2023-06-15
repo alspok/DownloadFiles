@@ -1,7 +1,7 @@
 /DataFiles
 /ModDataFiles
-_downloadFiles.out
-nohup.out
+/var/pythonapps/_downloadFiles.out
+/var/pythonapps/nohup.out
 .venv/lib/python3.10/site-packages/distutils-precedence.pth
 .venv/lib/python3.10/site-packages/six.py
 .venv/lib/python3.10/site-packages/__pycache__/six.cpython-310.pyc
