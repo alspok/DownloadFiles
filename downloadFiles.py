@@ -6,7 +6,7 @@ import requests
 from datetime import datetime
 import pytz
 
-@pycron.cron('*/1 * * * *')
+@pycron.cron('*/30 * * * *')
 async def downloadFile(timestamp: datetime) -> None:
     sys.stdout = open("/var/pythonapps/_downloadFiles.out", 'a')
     print(f"Cron job running at {datetime.now(pytz.timezone('Europe/Vilnius')): %Y-%m-%d  %H:%M:%S}", end='   ')
