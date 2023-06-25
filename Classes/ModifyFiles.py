@@ -29,6 +29,35 @@ class ModifyFiles():
 
         pass
 
+    def verkkokouppaModCSV(self):
+        in_file_name = "/var/pythonapps/DataFiles/Verkkokouppa.csv"
+        out_file_name = "/var/pythonapps/ModDataFiles/Verkkokouppa.mod.csv"
+
+        dict_list = []
+        with open(in_file_name, mode='r', encoding='utf-8', errors='ignore') as csvfh:
+            csv_reader = csv.DictReader(csvfh, delimiter=';')
+            for row in csv_reader:
+                dict_list.append(row)
+
+        subst_dict_list = []
+        for item in dict_list:
+            ean_list = item['eans'].split(':')
+            tail_dict = {
+                'sku': item['manufsku'],
+                'manufcturer': item['brand'],
+                'title': item['description'],
+                'price': item['price_wotax'],
+                'stock': item['availability_jatkasaari'],
+                'weight': item['weight']
+                }
+            for ean in ean_list:
+                ean_dict = {'ean': ean}
+                ean_dict.update(tail_dict)
+                subst_dict_list.append(ean_dict)
+
+        pass
+
+
     def gitanaMod() -> None:
 
         pass
@@ -50,4 +79,4 @@ class ModifyFiles():
         pass
 
 if __name__ == '__main__':
-    ModifyFiles().verkkokouppaMod()
+    ModifyFiles().verkkokouppaModCSV()
