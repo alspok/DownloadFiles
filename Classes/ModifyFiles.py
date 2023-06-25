@@ -31,6 +31,7 @@ class ModifyFiles():
 
     def verkkokouppaModCSV(self):
         in_file_name = "/var/pythonapps/DataFiles/Verkkokouppa.csv"
+        min_stock = 5
         out_file_name = "/var/pythonapps/ModDataFiles/Verkkokouppa.mod.csv"
 
         dict_list = []
@@ -53,7 +54,8 @@ class ModifyFiles():
             for ean in ean_list:
                 ean_dict = {'ean': ean}
                 ean_dict.update(tail_dict)
-                subst_dict_list.append(ean_dict)
+                if int(tail_dict['stock']) > min_stock:
+                    subst_dict_list.append(ean_dict)
 
         pass
 
