@@ -51,10 +51,37 @@ class ModifyFiles():
 
         dict_list = []
         with open(in_file_name, mode='r', encoding='utf-8', errors='ignore') as csvfh:
+            next(csvfh)
             csv_reader = csv.DictReader(csvfh, delimiter=';')
-            next(csv_reader)
             for row in csv_reader:
                 dict_list.append(row)
+
+        subst_dict_list = []
+        for item in dict_list:
+             subst_dict ={
+                  'ean': item['EAN'],
+                  'sku': item['Part Number'],
+                  'manufacturer': item['Vendor'],
+                  'title': item['name'],
+                  'stock': item['Qty'],
+                  'price': item['EUR EXW'],
+                  'weight': ''
+             }
+             subst_dict_list.append(item)
+
+        unique_ean_list = []
+        unique_item_dict = []
+        for item in subst_dict_list:
+            if int(item['ean']) not in unique_ean_list and int(item['stock']) >= min_stock:
+                unique_item_dict.append(item)
+
+        fieldnames = unique_item_dict[0].keys()
+
+        with open(f"{out_file_name}", mode='w', encoding='utf-8', newline='') as mcsvfh:
+            writer = csv.DictWriter(mcsvfh, fieldnames=fieldnames, delimiter=';')
+            writer.writeheader()
+            writer.writerows(unique_item_dict)
+
 
         pass
 
