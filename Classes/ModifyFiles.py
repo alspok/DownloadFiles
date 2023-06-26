@@ -35,10 +35,10 @@ class ModifyFiles():
             if int(item['ean']) not in unique_ean_list and int(item['stock']) >= min_stock :
                 unique_item_dict.append(item)
 
-        keys = unique_item_dict[0].keys()
+        fieldnames = unique_item_dict[0].keys()
 
         with open(f"{out_file_name}", mode='w', encoding='utf-8', newline='') as mcsvfh:
-            writer = csv.DictWriter(mcsvfh, fieldnames=unique_item_dict[0].keys(), delimiter=';')
+            writer = csv.DictWriter(mcsvfh, fieldnames=fieldnames, delimiter=';')
             writer.writeheader()
             writer.writerows(unique_item_dict)
 
