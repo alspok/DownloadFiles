@@ -2,7 +2,7 @@ import csv
 
 class ModifyFiles():
    
-    def verkkokouppaModCSV(self):
+    def verkkokouppaMod(self):
         in_file_name = "/var/pythonapps/DataFiles/Verkkokouppa.csv"
         out_file_name = "/var/pythonapps/ModDataFiles/Verkkokouppa.mod.csv"
         min_stock = 1
@@ -44,6 +44,20 @@ class ModifyFiles():
 
         pass
 
+    def apolloMod(self) -> None:
+        in_file_name = "/var/pythonapps/DataFiles/Apollo.csv"
+        out_file_name = "/var/pythonapps/ModDataFiles/Apollo.mod.csv"
+        min_stock = 1
+
+        dict_list = []
+        with open(in_file_name, mode='r', encoding='utf-8', errors='ignore') as csvfh:
+            csv_reader = csv.DictReader(csvfh, delimiter=';')
+            next(csv_reader)
+            for row in csv_reader:
+                dict_list.append(row)
+
+        pass
+
 
     def gitanaMod() -> None:
 
@@ -61,9 +75,7 @@ class ModifyFiles():
 
         pass
 
-    def apolloMod() -> None:
-
-        pass
 
 if __name__ == '__main__':
-    ModifyFiles().verkkokouppaModCSV()
+    # ModifyFiles().verkkokouppaMod()
+    ModifyFiles().apolloMod()
