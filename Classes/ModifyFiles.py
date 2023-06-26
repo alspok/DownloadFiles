@@ -58,22 +58,25 @@ class ModifyFiles():
 
         subst_dict_list = []
         for item in dict_list:
-             subst_dict ={
-                  'ean': item['EAN'],
-                  'sku': item['Part Number'],
-                  'manufacturer': item['Vendor'],
-                  'title': item['name'],
-                  'stock': item['Qty'],
-                  'price': item['EUR EXW'],
-                  'weight': ''
-             }
-             subst_dict_list.append(item)
+            subst_dict = {}
+            subst_dict['ean'] = item['EAN']
+            subst_dict['sku'] = item['Part Number']
+            subst_dict['manufacturer'] = item['Vendor']
+            subst_dict['title'] = item['Name']
+            subst_dict['stock'] = item['Qty']
+            subst_dict['price'] = item['EUR EXW']
+            subst_dict['weight'] = ''
+
+            subst_dict_list.append(subst_dict)
 
         unique_ean_list = []
         unique_item_dict = []
         for item in subst_dict_list:
-            if int(item['ean']) not in unique_ean_list and int(item['stock']) >= min_stock:
-                unique_item_dict.append(item)
+            try:
+                if int(item['ean']) not in unique_ean_list and int(item['stock']) >= min_stock:
+                    unique_item_dict.append(item)
+            except:
+                pass
 
         fieldnames = unique_item_dict[0].keys()
 
@@ -81,7 +84,6 @@ class ModifyFiles():
             writer = csv.DictWriter(mcsvfh, fieldnames=fieldnames, delimiter=';')
             writer.writeheader()
             writer.writerows(unique_item_dict)
-
 
         pass
 
