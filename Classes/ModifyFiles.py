@@ -106,5 +106,5 @@ class ModifyFiles():
 
 
 if __name__ == '__main__':
-    # ModifyFiles().verkkokouppaMod()
+    ModifyFiles().verkkokouppaMod()
     ModifyFiles().apolloMod()
