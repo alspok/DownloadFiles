@@ -10,6 +10,7 @@ class ModifyFiles():
     def verkkokouppaMod(self):
         in_file_name = "/var/pythonapps/DataFiles/Verkkokouppa.csv"
         out_file_name = "/var/pythonapps/ModDataFiles/Verkkokouppa.mod.csv"
+        company = 'Verkkokouppa'
         min_stock = 1
 
         dict_list = []
@@ -30,7 +31,9 @@ class ModifyFiles():
                 'weight': item['weight']
                 }
             for ean in ean_list:
-                ean_dict = {'ean': ean}
+                ean_dict = {}
+                ean_dict.update({'company': company})
+                ean_dict.update({'ean': ean})
                 ean_dict.update(tail_dict)
                 subst_dict_list.append(ean_dict)
 
@@ -52,6 +55,7 @@ class ModifyFiles():
     def apolloMod(self) -> None:
         in_file_name = "/var/pythonapps/DataFiles/Apollo.csv"
         out_file_name = "/var/pythonapps/ModDataFiles/Apollo.mod.csv"
+        company = 'Apollo'
         min_stock = 1
 
         dict_list = []
@@ -64,6 +68,7 @@ class ModifyFiles():
         subst_dict_list = []
         for item in dict_list:
             subst_dict = {}
+            subst_dict['company'] = company
             subst_dict['ean'] = item['EAN']
             subst_dict['sku'] = item['Part Number']
             subst_dict['manufacturer'] = item['Vendor']
@@ -95,6 +100,7 @@ class ModifyFiles():
     def actionMod(self) -> None:
         in_file_name = "/var/pythonapps/DataFiles/Action.csv"
         out_file_name = "/var/pythonapps/ModDataFiles/Action.mod.csv"
+        company = 'Action'
         min_stock = 1
 
         dict_list = []
@@ -107,6 +113,7 @@ class ModifyFiles():
         subst_dict_list = []
         for item in dict_list:
             subst_dict = {}
+            subst_dict['company'] = company
             subst_dict['ean'] = item['EAN']
             subst_dict['sku'] = item['Manufacturer\'s code']
             subst_dict['manufacturer'] = item['Producer']
@@ -248,7 +255,7 @@ class ModifyFiles():
 if __name__ == '__main__':
     # ModifyFiles().verkkokouppaMod()
     # ModifyFiles().apolloMod()
-    # ModifyFiles().actionMod()
+    ModifyFiles().actionMod()
     # ModifyFiles().domitechMod()
     # ModifyFiles().gitanaMod()
-    ModifyFiles().nzdMod()
+    # ModifyFiles().nzdMod()
