@@ -211,7 +211,11 @@ class ModifyFiles():
         company = 'NZD'
         min_stock = 1
         
-        xml_file = ET.parse(in_file_name)
+        try:
+            xml_file = ET.parse(in_file_name)
+        except Exception as e:
+            print(e)
+
         with open(f"{out_file_name}", mode='w', encoding='utf-8') as csvfh:
             csvfile_writer = csv.writer(csvfh, delimiter=';')
 
