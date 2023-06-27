@@ -205,7 +205,7 @@ class ModifyFiles():
 
         pass
 
-    def nzdMod() -> None:
+    def nzdMod(self) -> None:
         in_file_name = "/var/pythonapps/DataFiles/Nzd.xml"
         out_file_name = "/var/pythonapps/ModDataFiles/Nzd.mod.csv"
         company = 'NZD'
@@ -215,22 +215,27 @@ class ModifyFiles():
         with open(f"{out_file_name}", mode='w', encoding='utf-8') as csvfh:
             csvfile_writer = csv.writer(csvfh, delimiter=';')
 
-        csvfile_writer.writerow(['company', 'ean', 'sku', 'manufacturer', 'title', 'stock', 'price', 'weight'])
+            csvfile_writer.writerow(['company', 'ean', 'sku', 'manufacturer', 'title', 'stock', 'price', 'weight'])
 
-        for item in xml_file.findall(''):
+            ean_unique = []
+            for item in xml_file.findall('produkt'):
                 if item:
-                    ean = item.find('EAN').text
-                    sku = item.find('SKU').text
-                    manufacturer = item.find('PRODUCER').text
-                    title = ''
-                    stock = item.find('STOCK').text
-                    if float(stock) <= min_stock:
+                    ean = item.find('kod_kreskowy').text
+                    if ean == None or ean in ean_unique:
                         continue
-                    price = item.find('PRICE').text
-                    weight = ''
-                    csv_line = [ean, sku, manufacturer, title, stock, price, weight]
+                    else:
+                        ean_unique.append(ean)
+                        sku = item.find('indeks_handlowy').text
+                        manufacturer = item.find('producent').text
+                        title = item.find('nazwa').text
+                        stock = item.find('stan_liczbowy').text
+                        if float(stock) <= min_stock:
+                            continue
+                        price = item.find('cena_waluta').text
+                        weight = item.find('waga')
+                        csv_line = [company, ean, sku, manufacturer, title, stock, price, weight]
 
-                    csvfile_writer.writerow(csv_line)
+                        csvfile_writer.writerow(csv_line)
 
         pass
 
@@ -241,5 +246,6 @@ if __name__ == '__main__':
     # ModifyFiles().verkkokouppaMod()
     # ModifyFiles().apolloMod()
     # ModifyFiles().actionMod()
-    ModifyFiles().domitechMod()
+    # ModifyFiles().domitechMod()
     # ModifyFiles().gitanaMod()
+    ModifyFiles().nzdMod()
