@@ -238,7 +238,6 @@ class ModifyFiles():
                         csvfile_writer.writerow(csv_line)
 
         pass
-
    
 
 
