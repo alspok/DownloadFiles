@@ -1,4 +1,7 @@
 import csv
+import xmltodict
+import pprint
+from xml.etree import ElementTree as ET
 
 class ModifyFiles():
    
@@ -135,7 +138,15 @@ class ModifyFiles():
 #---------------------------- XML Files modification ----------------------------
 
     def domitechMod(self) -> None:
+        in_file_name = "/var/pythonapps/DataFiles/Domitech.xml"
+        out_file_name = "/var/pythonapps/ModDataFiles/Domitech.mod.csv"
+        min_stock = 1
 
+        with open(f"{in_file_name}", mode='r', encoding='utf-8', errors='ignore') as xfh:
+            xml_file = xfh.read()
+
+        xml_dict = xmltodict.parse(xml_file)
+        pprint.pprint(xml_dict, indent=2)
 
         pass
 
@@ -153,6 +164,7 @@ class ModifyFiles():
 
 
 if __name__ == '__main__':
-    ModifyFiles().verkkokouppaMod()
-    ModifyFiles().apolloMod()
-    ModifyFiles().actionMod()
+    # ModifyFiles().verkkokouppaMod()
+    # ModifyFiles().apolloMod()
+    # ModifyFiles().actionMod()
+    ModifyFiles().domitechMod()

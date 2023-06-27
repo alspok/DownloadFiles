@@ -2173,3 +2173,12 @@ pythonapps/nohup.out
 .venv/bin/python3.10
 .vscode/launch.json
 _downloadFiles.out
+.venv/lib/python3.10/site-packages/xmltodict.py
+.venv/lib/python3.10/site-packages/__pycache__/xmltodict.cpython-310.pyc
+.venv/lib/python3.10/site-packages/xmltodict-0.13.0.dist-info/INSTALLER
+.venv/lib/python3.10/site-packages/xmltodict-0.13.0.dist-info/LICENSE
+.venv/lib/python3.10/site-packages/xmltodict-0.13.0.dist-info/METADATA
+.venv/lib/python3.10/site-packages/xmltodict-0.13.0.dist-info/RECORD
+.venv/lib/python3.10/site-packages/xmltodict-0.13.0.dist-info/REQUESTED
+.venv/lib/python3.10/site-packages/xmltodict-0.13.0.dist-info/top_level.txt
+.venv/lib/python3.10/site-packages/xmltodict-0.13.0.dist-info/WHEEL
