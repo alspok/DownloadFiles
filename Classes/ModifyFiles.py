@@ -2,6 +2,8 @@ import csv
 
 class ModifyFiles():
    
+#---------------------------- CSV Files modification ----------------------------
+
     def verkkokouppaMod(self):
         in_file_name = "/var/pythonapps/DataFiles/Verkkokouppa.csv"
         out_file_name = "/var/pythonapps/ModDataFiles/Verkkokouppa.mod.csv"
@@ -127,18 +129,21 @@ class ModifyFiles():
             writer = csv.DictWriter(mcsvfh, fieldnames=fieldnames, delimiter=';')
             writer.writeheader()
             writer.writerows(unique_item_dict)
-        
 
         pass
 
+#---------------------------- XML Files modification ----------------------------
+
+    def domitechMod(self) -> None:
+
+
+        pass
 
     def gitanaMod() -> None:
 
         pass
 
-    def domitechcMod() -> None:
-
-        pass
+    
 
     def nzdMod() -> None:
 
