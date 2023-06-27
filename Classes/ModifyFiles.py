@@ -149,22 +149,25 @@ class ModifyFiles():
 
             csvfile_writer.writerow(['company', 'ean', 'sku', 'manufacturer', 'title', 'stock', 'price', 'weight'])
 
+            ean_unique = []
             for item in xml_file.findall('KARTOTEKA'):
                 if item:
                     ean = item.find('EAN').text
-                    if ean == None:
+                    if ean == None or ean in ean_unique:
                         continue
-                    sku = item.find('SKU').text
-                    manufacturer = item.find('PRODUCER').text
-                    title = ''
-                    stock = item.find('STOCK').text
-                    if float(stock) <= min_stock:
-                        continue
-                    price = item.find('PRICE').text
-                    weight = ''
-                    csv_line = [company, ean, sku, manufacturer, title, stock, price, weight]
+                    else:
+                        ean_unique.append(ean)
+                        sku = item.find('SKU').text
+                        manufacturer = item.find('PRODUCER').text
+                        title = ''
+                        stock = item.find('STOCK').text
+                        if float(stock) <= min_stock:
+                            continue
+                        price = item.find('PRICE').text
+                        weight = ''
+                        csv_line = [company, ean, sku, manufacturer, title, stock, price, weight]
 
-                    csvfile_writer.writerow(csv_line)
+                        csvfile_writer.writerow(csv_line)
 
         pass
 
@@ -180,11 +183,14 @@ class ModifyFiles():
 
             csvfile_writer.writerow(['company', 'ean', 'sku', 'manufacturer', 'title', 'stock', 'price', 'weight'])
 
+            ean_unique = []
             for item in xml_file.findall('article'):
-                    if item:
-                        ean = item.find('ean').text
-                        if ean == None:
-                            continue
+                if item:
+                    ean = item.find('ean').text
+                    if ean == None or ean in ean_unique:
+                        continue
+                    else:
+                        ean_unique.append(ean)
                         sku = item.find('artnum').text
                         manufacturer = item.find('manufacturer').text
                         title = item.find('title').text
@@ -198,8 +204,6 @@ class ModifyFiles():
                         csvfile_writer.writerow(csv_line)
 
         pass
-
-    
 
     def nzdMod() -> None:
         in_file_name = "/var/pythonapps/DataFiles/Nzd.xml"
@@ -227,7 +231,6 @@ class ModifyFiles():
                     csv_line = [ean, sku, manufacturer, title, stock, price, weight]
 
                     csvfile_writer.writerow(csv_line)
-
 
         pass
 
