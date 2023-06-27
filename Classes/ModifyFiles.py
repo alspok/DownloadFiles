@@ -140,15 +140,80 @@ class ModifyFiles():
     def domitechMod(self) -> None:
         in_file_name = "/var/pythonapps/DataFiles/Domitech.xml"
         out_file_name = "/var/pythonapps/ModDataFiles/Domitech.mod.csv"
+        company = 'Domitech'
         min_stock = 1
 
         xml_file = ET.parse(in_file_name)
         with open(f"{out_file_name}", mode='w', encoding='utf-8') as csvfh:
-            csvfile_writer = csv.writer(csvfh)
+            csvfile_writer = csv.writer(csvfh, delimiter=';')
 
-            csvfile_writer.writerow(['ean', 'sku', 'manufacturer', 'title', 'stock', 'price', 'weight'])
+            csvfile_writer.writerow(['company', 'ean', 'sku', 'manufacturer', 'title', 'stock', 'price', 'weight'])
 
             for item in xml_file.findall('KARTOTEKA'):
+                if item:
+                    ean = item.find('EAN').text
+                    if ean == None:
+                        continue
+                    sku = item.find('SKU').text
+                    manufacturer = item.find('PRODUCER').text
+                    title = ''
+                    stock = item.find('STOCK').text
+                    if float(stock) <= min_stock:
+                        continue
+                    price = item.find('PRICE').text
+                    weight = ''
+                    csv_line = [company, ean, sku, manufacturer, title, stock, price, weight]
+
+                    csvfile_writer.writerow(csv_line)
+
+        pass
+
+    def gitanaMod(self) -> None:
+        in_file_name = "/var/pythonapps/DataFiles/Gitana.xml"
+        out_file_name = "/var/pythonapps/ModDataFiles/Gitana.mod.csv"
+        company = 'Gitana'
+        min_stock = 1
+
+        xml_file = ET.parse(in_file_name)
+        with open(f"{out_file_name}", mode='w', encoding='utf-8') as csvfh:
+            csvfile_writer = csv.writer(csvfh, delimiter=';')
+
+            csvfile_writer.writerow(['company', 'ean', 'sku', 'manufacturer', 'title', 'stock', 'price', 'weight'])
+
+            for item in xml_file.findall('article'):
+                    if item:
+                        ean = item.find('ean').text
+                        if ean == None:
+                            continue
+                        sku = item.find('artnum').text
+                        manufacturer = item.find('manufacturer').text
+                        title = item.find('title').text
+                        stock = item.find('stock').text
+                        if float(stock) <= min_stock:
+                            continue
+                        price = item.find('price').text
+                        weight = ''
+                        csv_line = [company, ean, sku, manufacturer, title, stock, price, weight]
+
+                        csvfile_writer.writerow(csv_line)
+
+        pass
+
+    
+
+    def nzdMod() -> None:
+        in_file_name = "/var/pythonapps/DataFiles/Nzd.xml"
+        out_file_name = "/var/pythonapps/ModDataFiles/Nzd.mod.csv"
+        company = 'NZD'
+        min_stock = 1
+        
+        xml_file = ET.parse(in_file_name)
+        with open(f"{out_file_name}", mode='w', encoding='utf-8') as csvfh:
+            csvfile_writer = csv.writer(csvfh, delimiter=';')
+
+        csvfile_writer.writerow(['company', 'ean', 'sku', 'manufacturer', 'title', 'stock', 'price', 'weight'])
+
+        for item in xml_file.findall(''):
                 if item:
                     ean = item.find('EAN').text
                     sku = item.find('SKU').text
@@ -163,15 +228,6 @@ class ModifyFiles():
 
                     csvfile_writer.writerow(csv_line)
 
-        pass
-
-    def gitanaMod() -> None:
-
-        pass
-
-    
-
-    def nzdMod() -> None:
 
         pass
 
@@ -183,3 +239,4 @@ if __name__ == '__main__':
     # ModifyFiles().apolloMod()
     # ModifyFiles().actionMod()
     ModifyFiles().domitechMod()
+    # ModifyFiles().gitanaMod()
