@@ -142,11 +142,26 @@ class ModifyFiles():
         out_file_name = "/var/pythonapps/ModDataFiles/Domitech.mod.csv"
         min_stock = 1
 
-        with open(f"{in_file_name}", mode='r', encoding='utf-8', errors='ignore') as xfh:
-            xml_file = xfh.read()
+        xml_file = ET.parse(in_file_name)
+        with open(f"{out_file_name}", mode='w', encoding='utf-8') as csvfh:
+            csvfile_writer = csv.writer(csvfh)
 
-        xml_dict = xmltodict.parse(xml_file)
-        pprint.pprint(xml_dict, indent=2)
+            csvfile_writer.writerow(['ean', 'sku', 'manufacturer', 'title', 'stock', 'price', 'weight'])
+
+            for item in xml_file.findall('KARTOTEKA'):
+                if item:
+                    ean = item.find('EAN').text
+                    sku = item.find('SKU').text
+                    manufacturer = item.find('PRODUCER').text
+                    title = ''
+                    stock = item.find('STOCK').text
+                    if float(stock) <= min_stock:
+                        continue
+                    price = item.find('PRICE').text
+                    weight = ''
+                    csv_line = [ean, sku, manufacturer, title, stock, price, weight]
+
+                    csvfile_writer.writerow(csv_line)
 
         pass
 
