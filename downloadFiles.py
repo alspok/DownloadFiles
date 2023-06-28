@@ -7,7 +7,7 @@ import requests
 from datetime import datetime
 import pytz
 
-@pycron.cron('*/1 * * * *')
+@pycron.cron('*/60 * * * *')
 async def downloadFile(timestamp: datetime) -> None:
     sys.stdout = open("/var/pythonapps/_downloadFiles.out", 'a')
     print(f"Cron job running at {datetime.now(pytz.timezone('Europe/Vilnius')): %Y-%m-%d  %H:%M:%S}", end='   ')
@@ -58,28 +58,33 @@ async def downloadFile(timestamp: datetime) -> None:
         cnopts = pysftp.CnOpts()
         cnopts.hostkeys = None
 
-        with pysftp.Connection(host=HOSTNAME, username=USERNAME, password=PASSWORD, cnopts=cnopts) as sftp:
-            sftp.get()
-
-
-        try:
-            conn = pysftp.Connection(host=HOSTNAME, port=PORT, username=USERNAME, password=PASSWORD, cnopts = cnopts)
-            print("connection established successfully")
-        except Exception as e:
-            print(e)
-
-
-        ftp_server = ftplib.FTP(HOSTNAME, USERNAME, PASSWORD, port=22)
-        ftp_server.encoding = "utf-8"
         filename = "eeteuroparts.csv"
         os.chdir("/var/pythonapps/DataFiles")
-        with open(filename, "wb") as file:
-            ftp_server.retrbinary(f"RETR {filename}", file.write)
+        with pysftp.Connection(host=HOSTNAME, username=USERNAME, password=PASSWORD, cnopts=cnopts) as sftp:
+            sftp.get(filename)
         os.rename(filename, "Eeteuroparts.csv")
-        ftp_server.close()
     except Exception as e:
         print(e)
         pass
+
+    #     try:
+    #         conn = pysftp.Connection(host=HOSTNAME, port=PORT, username=USERNAME, password=PASSWORD, cnopts = cnopts)
+    #         print("connection established successfully")
+    #     except Exception as e:
+    #         print(e)
+
+
+    #     ftp_server = ftplib.FTP(HOSTNAME, USERNAME, PASSWORD, port=22)
+    #     ftp_server.encoding = "utf-8"
+    #     filename = "eeteuroparts.csv"
+    #     os.chdir("/var/pythonapps/DataFiles")
+    #     with open(filename, "wb") as file:
+    #         ftp_server.retrbinary(f"RETR {filename}", file.write)
+    #     os.rename(filename, "Eeteuroparts.csv")
+    #     ftp_server.close()
+    # except Exception as e:
+    #     print(e)
+        # pass
 
     # Donwload FTP APOLO file /MD%20FTP/Apollo%20offer%20CSV.csv
     try:
