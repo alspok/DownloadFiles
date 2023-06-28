@@ -40,8 +40,8 @@ class MenageSQL():
 
         pass
 
-    def insertTable(self, conn: object, table_name: str) -> None:
-        
+    def insertTable(self, conn: object, table_name: str, file_name: str) -> None:
+
 
 
         pass

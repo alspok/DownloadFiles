@@ -11,7 +11,7 @@ def menageSQL() -> None:
 
     file_list = os.listdir(path)
     for file in file_list:
-        msql().insertTable(conn, table_name)
+        msql().insertTable(conn, table_name, file)
     # MenageSQL().dropTable(conn, table_name)
 
     pass
