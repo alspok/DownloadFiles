@@ -147,7 +147,7 @@ class ModifyFiles():
         in_file_name = "/var/pythonapps/DataFiles/Eeteuroparts.csv"
         out_file_name = "/var/pythonapps/ModDataFiles/Eeteuroparts.mod.csv"
         company = 'Eeteuroparts'
-        min_stock = 1
+        min_stock = 1.0
 
         dict_list = []
         with open(in_file_name, mode='r', encoding='utf-8', errors='ignore') as csvfh:
@@ -161,6 +161,8 @@ class ModifyFiles():
             subst_dict = {}
             subst_dict['company'] = company
             subst_dict['ean'] = item['EAN/UPC']
+            if subst_dict['ean'] == '':
+                continue
             subst_dict['sku'] = item['Item Nr']
             subst_dict['manufacturer'] = item['Brand Name']
             subst_dict['title'] = item['Description']
@@ -172,10 +174,12 @@ class ModifyFiles():
 
         unique_ean_list = []
         unique_item_dict = []
+        row_number = 1
         for item in subst_dict_list:
             try:
                 if int(item['ean']) not in unique_ean_list and float(item['stock']) >= min_stock:
                     unique_item_dict.append(item)
+                    row_number += 1
             except Exception as e:
                 print(e)
                 pass
