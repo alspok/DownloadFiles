@@ -304,10 +304,10 @@ class ModifyFiles():
 
 
 if __name__ == '__main__':
-    # ModifyFiles().verkkokouppaMod()
+    ModifyFiles().verkkokouppaMod()
     # ModifyFiles().apolloMod()
     # ModifyFiles().actionMod()
     # ModifyFiles().domitechMod()
     # ModifyFiles().gitanaMod()
-    ModifyFiles().nzdMod()
+    # ModifyFiles().nzdMod()
     # ModifyFiles().eeteuropartsMod()
