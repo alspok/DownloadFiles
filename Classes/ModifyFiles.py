@@ -167,6 +167,8 @@ class ModifyFiles():
             subst_dict['manufacturer'] = item['Brand Name']
             subst_dict['title'] = item['Description']
             subst_dict['stock'] = item['Available for sale'].replace(',', '.')
+            if float(subst_dict['stoce']) < min_stock:
+                continue
             subst_dict['price'] = item['Price'].replace(',', '.')
             subst_dict['weight'] = item['Gross Weight'].replace(',', '.')
 
@@ -174,12 +176,10 @@ class ModifyFiles():
 
         unique_ean_list = []
         unique_item_dict = []
-        row_number = 1
         for item in subst_dict_list:
             try:
-                if int(item['ean']) not in unique_ean_list and float(item['stock']) >= min_stock:
+                if int(item['ean']) not in unique_ean_list:
                     unique_item_dict.append(item)
-                    row_number += 1
             except Exception as e:
                 print(e)
                 pass
@@ -309,5 +309,5 @@ if __name__ == '__main__':
     # ModifyFiles().actionMod()
     # ModifyFiles().domitechMod()
     # ModifyFiles().gitanaMod()
-    # ModifyFiles().nzdMod()
-    ModifyFiles().eeteuropartsMod()
+    ModifyFiles().nzdMod()
+    # ModifyFiles().eeteuropartsMod()
