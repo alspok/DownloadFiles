@@ -152,7 +152,7 @@ class ModifyFiles():
         dict_list = []
         with open(in_file_name, mode='r', encoding='utf-8', errors='ignore') as csvfh:
             # next(csvfh)
-            csv_reader = csv.DictReader(csvfh, delimiter=',')
+            csv_reader = csv.DictReader(csvfh, delimiter=';')
             for row in csv_reader:
                 dict_list.append(row)
 
@@ -164,9 +164,9 @@ class ModifyFiles():
             subst_dict['sku'] = item['Item Nr']
             subst_dict['manufacturer'] = item['Brand Name']
             subst_dict['title'] = item['Description']
-            subst_dict['stock'] = item['Available for sale']
-            subst_dict['price'] = item['Price']
-            subst_dict['weight'] = item['Gross Weight']
+            subst_dict['stock'] = item['Available for sale'].replace(',', '.')
+            subst_dict['price'] = item['Price'].replace(',', '.')
+            subst_dict['weight'] = item['Gross Weight'].replace(',', '.')
 
             subst_dict_list.append(subst_dict)
 
@@ -305,4 +305,5 @@ if __name__ == '__main__':
     # ModifyFiles().actionMod()
     # ModifyFiles().domitechMod()
     # ModifyFiles().gitanaMod()
-    ModifyFiles().nzdMod()
+    # ModifyFiles().nzdMod()
+    ModifyFiles().eeteuropartsMod()
