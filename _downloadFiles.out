@@ -347,3 +347,5 @@ Cron job running at  2023-06-22  17:00:00   ['Verkkokouppa.csv', 'Nzd.xml', 'Act
 Cron job running at  2023-06-22  17:30:00   ['Verkkokouppa.csv', 'Nzd.xml', 'Action.csv', 'Gitana.xml', 'Domitech.xml', 'Apollo.csv']
 Cron job running at  2023-06-22  18:00:00   ('Connection broken: IncompleteRead(87244800 bytes read, 12875514 more expected)', IncompleteRead(87244800 bytes read, 12875514 more expected))
 ['Verkkokouppa.csv', 'Nzd.xml', 'Action.csv', 'Gitana.xml', 'Domitech.xml', 'Apollo.csv']
+Cron job running at  2023-06-27  19:36:00   530 Secure connection required
+['Verkkokouppa.csv', 'Nzd.xml', 'Action.csv', 'Gitana.xml', 'Domitech.xml', 'Apollo.csv']

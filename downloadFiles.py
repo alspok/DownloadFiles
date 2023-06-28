@@ -2,11 +2,12 @@ import os
 import sys
 import pycron
 import ftplib
+import pysftp
 import requests
 from datetime import datetime
 import pytz
 
-@pycron.cron('*/30 * * * *')
+@pycron.cron('*/1 * * * *')
 async def downloadFile(timestamp: datetime) -> None:
     sys.stdout = open("/var/pythonapps/_downloadFiles.out", 'a')
     print(f"Cron job running at {datetime.now(pytz.timezone('Europe/Vilnius')): %Y-%m-%d  %H:%M:%S}", end='   ')
@@ -33,6 +34,7 @@ async def downloadFile(timestamp: datetime) -> None:
         HOSTNAME = "194.163.128.173"
         USERNAME = "UABAdemi"
         PASSWORD = "uygvuyi*(YDuiouiy78cyc8T&***YD(*7867987yttTFDDS"
+
         ftp_server = ftplib.FTP(HOSTNAME, USERNAME, PASSWORD)
         ftp_server.encoding = "utf-8"
         filename = "KARTOTEKI.XML"
@@ -45,30 +47,39 @@ async def downloadFile(timestamp: datetime) -> None:
         print(e)
         pass
 
-    # Download FTP EETEUROPARTS file eeteuroparts.csv output file Eeteuroparts.csv
-    # try:
-    #     HOSTNAME = "ftp.eetgroup.com"
-    #     USERNAME = "Ledynas"
-    #     PASSWORD = "I1Um77Ignl9Fh172y7DPRjMf"
-    #     PORT = 22
+    #Download FTP EETEUROPARTS file eeteuroparts.csv output file Eeteuroparts.csv
+    try:
+        HOSTNAME = "ftp.eetgroup.com"
+        USERNAME = "Ledynas"
+        PASSWORD = "I1Um77Ignl9Fh172y7DPRjMf"
+        PORT = 22
 
-    #     ftps = ftplib.FTP_TLS(HOSTNAME)
-    #     ftps.login(USERNAME, PASSWORD)
-    #     ftps.prot_p()
+        # disable host key checking
+        cnopts = pysftp.CnOpts()
+        cnopts.hostkeys = None
 
-    #     # ftp_server = ftplib.FTP_TLS(HOSTNAME, USERNAME, PASSWORD, PORT)
-    #     # ftp_server.encoding = "utf-8"
-    #     filename = "/eeteuroparts.csv"
-    #     os.chdir("/var/pythonapps/DataFiles")
-    #     with open(filename, "wb") as file:
-    #         ftps.retrbinary(f"RETR {filename}", file.write)
-    #         # ftp_server.retrbinary(f"RETR {filename}", file.write)
-    #     # os.rename(filename, "Eeteuroparts.csv")
-    #     del filename
-    #     ftp_server.close()
-    # except Exception as e:
-    #     print(e)
-        # pass
+        with pysftp.Connection(host=HOSTNAME, username=USERNAME, password=PASSWORD, cnopts=cnopts) as sftp:
+            sftp.get()
+
+
+        try:
+            conn = pysftp.Connection(host=HOSTNAME, port=PORT, username=USERNAME, password=PASSWORD, cnopts = cnopts)
+            print("connection established successfully")
+        except Exception as e:
+            print(e)
+
+
+        ftp_server = ftplib.FTP(HOSTNAME, USERNAME, PASSWORD, port=22)
+        ftp_server.encoding = "utf-8"
+        filename = "eeteuroparts.csv"
+        os.chdir("/var/pythonapps/DataFiles")
+        with open(filename, "wb") as file:
+            ftp_server.retrbinary(f"RETR {filename}", file.write)
+        os.rename(filename, "Eeteuroparts.csv")
+        ftp_server.close()
+    except Exception as e:
+        print(e)
+        pass
 
     # Donwload FTP APOLO file /MD%20FTP/Apollo%20offer%20CSV.csv
     try:
