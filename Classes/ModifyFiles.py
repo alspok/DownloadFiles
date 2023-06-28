@@ -130,7 +130,54 @@ class ModifyFiles():
             try:
                 if int(item['ean']) not in unique_ean_list and int(item['stock']) >= min_stock:
                     unique_item_dict.append(item)
-            except:
+            except Exception as e:
+                print(e)
+                pass
+
+        fieldnames = unique_item_dict[0].keys()
+
+        with open(f"{out_file_name}", mode='w', encoding='utf-8', newline='') as mcsvfh:
+            writer = csv.DictWriter(mcsvfh, fieldnames=fieldnames, delimiter=';')
+            writer.writeheader()
+            writer.writerows(unique_item_dict)
+
+        pass
+
+    def eeteuropartsMod(self) -> None:
+        in_file_name = "/var/pythonapps/DataFiles/Eeteuroparts.csv"
+        out_file_name = "/var/pythonapps/ModDataFiles/Eeteuroparts.mod.csv"
+        company = 'Eeteuroparts'
+        min_stock = 1
+
+        dict_list = []
+        with open(in_file_name, mode='r', encoding='utf-8', errors='ignore') as csvfh:
+            # next(csvfh)
+            csv_reader = csv.DictReader(csvfh, delimiter=',')
+            for row in csv_reader:
+                dict_list.append(row)
+
+        subst_dict_list = []
+        for item in dict_list:
+            subst_dict = {}
+            subst_dict['company'] = company
+            subst_dict['ean'] = item['EAN/UPC']
+            subst_dict['sku'] = item['Item Nr']
+            subst_dict['manufacturer'] = item['Brand Name']
+            subst_dict['title'] = item['Description']
+            subst_dict['stock'] = item['Available for sale']
+            subst_dict['price'] = item['Price']
+            subst_dict['weight'] = item['Gross Weight']
+
+            subst_dict_list.append(subst_dict)
+
+        unique_ean_list = []
+        unique_item_dict = []
+        for item in subst_dict_list:
+            try:
+                if int(item['ean']) not in unique_ean_list and int(item['stock']) >= min_stock:
+                    unique_item_dict.append(item)
+            except Exception as e:
+                print(e)
                 pass
 
         fieldnames = unique_item_dict[0].keys()
