@@ -174,7 +174,7 @@ class ModifyFiles():
         unique_item_dict = []
         for item in subst_dict_list:
             try:
-                if int(item['ean']) not in unique_ean_list and int(item['stock']) >= min_stock:
+                if int(item['ean']) not in unique_ean_list and float(item['stock']) >= min_stock:
                     unique_item_dict.append(item)
             except Exception as e:
                 print(e)
