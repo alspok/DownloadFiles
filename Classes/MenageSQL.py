@@ -22,8 +22,8 @@ class MenageSQL():
                         "title varchar(1000)," \
                         "stock char(255), " \
                         "price char(255)," \
-                        "time_stamps TIMESTAMP DEFAULT CURRENT_TIMESTAMP,"  \
-                        "INDEX (ean)) engine=InnoDB"
+                        "weight char(255)," \
+                        "time_stamps TIMESTAMP DEFAULT CURRENT_TIMESTAMP);"
         
         cursor = conn.cursor()
         query = f"Create table if not exists {table_name} {table_columns}"
@@ -40,20 +40,18 @@ class MenageSQL():
 
         pass
 
-    def insertTable(self, conn: object, table_name: str, file_name: str) -> None:
+    def insertTable(self, conn: object, table_name: str, path: str, file_name: str) -> None:
         import csv
 
-        with open(file_name, mode='r', encoding='utf-8', errors='ignore') as csvfh:
-            reader = csv.reader(csvfh)
+        with open(f"{path}{file_name}", mode='r', encoding='utf-8', errors='ignore') as csvfh:
+            next(csvfh)
+            reader = csv.reader(csvfh, delimiter=';')
             cursor = conn.cursor()
             for row in reader:
-                query = f"insert into {table_name} (company, ean, sku, manufacturer, title, stock, price, time_stamp) values (%s,%s,%s,%s,%s,$s,%s,%s)"
+                query = f"insert into {table_name} (company, ean, sku, manufacturer, title, stock, price, weight) values (%s,%s,%s,%s,%s,%s,%s,%s)"
                 cursor.execute(query, row)
             conn.commit()
 
         cursor.close()
-        conn.close()
-
-
 
         pass

@@ -2958,3 +2958,5 @@ _downloadFiles.out
 .venv/lib/python3.10/site-packages/protobuf-3.20.3.dist-info/WHEEL
 .gitignore
 Classes/__pycache__/MenageSQL.cpython-310.pyc
+Classes/__pycache__/InitValues.cpython-310.pyc
+Classes/__pycache__/InitValues.cpython-310.pyc
