@@ -41,6 +41,18 @@ class MenageSQL():
         pass
 
     def insertTable(self, conn: object, table_name: str, file_name: str) -> None:
+        import csv
+
+        with open(file_name, mode='r', encoding='utf-8', errors='ignore') as csvfh:
+            reader = csv.reader(csvfh)
+            cursor = conn.cursor()
+            for row in reader:
+                query = f"insert into {table_name} (company, ean, sku, manufacturer, title, stock, price, time_stamp) values (%s,%s,%s,%s,%s,$s,%s,%s)"
+                cursor.execute(query, row)
+            conn.commit()
+
+        cursor.close()
+        conn.close()
 
 
 
