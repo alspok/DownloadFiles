@@ -2,6 +2,9 @@
 /ModDataFiles
 pythonapps/_downloadFiles.out
 pythonapps/nohup.out
+__pycache__/
+*.py[cod]
+*$py.class
 .venv/lib/python3.10/site-packages/distutils-precedence.pth
 .venv/lib/python3.10/site-packages/six.py
 .venv/lib/python3.10/site-packages/__pycache__/six.cpython-310.pyc
