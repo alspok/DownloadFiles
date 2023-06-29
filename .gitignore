@@ -1,5 +1,5 @@
-/DataFiles
-/ModDataFiles
+/DataFiles/**
+/ModDataFiles/**
 !DataFiles/.gitkeep
 !ModDataFiles/.gitkeep
 pythonapps/_downloadFiles.out
