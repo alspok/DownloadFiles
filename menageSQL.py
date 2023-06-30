@@ -10,6 +10,8 @@ def menageSQL() -> None:
 
     file_list = os.listdir(path)
     for file in file_list:
+        if file == '.gitkeep':
+            continue
         msql().insertTable(conn, table_name, path, file)
     # MenageSQL().dropTable(conn, table_name)
     conn.close()

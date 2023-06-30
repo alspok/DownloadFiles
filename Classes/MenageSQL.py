@@ -11,6 +11,9 @@ class MenageSQL():
             database = 'e_deals_db'
         )
 
+        cursor = conn.cursor()
+        cursor.execute("set time_zone = 'Europe/Vilnius'")
+
         return conn
     
     def createTable(self, conn: object, table_name: str) -> None:

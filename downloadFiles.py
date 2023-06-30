@@ -7,7 +7,7 @@ import requests
 from datetime import datetime
 import pytz
 
-@pycron.cron('*/60 * * * *')
+@pycron.cron('*/1 * * * *')
 async def downloadFile(timestamp: datetime) -> None:
     sys.stdout = open("/var/pythonapps/_downloadFiles.out", 'a')
     print(f"Cron job running at {datetime.now(pytz.timezone('Europe/Vilnius')): %Y-%m-%d  %H:%M:%S}", end='   ')
@@ -114,13 +114,13 @@ async def downloadFile(timestamp: datetime) -> None:
         pass
 
     # Download URL NZD file Nzd.xml output file Nzd.xml
-    try:
-        url = "https://aw-narzedzia.com.pl/xlm/AW-Narzedzia-XML-45635674.xml"
-        request = requests.get(url, allow_redirects=True)
-        open("Nzd.xml", 'wb').write(request.content)
-    except Exception as e:
-        print(e)
-        pass
+    # try:
+    #     url = "https://aw-narzedzia.com.pl/xlm/AW-Narzedzia-XML-45635674.xml"
+    #     request = requests.get(url, allow_redirects=True)
+    #     open("Nzd.xml", 'wb').write(request.content)
+    # except Exception as e:
+    #     print(e)
+    #     pass
 
     # Download URL ACTION file Action.csv output file Action.csv
     try:
@@ -130,6 +130,25 @@ async def downloadFile(timestamp: datetime) -> None:
     except Exception as e:
         print(e)
         pass
+
+    # Download URL JACOB file haendler_netto.csv output file Jacob.csv
+    try:
+        url = "https://www.jacob.de/content/csvTool/haendler_netto.csv"
+        request = requests.get(url, allow_redirects=True)
+        open("Jacob.csv", 'wb').write(request.content)
+    except Exception as e:
+        print(e)
+        pass
+
+    # Download URL B2B_SPORTS_WHOLESALE partner_b2b_full.xml output file B2B_full.xml
+    try:
+        url = "https://b2bsportswholesale.net/v2/xml/download/format/partner_b2b_full/key/78d2afad8f1fa4c0098dc6b9721f63df/lang/en"
+        request = requests.get(url, allow_redirects=True)
+        open("B2B_full.xml", 'wb').write(request.content)
+    except Exception as e:
+        print(e)
+        pass
+
 
     print(f"{os.listdir()}")
     sys.stdout.close()
