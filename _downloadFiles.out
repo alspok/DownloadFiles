@@ -358,3 +358,13 @@ Cron job running at  2023-06-28  12:00:00   ['Verkkokouppa.csv', 'Nzd.xml', 'Act
 Cron job running at  2023-06-28  13:00:00   ['Verkkokouppa.csv', 'Nzd.xml', 'Action.csv', 'Gitana.xml', 'Domitech.xml', 'Eeteuroparts.csv', 'Apollo.csv']
 Cron job running at  2023-06-28  14:00:00   ('Connection broken: IncompleteRead(83804160 bytes read, 16316154 more expected)', IncompleteRead(83804160 bytes read, 16316154 more expected))
 ['Verkkokouppa.csv', 'Nzd.xml', 'Action.csv', 'Gitana.xml', 'Domitech.xml', 'Eeteuroparts.csv', 'Apollo.csv']
+Cron job running at  2023-06-30  14:31:00   Cron job running at  2023-06-30  14:33:04   ('Connection broken: IncompleteRead(2221 bytes read, 1875 more expected)', IncompleteRead(2221 bytes read, 1875 more expected))
+['.gitkeep', 'Verkkokouppa.csv', 'B2B_full.xml', 'Action.csv', 'Gitana.xml', 'Domitech.xml', 'Eeteuroparts.csv', 'Apollo.csv', 'eeteuroparts.csv']
+Cron job running at  2023-06-30  14:47:01   Cron job running at  2023-06-30  14:48:00   Cron job running at  2023-06-30  14:49:02   Cron job running at  2023-07-02  16:24:00   No hostkey for host ftp.eetgroup.com found.
+Cron job running at  2023-07-02  16:25:01   Cron job running at  2023-07-02  16:26:03   Cron job running at  2023-07-03  11:52:00   No hostkey for host ftp.eetgroup.com found.
+['.gitkeep', 'Verkkokouppa.csv', 'B2B_full.xml', 'Action.csv', 'Gitana.xml', 'Domitech.xml', 'Jacob.csv', 'Eeteuroparts.csv', 'Apollo.csv']
+Cron job running at  2023-07-03  12:05:00   Server 'ftp.eetgroup.com' not found in known_hosts
+Cron job running at  2023-07-03  12:11:00   Server 'ftp.eetgroup.com' not found in known_hosts
+Cron job running at  2023-07-03  12:12:01   
+
+Cron job running at  2023-07-03  12:43:00   Cron job running at  2023-07-03  12:44:01   Cron job running at  2023-07-03  12:45:36   

@@ -6,8 +6,10 @@ import pysftp
 import requests
 from datetime import datetime
 import pytz
+import paramiko
 
-@pycron.cron('*/1 * * * *')
+
+@pycron.cron('*/5 * * * *')
 async def downloadFile(timestamp: datetime) -> None:
     sys.stdout = open("/var/pythonapps/_downloadFiles.out", 'a')
     print(f"Cron job running at {datetime.now(pytz.timezone('Europe/Vilnius')): %Y-%m-%d  %H:%M:%S}", end='   ')
@@ -48,24 +50,35 @@ async def downloadFile(timestamp: datetime) -> None:
         pass
 
     #Download FTP EETEUROPARTS file eeteuroparts.csv output file Eeteuroparts.csv
-    try:
-        HOSTNAME = "ftp.eetgroup.com"
-        USERNAME = "Ledynas"
-        PASSWORD = "I1Um77Ignl9Fh172y7DPRjMf"
-        PORT = 22
+    # try:
+    #     HOSTNAME = "ftp.eetgroup.com"
+    #     USERNAME = "Ledynas"
+    #     PASSWORD = "I1Um77Ignl9Fh172y7DPRjMf"
+    #     PORT = 22
 
-        # disable host key checking
-        cnopts = pysftp.CnOpts()
-        cnopts.hostkeys = None
+    #     # disable host key checking
+    #     cnopts = pysftp.CnOpts()
+    #     cnopts.hostkeys = None
 
-        filename = "eeteuroparts.csv"
-        os.chdir("/var/pythonapps/DataFiles")
-        with pysftp.Connection(host=HOSTNAME, username=USERNAME, password=PASSWORD, cnopts=cnopts) as sftp:
-            sftp.get(filename)
-        os.rename(filename, "Eeteuroparts.csv")
-    except Exception as e:
-        print(e)
-        pass
+    #     #Create an SSHClient object
+    #     client = paramiko.SSHClient()
+    #     #Connect to the server
+    #     client.connect(hostname=HOSTNAME, port=PORT, username=USERNAME, password=PASSWORD)
+    #     os.chdir("/var/pythonapps/DataFiles")
+    #     client.sftp_client.get('eeteuroparts.csv', 'eeteuroparts.csv')
+    #     os.rename(filename, "Eeteuroparts.csv")
+    # except Exception as e:
+    #     print(e)
+    #     pass
+
+    #     filename = "eeteuroparts.csv"
+    #     os.chdir("/var/pythonapps/DataFiles")
+    #     with pysftp.Connection(host=HOSTNAME, username=USERNAME, password=PASSWORD, cnopts=cnopts) as sftp:
+    #         sftp.get(filename)
+    #     os.rename(filename, "Eeteuroparts.csv")
+    # except Exception as e:
+    #     print(e)
+    #     pass
 
     #     try:
     #         conn = pysftp.Connection(host=HOSTNAME, port=PORT, username=USERNAME, password=PASSWORD, cnopts = cnopts)
