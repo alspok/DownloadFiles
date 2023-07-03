@@ -9,7 +9,7 @@ import pytz
 import paramiko
 
 
-@pycron.cron('*/5 * * * *')
+@pycron.cron('*/20 * * * *')
 async def downloadFile(timestamp: datetime) -> None:
     sys.stdout = open("/var/pythonapps/_downloadFiles.out", 'a')
     print(f"Cron job running at {datetime.now(pytz.timezone('Europe/Vilnius')): %Y-%m-%d  %H:%M:%S}", end='   ')
