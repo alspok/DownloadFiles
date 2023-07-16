@@ -329,7 +329,11 @@ class ModifyFiles():
 
             for stock in xml_root.iter('stock'):
                 for item in stock.iter('item'):
-                    print(item.attrib['ean'], item.attrib['quantity'])
+                    if((item.attrib['ean'] in ean_unique) or (item.attrib['quantity'] == '0')):
+                        continue
+                    else:
+                        ean_unique.append(item.attrib['ean'])
+                        # print(item.attrib['ean'], item.attrib['quantity'])
                 
 
                     # if ean == None or ean in ean_unique:
