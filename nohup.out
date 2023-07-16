@@ -1,0 +1,57 @@
+Traceback (most recent call last):
+  File "/var/pythonapps/downloadFiles.py", line 3, in <module>
+    import pycron
+ModuleNotFoundError: No module named 'pycron'
+Traceback (most recent call last):
+  File "/var/pythonapps/downloadFiles.py", line 3, in <module>
+    import pycron
+ModuleNotFoundError: No module named 'pycron'
+Traceback (most recent call last):
+  File "/var/pythonapps/downloadFiles.py", line 3, in <module>
+    import pycron
+ModuleNotFoundError: No module named 'pycron'
+Traceback (most recent call last):
+  File "/var/pythonapps/downloadFiles.py", line 3, in <module>
+    import pycron
+ModuleNotFoundError: No module named 'pycron'
+Traceback (most recent call last):
+  File "/var/pythonapps/downloadFiles.py", line 159, in <module>
+    pycron.start()
+  File "/var/pythonapps/.venv/lib/python3.11/site-packages/pycron/__init__.py", line 104, in start
+    time.sleep(1 - (end_time - start_time))
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "/var/pythonapps/downloadFiles.py", line 159, in <module>
+    pycron.start()
+  File "/var/pythonapps/.venv/lib/python3.11/site-packages/pycron/__init__.py", line 104, in start
+    time.sleep(1 - (end_time - start_time))
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "/var/pythonapps/downloadFiles.py", line 159, in <module>
+    pycron.start()
+  File "/var/pythonapps/.venv/lib/python3.11/site-packages/pycron/__init__.py", line 104, in start
+    time.sleep(1 - (end_time - start_time))
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "/var/pythonapps/downloadFiles.py", line 159, in <module>
+    pycron.start()
+  File "/var/pythonapps/.venv/lib/python3.11/site-packages/pycron/__init__.py", line 104, in start
+    time.sleep(1 - (end_time - start_time))
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "/var/pythonapps/downloadFiles.py", line 159, in <module>
+    pycron.start()
+  File "/var/pythonapps/.venv/lib/python3.11/site-packages/pycron/__init__.py", line 104, in start
+    time.sleep(1 - (end_time - start_time))
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "/var/pythonapps/downloadFiles.py", line 159, in <module>
+    pycron.start()
+  File "/var/pythonapps/.venv/lib/python3.11/site-packages/pycron/__init__.py", line 104, in start
+    time.sleep(1 - (end_time - start_time))
+KeyboardInterrupt
+Exception ignored in: <module 'threading' from '/usr/lib/python3.11/threading.py'>
+Traceback (most recent call last):
+  File "/usr/lib/python3.11/threading.py", line 1583, in _shutdown
+    lock.acquire()
+KeyboardInterrupt: 

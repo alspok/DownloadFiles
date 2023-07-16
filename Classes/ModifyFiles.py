@@ -6,7 +6,7 @@ from xml.etree import ElementTree as ET
 class ModifyFiles():
    
 #---------------------------- CSV Files modification ----------------------------
-
+    # 1
     def verkkokouppaMod(self):
         in_file_name = "/var/pythonapps/DataFiles/Verkkokouppa.csv"
         out_file_name = "/var/pythonapps/ModDataFiles/Verkkokouppa.mod.csv"
@@ -52,6 +52,7 @@ class ModifyFiles():
 
         pass
 
+    # 2
     def apolloMod(self) -> None:
         in_file_name = "/var/pythonapps/DataFiles/Apollo.csv"
         out_file_name = "/var/pythonapps/ModDataFiles/Apollo.mod.csv"
@@ -97,6 +98,7 @@ class ModifyFiles():
 
         pass
 
+    # 3
     def actionMod(self) -> None:
         in_file_name = "/var/pythonapps/DataFiles/Action.csv"
         out_file_name = "/var/pythonapps/ModDataFiles/Action.mod.csv"
@@ -143,6 +145,7 @@ class ModifyFiles():
 
         pass
 
+    # 4
     def eeteuropartsMod(self) -> None:
         in_file_name = "/var/pythonapps/DataFiles/Eeteuroparts.csv"
         out_file_name = "/var/pythonapps/ModDataFiles/Eeteuroparts.mod.csv"
@@ -195,6 +198,7 @@ class ModifyFiles():
 
 #---------------------------- XML Files modification ----------------------------
 
+    # 5
     def domitechMod(self) -> None:
         in_file_name = "/var/pythonapps/DataFiles/Domitech.xml"
         out_file_name = "/var/pythonapps/ModDataFiles/Domitech.mod.csv"
@@ -229,6 +233,7 @@ class ModifyFiles():
 
         pass
 
+    # 6
     def gitanaMod(self) -> None:
         in_file_name = "/var/pythonapps/DataFiles/Gitana.xml"
         out_file_name = "/var/pythonapps/ModDataFiles/Gitana.mod.csv"
@@ -263,6 +268,7 @@ class ModifyFiles():
 
         pass
 
+    # 7
     def nzdMod(self) -> None:
         in_file_name = "/var/pythonapps/DataFiles/Nzd.xml"
         out_file_name = "/var/pythonapps/ModDataFiles/Nzd.mod.csv"
@@ -301,7 +307,33 @@ class ModifyFiles():
 
         pass
    
+    # 8
+    def b2bsportsMod(self) -> None:
+        in_file_name = "/var/pythonapps/DataFiles/B2B_full.xml"
+        out_file_name = "/var/pythonapps/ModDataFiles/B2B_full.mod.csv"
+        company = "B2B_sports"
+        min_stock = 1
 
+        try:
+            xml_file = ET.parse(in_file_name)
+        except Exception as e:
+            print(e)
+
+        with open(f"{out_file_name}", mode='w', encoding='utf-8') as csvfh:
+            csvfile_writer = csv.writer(csvfh, delimiter=';')
+
+            csvfile_writer.writerow(['company', 'ean', 'sku', 'manufacturer', 'title', 'stock', 'price', 'weight'])
+
+            ean_unique = []
+            for item in xml_file.findall('produkt'):
+                if item:
+                    ean = item.find('cn').text
+                    if ean == None or ean in ean_unique:
+                        continue
+                    else:
+                        ean_unique.append(ean)
+
+        pass
 
 if __name__ == '__main__':
     ModifyFiles().verkkokouppaMod()
