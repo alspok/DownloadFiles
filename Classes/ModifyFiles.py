@@ -315,7 +315,8 @@ class ModifyFiles():
         min_stock = 1
 
         try:
-            xml_file = ET.parse(in_file_name)
+            xml_tree = ET.parse(in_file_name)
+            xml_root = xml_tree.getroot()
         except Exception as e:
             print(e)
 
@@ -325,18 +326,22 @@ class ModifyFiles():
             csvfile_writer.writerow(['company', 'ean', 'sku', 'manufacturer', 'title', 'stock', 'price', 'weight'])
 
             ean_unique = []
-            for item in xml_file.findall('produkt'):
-                if item:
-                    ean = item.find('cn').text
-                    if ean == None or ean in ean_unique:
-                        continue
-                    else:
-                        ean_unique.append(ean)
+
+            for stock in xml_root.iter('stock'):
+                for item in stock.iter('item'):
+                    print(item.tag, item.attrib)
+                
+
+                    # if ean == None or ean in ean_unique:
+                    #     continue
+                    # else:
+                    #     ean_unique.append(ean)
 
         pass
 
 if __name__ == '__main__':
-    ModifyFiles().verkkokouppaMod()
+    ModifyFiles().b2bsportsMod()
+    # ModifyFiles().verkkokouppaMod()
     # ModifyFiles().apolloMod()
     # ModifyFiles().actionMod()
     # ModifyFiles().domitechMod()
