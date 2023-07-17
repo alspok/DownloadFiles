@@ -240,14 +240,16 @@ class ModifyFiles():
         company = 'Gitana'
         min_stock = 1
 
-        xml_file = ET.parse(in_file_name)
+        xml_tree = ET.parse(in_file_name)
+        xml_root = xml_tree.getroot()
+
         with open(f"{out_file_name}", mode='w', encoding='utf-8') as csvfh:
             csvfile_writer = csv.writer(csvfh, delimiter=';')
 
             csvfile_writer.writerow(['company', 'ean', 'sku', 'manufacturer', 'title', 'stock', 'price', 'weight'])
 
             ean_unique = []
-            for item in xml_file.findall('article'):
+            for item in xml_tree.iter('article'):
                 if item:
                     ean = item.find('ean').text
                     if ean == None or ean in ean_unique:
@@ -329,12 +331,13 @@ class ModifyFiles():
 
             for stock in xml_root.iter('stock'):
                 for item in stock.iter('item'):
-                    if((item.attrib['ean'] in ean_unique) or (item.attrib['quantity'] == '0')):
+                    if((item.attrib['ean'] in ean_unique) or (float(item.attrib['quantity']) <= min_stock)):
                         continue
                     else:
                         ean_unique.append(item.attrib['ean'])
-                        # print(item.attrib['ean'], item.attrib['quantity'])
+                        print(item.attrib['ean'], item.attrib['quantity'])
                 
+                pass
 
                     # if ean == None or ean in ean_unique:
                     #     continue
@@ -343,8 +346,8 @@ class ModifyFiles():
 
         pass
 
-if __name__ == '__main__':
-    ModifyFiles().b2bsportsMod()
+# if __name__ == '__main__':
+    # ModifyFiles().b2bsportsMod()
     # ModifyFiles().verkkokouppaMod()
     # ModifyFiles().apolloMod()
     # ModifyFiles().actionMod()
