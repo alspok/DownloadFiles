@@ -8,6 +8,7 @@ from datetime import datetime
 import pytz
 import paramiko
 from Classes.ModifyFiles import ModifyFiles
+from Classes.MenageSQL import MenageSQL
 
 
 @pycron.cron('*/60 * * * *')
@@ -163,6 +164,16 @@ async def downloadFiles(timestamp: datetime) -> None:
     ModifyFiles().gitanaMod()
     ModifyFiles().nzdMod()
     ModifyFiles().eeteuropartsMod()
+
+    table_name = "e_deals_tbl"
+    path = "/var/pythonapps/ModDataFiles"
+    conn = MenageSQL().connectDB()
+    MenageSQL.dropTable(conn, table_name)
+    MenageSQL.createTable(conn, table_name)
+    MenageSQL.insertTable(conn, table_name, path)
+
+    conn.close()
+
 
 if __name__ == '__main__':
     pycron.start()

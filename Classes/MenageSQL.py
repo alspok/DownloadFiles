@@ -43,17 +43,24 @@ class MenageSQL():
 
         pass
 
-    def insertTable(self, conn: object, table_name: str, path: str, file_name: str) -> None:
+    def insertTable(self, conn: object, table_name: str, path: str) -> None:
         import csv
+        import os
 
-        with open(f"{path}{file_name}", mode='r', encoding='utf-8', errors='ignore') as csvfh:
-            next(csvfh)
-            reader = csv.reader(csvfh, delimiter=';')
-            cursor = conn.cursor()
-            for row in reader:
-                query = f"insert into {table_name} (company, ean, sku, manufacturer, title, stock, price, weight) values (%s,%s,%s,%s,%s,%s,%s,%s)"
-                cursor.execute(query, row)
-            conn.commit()
+        dir_list = os.listdir(path)
+
+        for file in dir_list:
+            if file == ".gitkeep":
+                continue
+            else:
+                with open(f"{path}{file}", mode='r', encoding='utf-8', errors='ignore') as csvfh:
+                    next(csvfh)
+                    reader = csv.reader(csvfh, delimiter=';')
+                    cursor = conn.cursor()
+                    for row in reader:
+                        query = f"insert into {table_name} (company, ean, sku, manufacturer, title, stock, price, weight) values (%s,%s,%s,%s,%s,%s,%s,%s)"
+                        cursor.execute(query, row)
+                    conn.commit()
 
         cursor.close()
 
