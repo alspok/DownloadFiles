@@ -294,15 +294,13 @@ class ModifyFiles():
                 if item['kod_kreskowy'] == None or item['stan_liczbowy' <= min_stock]:
                         continue
                 else:
-                    ean_unique.append(ean)
-                    sku = item.find('indeks_handlowy').text
-                    manufacturer = item.find('producent').text
-                    title = item.find('nazwa').text
-                    stock = item.find('stan_liczbowy').text
-                    if float(stock) <= min_stock:
-                        continue
-                    price = item.find('cena_waluta').text
-                    weight = item.find('waga')
+                    ean_unique.append(item['kod_krestowy'])
+                    sku = item['indeks_handlowy']
+                    manufacturer = item['producent']
+                    title = item['nazwa']
+                    stock = item['stan_liczbowy']
+                    price = item['cena_waluta']
+                    weight = item['waga']
                     csv_line = [company, ean, sku, manufacturer, title, stock, price, weight]
 
                     csvfile_writer.writerow(csv_line)
