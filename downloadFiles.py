@@ -11,7 +11,7 @@ from Classes.ModifyFiles import ModifyFiles
 from Classes.MenageSQL import MenageSQL
 
 
-@pycron.cron('*/60 * * * *')
+@pycron.cron('*/10 * * * *')
 async def downloadFiles(timestamp: datetime) -> None:
     sys.stdout = open("/var/pythonapps/_downloadFiles.out", 'a')
     print(f"Cron job running at {datetime.now(pytz.timezone('Europe/Vilnius')): %Y-%m-%d  %H:%M:%S}", end='   ')
@@ -157,6 +157,7 @@ async def downloadFiles(timestamp: datetime) -> None:
     print(downloadedFiles)
     sys.stdout.close()
 
+    # 
     ModifyFiles().verkkokouppaMod()
     ModifyFiles().apolloMod()
     ModifyFiles().actionMod()

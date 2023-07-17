@@ -15,6 +15,7 @@ class ModifyFiles():
 
         dict_list = []
         with open(in_file_name, mode='r', encoding='utf-8', errors='ignore') as csvfh:
+            # next(csvfh)
             csv_reader = csv.DictReader(csvfh, delimiter=';')
             for row in csv_reader:
                 dict_list.append(row)
@@ -61,7 +62,7 @@ class ModifyFiles():
 
         dict_list = []
         with open(in_file_name, mode='r', encoding='utf-8', errors='ignore') as csvfh:
-            next(csvfh)
+            # next(csvfh)
             csv_reader = csv.DictReader(csvfh, delimiter=';')
             for row in csv_reader:
                 dict_list.append(row)
@@ -72,7 +73,7 @@ class ModifyFiles():
             subst_dict['company'] = company
             subst_dict['ean'] = item['EAN']
             subst_dict['sku'] = item['Part Number']
-            subst_dict['manufacturer'] = item['Vendor']
+            subst_dict['manufacturer'] = item['\ufeffVendor']
             subst_dict['title'] = item['Name']
             subst_dict['stock'] = item['Qty']
             subst_dict['price'] = item['EUR EXW']
@@ -84,7 +85,7 @@ class ModifyFiles():
         unique_item_dict = []
         for item in subst_dict_list:
             try:
-                if int(item['ean']) not in unique_ean_list and int(item['stock']) >= min_stock:
+                if int(item['ean']) not in unique_ean_list or int(item['stock']) >= min_stock:
                     unique_item_dict.append(item)
             except:
                 pass
@@ -130,7 +131,7 @@ class ModifyFiles():
         unique_item_dict = []
         for item in subst_dict_list:
             try:
-                if int(item['ean']) not in unique_ean_list and int(item['stock']) >= min_stock:
+                if (item['ean'] != '') and (int(item['ean']) not in unique_ean_list) and (int(item['stock']) >= min_stock):
                     unique_item_dict.append(item)
             except Exception as e:
                 print(e)
@@ -278,7 +279,8 @@ class ModifyFiles():
         min_stock = 1
         
         try:
-            xml_file = ET.parse(in_file_name)
+            xml_tree = ET.parse(in_file_name)
+            xml_root = xml_tree.getroot()
         except Exception as e:
             print(e)
 
@@ -288,24 +290,22 @@ class ModifyFiles():
             csvfile_writer.writerow(['company', 'ean', 'sku', 'manufacturer', 'title', 'stock', 'price', 'weight'])
 
             ean_unique = []
-            for item in xml_file.findall('produkt'):
-                if item:
-                    ean = item.find('kod_kreskowy').text
-                    if ean == None or ean in ean_unique:
+            for item in xml_root.iter('produkt'):
+                if item['kod_kreskowy'] == None or item['stan_liczbowy' <= min_stock]:
                         continue
-                    else:
-                        ean_unique.append(ean)
-                        sku = item.find('indeks_handlowy').text
-                        manufacturer = item.find('producent').text
-                        title = item.find('nazwa').text
-                        stock = item.find('stan_liczbowy').text
-                        if float(stock) <= min_stock:
-                            continue
-                        price = item.find('cena_waluta').text
-                        weight = item.find('waga')
-                        csv_line = [company, ean, sku, manufacturer, title, stock, price, weight]
+                else:
+                    ean_unique.append(ean)
+                    sku = item.find('indeks_handlowy').text
+                    manufacturer = item.find('producent').text
+                    title = item.find('nazwa').text
+                    stock = item.find('stan_liczbowy').text
+                    if float(stock) <= min_stock:
+                        continue
+                    price = item.find('cena_waluta').text
+                    weight = item.find('waga')
+                    csv_line = [company, ean, sku, manufacturer, title, stock, price, weight]
 
-                        csvfile_writer.writerow(csv_line)
+                    csvfile_writer.writerow(csv_line)
 
         pass
    
@@ -346,12 +346,12 @@ class ModifyFiles():
 
         pass
 
-# if __name__ == '__main__':
+if __name__ == '__main__':
     # ModifyFiles().b2bsportsMod()
     # ModifyFiles().verkkokouppaMod()
     # ModifyFiles().apolloMod()
     # ModifyFiles().actionMod()
     # ModifyFiles().domitechMod()
     # ModifyFiles().gitanaMod()
-    # ModifyFiles().nzdMod()
+    ModifyFiles().nzdMod()
     # ModifyFiles().eeteuropartsMod()
