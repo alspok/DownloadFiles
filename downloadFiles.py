@@ -164,7 +164,7 @@ async def downloadFiles(timestamp: datetime) -> None:
     ModifyFiles().domitechMod() #
     ModifyFiles().gitanaMod() #
     ModifyFiles().nzdMod() #
-    ModifyFiles().b2bsportsMod() #
+    # ModifyFiles().b2bsportsMod() #
     # ModifyFiles().eeteuropartsMod()
 
     table_name = "e_deals_tbl"
