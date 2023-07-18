@@ -72,11 +72,11 @@ class ModifyFiles():
             subst_dict = {}
             subst_dict['company'] = company
             subst_dict['ean'] = item['EAN']
-            subst_dict['sku'] = item['Part Number']
-            subst_dict['manufacturer'] = item['\ufeffVendor']
+            subst_dict['sku'] = item['\ufeffPart number']
+            subst_dict['manufacturer'] = item['Producer']
             subst_dict['title'] = item['Name']
-            subst_dict['stock'] = item['Qty']
-            subst_dict['price'] = item['EUR EXW']
+            subst_dict['stock'] = item['Quantity']
+            subst_dict['price'] = item['Price EURO EXW']
             subst_dict['weight'] = ''
 
             subst_dict_list.append(subst_dict)
@@ -345,10 +345,10 @@ class ModifyFiles():
 
         pass
 
-# if __name__ == '__main__':
+if __name__ == '__main__':
     # ModifyFiles().b2bsportsMod()
     # ModifyFiles().verkkokouppaMod()
-    # ModifyFiles().apolloMod()
+    ModifyFiles().apolloMod()
     # ModifyFiles().actionMod()
     # ModifyFiles().domitechMod()
     # ModifyFiles().gitanaMod()
