@@ -160,7 +160,7 @@ async def downloadFiles(timestamp: datetime) -> None:
     # 
     ModifyFiles().verkkokouppaMod() #
     ModifyFiles().apolloMod() #
-    ModifyFiles().actionMod() #
+    # ModifyFiles().actionMod() #
     ModifyFiles().domitechMod() #
     ModifyFiles().gitanaMod() #
     ModifyFiles().nzdMod() #
