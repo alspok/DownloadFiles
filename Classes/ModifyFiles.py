@@ -290,17 +290,18 @@ class ModifyFiles():
             csvfile_writer.writerow(['company', 'ean', 'sku', 'manufacturer', 'title', 'stock', 'price', 'weight'])
 
             ean_unique = []
-            for item in xml_root.iter('produkt'):
-                if item['kod_kreskowy'] == None or item['stan_liczbowy' <= min_stock]:
+            for item in xml_root.findall('produkt'):
+                if item[5].text in ean_unique or item[5].text == None or float(item[9].text.replace(',', '.')) <= min_stock:
                         continue
                 else:
-                    ean_unique.append(item['kod_krestowy'])
-                    sku = item['indeks_handlowy']
-                    manufacturer = item['producent']
-                    title = item['nazwa']
-                    stock = item['stan_liczbowy']
-                    price = item['cena_waluta']
-                    weight = item['waga']
+                    ean_unique.append(item[5].text)
+                    ean = item[5].text
+                    sku = item[2].text
+                    manufacturer = item[8].text
+                    title = item[6].text
+                    stock = item[9].text
+                    price = item[0].text
+                    weight = item[10].text
                     csv_line = [company, ean, sku, manufacturer, title, stock, price, weight]
 
                     csvfile_writer.writerow(csv_line)
@@ -344,12 +345,12 @@ class ModifyFiles():
 
         pass
 
-if __name__ == '__main__':
+# if __name__ == '__main__':
     # ModifyFiles().b2bsportsMod()
     # ModifyFiles().verkkokouppaMod()
     # ModifyFiles().apolloMod()
     # ModifyFiles().actionMod()
     # ModifyFiles().domitechMod()
     # ModifyFiles().gitanaMod()
-    ModifyFiles().nzdMod()
+    # ModifyFiles().nzdMod()
     # ModifyFiles().eeteuropartsMod()
