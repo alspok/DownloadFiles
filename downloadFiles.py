@@ -11,7 +11,7 @@ from Classes.ModifyFiles import ModifyFiles
 from Classes.MenageSQL import MenageSQL
 
 
-@pycron.cron('*/30 * * * *')
+@pycron.cron('*/10 * * * *')
 async def downloadFiles(timestamp: datetime) -> None:
     sys.stdout = open("/var/pythonapps/_downloadFiles.out", 'a')
     print(f"Cron job running at {datetime.now(pytz.timezone('Europe/Vilnius')): %Y-%m-%d  %H:%M:%S}", end='   ')
@@ -49,7 +49,7 @@ async def downloadFiles(timestamp: datetime) -> None:
         os.chdir("/var/pythonapps/DataFiles")
         with open(filename, "wb") as file:
             ftp_server.retrbinary(f"RETR {filename}", file.write)
-        ren_filename = "Kartoteki.xml"
+        ren_filename = "Domitech.xml"
         os.rename(filename, ren_filename)
         downloadedFiles.append(ren_filename)
         ftp_server.close()
@@ -158,13 +158,14 @@ async def downloadFiles(timestamp: datetime) -> None:
     sys.stdout.close()
 
     # 
-    ModifyFiles().verkkokouppaMod()
-    ModifyFiles().apolloMod()
-    ModifyFiles().actionMod()
-    ModifyFiles().domitechMod()
-    ModifyFiles().gitanaMod()
-    ModifyFiles().nzdMod()
-    ModifyFiles().eeteuropartsMod()
+    ModifyFiles().verkkokouppaMod() #
+    ModifyFiles().apolloMod() #
+    ModifyFiles().actionMod() #
+    ModifyFiles().domitechMod() #
+    ModifyFiles().gitanaMod() #
+    ModifyFiles().nzdMod() #
+    ModifyFiles().b2bsportsMod() #
+    # ModifyFiles().eeteuropartsMod()
 
     table_name = "e_deals_tbl"
     path = "/var/pythonapps/ModDataFiles"

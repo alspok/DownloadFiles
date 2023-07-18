@@ -148,3 +148,112 @@ Traceback (most recent call last):
   File "/var/pythonapps/.venv/lib/python3.11/site-packages/pycron/__init__.py", line 104, in start
     time.sleep(1 - (end_time - start_time))
 KeyboardInterrupt
+Exception in thread Thread-1:
+Traceback (most recent call last):
+  File "/usr/lib/python3.11/threading.py", line 1038, in _bootstrap_inner
+    self.run()
+  File "/var/pythonapps/.venv/lib/python3.11/site-packages/pycron/__init__.py", line 24, in run
+    asyncio.run(self.function(datetime.now()))
+  File "/usr/lib/python3.11/asyncio/runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/asyncio/base_events.py", line 653, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/var/pythonapps/downloadFiles.py", line 162, in downloadFiles
+    ModifyFiles().apolloMod()
+  File "/var/pythonapps/Classes/ModifyFiles.py", line 75, in apolloMod
+    subst_dict['sku'] = item['Part Number']
+                        ~~~~^^^^^^^^^^^^^^^
+KeyError: 'Part Number'
+Exception in thread Thread-1:
+Traceback (most recent call last):
+  File "/usr/lib/python3.11/threading.py", line 1038, in _bootstrap_inner
+    self.run()
+  File "/var/pythonapps/.venv/lib/python3.11/site-packages/pycron/__init__.py", line 24, in run
+    asyncio.run(self.function(datetime.now()))
+  File "/usr/lib/python3.11/asyncio/runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/asyncio/base_events.py", line 653, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/var/pythonapps/downloadFiles.py", line 162, in downloadFiles
+    ModifyFiles().apolloMod() #
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/pythonapps/Classes/ModifyFiles.py", line 75, in apolloMod
+    subst_dict['sku'] = item['Part Number']
+                        ~~~~^^^^^^^^^^^^^^^
+KeyError: 'Part Number'
+Exception in thread Thread-2:
+Traceback (most recent call last):
+  File "/usr/lib/python3.11/threading.py", line 1038, in _bootstrap_inner
+    self.run()
+  File "/var/pythonapps/.venv/lib/python3.11/site-packages/pycron/__init__.py", line 24, in run
+    asyncio.run(self.function(datetime.now()))
+  File "/usr/lib/python3.11/asyncio/runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/asyncio/base_events.py", line 653, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/var/pythonapps/downloadFiles.py", line 162, in downloadFiles
+    ModifyFiles().apolloMod() #
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/pythonapps/Classes/ModifyFiles.py", line 75, in apolloMod
+    subst_dict['sku'] = item['Part Number']
+                        ~~~~^^^^^^^^^^^^^^^
+KeyError: 'Part Number'
+Exception in thread Thread-3:
+Traceback (most recent call last):
+  File "/usr/lib/python3.11/threading.py", line 1038, in _bootstrap_inner
+    self.run()
+  File "/var/pythonapps/.venv/lib/python3.11/site-packages/pycron/__init__.py", line 24, in run
+    asyncio.run(self.function(datetime.now()))
+  File "/usr/lib/python3.11/asyncio/runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/asyncio/base_events.py", line 653, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/var/pythonapps/downloadFiles.py", line 162, in downloadFiles
+    ModifyFiles().apolloMod() #
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/pythonapps/Classes/ModifyFiles.py", line 75, in apolloMod
+    subst_dict['sku'] = item['Part Number']
+                        ~~~~^^^^^^^^^^^^^^^
+KeyError: 'Part Number'
+Exception in thread Thread-4:
+Traceback (most recent call last):
+  File "/usr/lib/python3.11/threading.py", line 1038, in _bootstrap_inner
+    self.run()
+  File "/var/pythonapps/.venv/lib/python3.11/site-packages/pycron/__init__.py", line 24, in run
+    asyncio.run(self.function(datetime.now()))
+  File "/usr/lib/python3.11/asyncio/runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/asyncio/base_events.py", line 653, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/var/pythonapps/downloadFiles.py", line 162, in downloadFiles
+    ModifyFiles().apolloMod() #
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/pythonapps/Classes/ModifyFiles.py", line 75, in apolloMod
+    subst_dict['sku'] = item['Part Number']
+                        ~~~~^^^^^^^^^^^^^^^
+KeyError: 'Part Number'

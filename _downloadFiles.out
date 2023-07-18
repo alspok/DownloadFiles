@@ -974,3 +974,12 @@ Cron job running at  2023-07-17  15:00:00   ['Verkkokouppa.csv', 'Kartoteki.xml'
 Cron job running at  2023-07-17  15:50:00   ['Verkkokouppa.csv', 'Kartoteki.xml', 'Apollo.csv', 'Gitana.xml', 'Nzd.xml', 'Action.csv', 'Jacob.csv', 'B2B_full.xml']
 
 
+Cron job running at  2023-07-18  14:30:00   ['Verkkokouppa.csv', 'Kartoteki.xml', 'Apollo.csv', 'Gitana.xml', 'Nzd.xml', 'Action.csv', 'Jacob.csv', 'B2B_full.xml']
+
+
+Cron job running at  2023-07-18  16:00:00   550 Can't open Dovitech.XML: No such file or directory
+['Verkkokouppa.csv', 'Apollo.csv', 'Gitana.xml', 'Nzd.xml', 'Action.csv', 'Jacob.csv', 'B2B_full.xml']
+Cron job running at  2023-07-18  16:30:00   550 Can't open Dovitech.XML: No such file or directory
+['Verkkokouppa.csv', 'Apollo.csv', 'Gitana.xml', 'Nzd.xml', 'Action.csv', 'Jacob.csv', 'B2B_full.xml']
+
+
