@@ -167,14 +167,14 @@ async def downloadFiles(timestamp: datetime) -> None:
     # ModifyFiles().b2bsportsMod() #
     # ModifyFiles().eeteuropartsMod()
 
-    table_name = "e_deals_tbl"
-    path = "/var/pythonapps/ModDataFiles"
-    conn = MenageSQL().connectDB()
-    MenageSQL.dropTable(conn, table_name)
-    MenageSQL.createTable(conn, table_name)
-    MenageSQL.insertTable(conn, table_name, path)
+    # table_name = "e_deals_tbl"
+    # path = "/var/pythonapps/ModDataFiles"
+    # conn = MenageSQL().connectDB()
+    # MenageSQL.dropTable(conn, table_name)
+    # MenageSQL.createTable(conn, table_name)
+    # MenageSQL.insertTable(conn, table_name, path)
 
-    conn.close()
+    # conn.close()
 
 
 if __name__ == '__main__':
