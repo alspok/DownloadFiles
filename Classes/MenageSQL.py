@@ -26,7 +26,7 @@ class MenageSQL():
                         "stock char(255), " \
                         "price char(255)," \
                         "weight char(255)," \
-                        "time_stamps TIMESTAMP DEFAULT CURRENT_TIMESTAMP);"
+                        "time_stamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP);"
         
         cursor = conn.cursor()
         query = f"Create table if not exists {table_name} {table_columns}"
@@ -65,6 +65,7 @@ class MenageSQL():
                         cursor.execute(query, row)
                     conn.commit()
                     modFiles.append(file)
+                    print(modFiles)
 
         cursor.close()
 
