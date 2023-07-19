@@ -65,8 +65,6 @@ class MenageSQL():
                         cursor.execute(query, row)
                     conn.commit()
                     modFiles.append(file)
-                
-                # print(f"{file} inserted to mysql.")
 
         cursor.close()
 
