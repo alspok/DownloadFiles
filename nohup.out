@@ -656,3 +656,25 @@ Traceback (most recent call last):
     subst_dict['ean'] = item['EAN']
                         ~~~~^^^^^^^
 KeyError: 'EAN'
+Exception in thread Thread-1:
+Traceback (most recent call last):
+  File "/usr/lib/python3.11/threading.py", line 1038, in _bootstrap_inner
+    self.run()
+  File "/var/pythonapps/.venv/lib/python3.11/site-packages/pycron/__init__.py", line 24, in run
+    asyncio.run(self.function(datetime.now()))
+  File "/usr/lib/python3.11/asyncio/runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/asyncio/base_events.py", line 653, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/var/pythonapps/downloadFiles.py", line 162, in downloadFiles
+    ModifyFiles().actionMod() #
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/pythonapps/Classes/ModifyFiles.py", line 120, in actionMod
+    subst_dict['ean'] = item['EAN']
+                        ~~~~^^^^^^^
+KeyError: 'EAN'
