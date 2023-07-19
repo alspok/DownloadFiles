@@ -51,6 +51,7 @@ class MenageSQL():
 
         dir_list = os.listdir(path)
 
+        modFiles =[]
         for file in dir_list:
             if file == ".gitkeep":
                 continue
@@ -63,9 +64,10 @@ class MenageSQL():
                         query = f"insert into {table_name} (company, ean, sku, manufacturer, title, stock, price, weight) values (%s,%s,%s,%s,%s,%s,%s,%s)"
                         cursor.execute(query, row)
                     conn.commit()
+                    modFiles.append(file)
                 
-                print(f"{file} inserted to mysql.")
+                # print(f"{file} inserted to mysql.")
 
         cursor.close()
 
-        pass
+        return modFiles
