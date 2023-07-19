@@ -6,13 +6,10 @@ def menageSQL() -> None:
     path = '/var/pythonapps/ModDataFiles/'
 
     conn = msql().connectDB()
+    msql().dropTable(conn, table_name)
     msql().createTable(conn, table_name)
 
-    file_list = os.listdir(path)
-    for file in file_list:
-        if file == '.gitkeep':
-            continue
-        msql().insertTable(conn, table_name, path, file)
+    msql().insertTable(conn, table_name, path)
     # MenageSQL().dropTable(conn, table_name)
     conn.close()
 

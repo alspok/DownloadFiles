@@ -22,7 +22,7 @@ class MenageSQL():
                         "ean char(255)," \
                         "sku char(255)," \
                         "manufacturer varchar(500)," \
-                        "title varchar(1000)," \
+                        "title varchar(2000)," \
                         "stock char(255), " \
                         "price char(255)," \
                         "weight char(255)," \
@@ -36,10 +36,12 @@ class MenageSQL():
         pass
 
     def dropTable(self, conn, table_name) -> None:
-        query = f"drop table {table_name}"
+        query = f"drop table if exists {table_name}"
         cursor = conn.cursor()
         cursor. execute(query)
         conn.commit()
+
+        cursor.close()
 
         pass
 
@@ -61,6 +63,8 @@ class MenageSQL():
                         query = f"insert into {table_name} (company, ean, sku, manufacturer, title, stock, price, weight) values (%s,%s,%s,%s,%s,%s,%s,%s)"
                         cursor.execute(query, row)
                     conn.commit()
+                
+                print(f"{file} inserted to mysql.")
 
         cursor.close()
 

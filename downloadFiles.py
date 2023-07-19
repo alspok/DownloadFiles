@@ -9,9 +9,10 @@ import pytz
 import paramiko
 from Classes.ModifyFiles import ModifyFiles
 from Classes.MenageSQL import MenageSQL
+import menageSQL
 
 
-@pycron.cron('*/20 * * * *')
+@pycron.cron('*/40 * * * *')
 async def downloadFiles(timestamp: datetime) -> None:
     sys.stdout = open("/var/pythonapps/_downloadFiles.out", 'a')
     print(f"Cron job running at {datetime.now(pytz.timezone('Europe/Vilnius')): %Y-%m-%d  %H:%M:%S}", end='   ')
@@ -167,14 +168,7 @@ async def downloadFiles(timestamp: datetime) -> None:
     # ModifyFiles().b2bsportsMod() #
     # ModifyFiles().eeteuropartsMod()
 
-    # table_name = "e_deals_tbl"
-    # path = "/var/pythonapps/ModDataFiles"
-    # conn = MenageSQL().connectDB()
-    # MenageSQL.dropTable(conn, table_name)
-    # MenageSQL.createTable(conn, table_name)
-    # MenageSQL.insertTable(conn, table_name, path)
-
-    # conn.close()
+    menageSQL()
 
 
 if __name__ == '__main__':
