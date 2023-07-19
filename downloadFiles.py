@@ -153,17 +153,17 @@ async def downloadFiles(timestamp: datetime) -> None:
         print(e)
         pass
 
-
     print(downloadedFiles)
     sys.stdout.close()
 
     # 
     ModifyFiles().verkkokouppaMod() #
     ModifyFiles().apolloMod() #
-    # ModifyFiles().actionMod() #
+    ModifyFiles().actionMod() #
     ModifyFiles().domitechMod() #
     ModifyFiles().gitanaMod() #
     ModifyFiles().nzdMod() #
+    ModifyFiles().jacobMod() #
     # ModifyFiles().b2bsportsMod() #
     # ModifyFiles().eeteuropartsMod()
 
