@@ -407,7 +407,7 @@ class ModifyFiles():
 
         pass
 
-if __name__ == '__main__':
+# if __name__ == '__main__':
     # ModifyFiles().b2bsportsMod()
     # ModifyFiles().verkkokouppaMod()
     # ModifyFiles().apolloMod()
@@ -416,4 +416,4 @@ if __name__ == '__main__':
     # ModifyFiles().gitanaMod()
     # ModifyFiles().nzdMod()
     # ModifyFiles().eeteuropartsMod()
-    ModifyFiles().jacobMod()
+    # ModifyFiles().jacobMod()
