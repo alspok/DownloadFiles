@@ -155,6 +155,7 @@ async def downloadFiles(timestamp: datetime) -> None:
         pass
 
     print(downloadedFiles)
+    sys.stdout.close()
 
     # 
     ModifyFiles().verkkokouppaMod() # 1
@@ -167,12 +168,7 @@ async def downloadFiles(timestamp: datetime) -> None:
     ModifyFiles().b2bsportsMod() # 8
     # ModifyFiles().eeteuropartsMod()
 
-
-    print(f"MySQL adds files at {datetime.now(pytz.timezone('Europe/Vilnius')): %Y-%m-%d  %H:%M:%S}", end='   ')
-    modFiles = menageSQL()
-
-    print(modFiles)
-    sys.stdout.close()
+    MenageSQL().menageSQL()
 
 
 if __name__ == '__main__':
