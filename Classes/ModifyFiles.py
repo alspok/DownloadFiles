@@ -27,8 +27,8 @@ class ModifyFiles():
                 'sku': item['manufsku'],
                 'manufcturer': item['brand'],
                 'title': item['description'],
-                'price': item['price_wotax'],
                 'stock': item['availability_jatkasaari'],
+                'price': item['price_wotax'],
                 'weight': item['weight']
                 }
             for ean in ean_list:

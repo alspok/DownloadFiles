@@ -61,7 +61,7 @@ class MenageSQL():
                     reader = csv.reader(csvfh, delimiter=';')
                     cursor = conn.cursor()
                     for row in reader:
-                        query = f"insert into {table_name} (company, ean, sku, manufacturer, title, price, stock, weight) values (%s,%s,%s,%s,%s,%s,%s,%s)"
+                        query = f"insert into {table_name} (company, ean, sku, manufacturer, title, stock, price, weight) values (%s,%s,%s,%s,%s,%s,%s,%s)"
                         cursor.execute(query, row)
                     conn.commit()
                     modFiles.append(file)
