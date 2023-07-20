@@ -168,7 +168,7 @@ async def downloadFiles(timestamp: datetime) -> None:
     ModifyFiles().b2bsportsMod() # 8
     # ModifyFiles().eeteuropartsMod()
 
-    MenageSQL().menageSQL()
+    menageSQL()
 
 
 if __name__ == '__main__':
