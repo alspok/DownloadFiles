@@ -2,11 +2,9 @@ import os
 import sys
 import pycron
 import ftplib
-import pysftp
 import requests
 from datetime import datetime
 import pytz
-import paramiko
 from Classes.ModifyFiles import ModifyFiles
 from Classes.MenageSQL import MenageSQL
 import menageSQL

@@ -897,3 +897,9 @@ Traceback (most recent call last):
   File "/var/DownloadFiles/downloadFiles.py", line 3, in <module>
     import pycron
 ModuleNotFoundError: No module named 'pycron'
+Traceback (most recent call last):
+  File "/var/DownloadFiles/downloadFiles.py", line 8, in <module>
+    from Classes.ModifyFiles import ModifyFiles
+  File "/var/DownloadFiles/Classes/ModifyFiles.py", line 2, in <module>
+    import xmltodict
+ModuleNotFoundError: No module named 'xmltodict'
