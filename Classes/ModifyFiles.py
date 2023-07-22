@@ -8,8 +8,9 @@ class ModifyFiles():
 #---------------------------- CSV Files modification ----------------------------
     # 1
     def verkkokouppaMod(self):
-        in_file_name = "/var/pythonapps/DataFiles/Verkkokouppa.csv"
-        out_file_name = "/var/pythonapps/ModDataFiles/Verkkokouppa.mod.csv"
+        cwd = os.getcwd()
+        in_file_name = f"{cwd}/DataFiles/Verkkokouppa.csv"
+        out_file_name = f"{cwd}/ModDataFiles/Verkkokouppa.mod.csv"
         company = 'Verkkokouppa'
         min_stock = 1
 
@@ -55,8 +56,9 @@ class ModifyFiles():
 
     # 2
     def apolloMod(self) -> None:
-        in_file_name = "/var/pythonapps/DataFiles/Apollo.csv"
-        out_file_name = "/var/pythonapps/ModDataFiles/Apollo.mod.csv"
+        cwd = os.getcwd()
+        in_file_name = f"{cwd}/DataFiles/Apollo.csv"
+        out_file_name = f"{cwd}/ModDataFiles/Apollo.mod.csv"
         company = 'Apollo'
         min_stock = 1
 
@@ -101,8 +103,9 @@ class ModifyFiles():
 
     # 3
     def actionMod(self) -> None:
-        in_file_name = "/var/pythonapps/DataFiles/Action.csv"
-        out_file_name = "/var/pythonapps/ModDataFiles/Action.mod.csv"
+        cwd = os.getcwd()
+        in_file_name = f"{cwd}/DataFiles/Action.csv"
+        out_file_name = f"{cwd}/ModDataFiles/Action.mod.csv"
         company = 'Action'
         min_stock = 1
 
@@ -148,8 +151,9 @@ class ModifyFiles():
 
     # 4
     def eeteuropartsMod(self) -> None:
-        in_file_name = "/var/pythonapps/DataFiles/Eeteuroparts.csv"
-        out_file_name = "/var/pythonapps/ModDataFiles/Eeteuroparts.mod.csv"
+        cwd = os.getcwd()
+        in_file_name = f"{cwd}/DataFiles/Eeteuroparts.csv"
+        out_file_name = f"{cwd}/ModDataFiles/Eeteuroparts.mod.csv"
         company = 'Eeteuroparts'
         min_stock = 1.0
 
@@ -204,8 +208,9 @@ class ModifyFiles():
         pass
 
     def jacobMod(self) -> None:
-        in_file_name = "/var/pythonapps/DataFiles/Jacob.csv"
-        out_file_name = "/var/pythonapps/ModDataFiles/Jacob.mod.csv"
+        cwd = os.getcwd()
+        in_file_name = f"{cwd}/DataFiles/Jacob.csv"
+        out_file_name = f"{cwd}/ModDataFiles/Jacob.mod.csv"
         company = "Jacob"
         min_stock = 1
 
@@ -263,8 +268,9 @@ class ModifyFiles():
 
     # 5
     def domitechMod(self) -> None:
-        in_file_name = "/var/pythonapps/DataFiles/Domitech.xml"
-        out_file_name = "/var/pythonapps/ModDataFiles/Domitech.mod.csv"
+        cwd = os.getcwd()
+        in_file_name = f"{cwd}/DataFiles/Domitech.xml"
+        out_file_name = f"{cwd}/ModDataFiles/Domitech.mod.csv"
         company = 'Domitech'
         min_stock = 1
 
@@ -298,8 +304,9 @@ class ModifyFiles():
 
     # 6
     def gitanaMod(self) -> None:
-        in_file_name = "/var/pythonapps/DataFiles/Gitana.xml"
-        out_file_name = "/var/pythonapps/ModDataFiles/Gitana.mod.csv"
+        cwd = os.getcwd()
+        in_file_name = f"{cwd}/DataFiles/Gitana.xml"
+        out_file_name = f"{cwd}/ModDataFiles/Gitana.mod.csv"
         company = 'Gitana'
         min_stock = 1
 
@@ -335,8 +342,9 @@ class ModifyFiles():
 
     # 7
     def nzdMod(self) -> None:
-        in_file_name = "/var/pythonapps/DataFiles/Nzd.xml"
-        out_file_name = "/var/pythonapps/ModDataFiles/Nzd.mod.csv"
+        cwd = os.getcwd()
+        in_file_name = f"{cwd}/DataFiles/Nzd.xml"
+        out_file_name = f"{cwd}/ModDataFiles/Nzd.mod.csv"
         company = 'NZD'
         min_stock = 1
         
@@ -372,8 +380,9 @@ class ModifyFiles():
    
     # 8
     def b2bsportsMod(self) -> None:
-        in_file_name = "/var/pythonapps/DataFiles/B2B_full.xml"
-        out_file_name = "/var/pythonapps/ModDataFiles/B2B_full.mod.csv"
+        cwd = os.getcwd()
+        in_file_name = f"{cwd}/DataFiles/B2B_full.xml"
+        out_file_name = f"{cwd}/ModDataFiles/B2B_full.mod.csv"
         company = "B2B_sports"
         min_stock = 1
 
