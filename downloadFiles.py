@@ -12,10 +12,11 @@ import menageSQL
 
 @pycron.cron('*/40 * * * *')
 async def downloadFiles(timestamp: datetime) -> None:
-    sys.stdout = open("/var/pythonapps/_downloadFiles.out", 'a')
+    cwd = os.getcwd()
+    sys.stdout = open(f"{cwd}/_downloadFiles.out", 'a')
     print(f"Cron job running at {datetime.now(pytz.timezone('Europe/Vilnius')): %Y-%m-%d  %H:%M:%S}", end='   ')
     
-    cwd = os.getcwd()
+
     downloadedFiles = []
 # def downloadFiles() -> None:
 #     sys.stdout = open("/var/pythonapps/_downloadFiles.out", 'a')

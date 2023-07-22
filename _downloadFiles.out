@@ -38,3 +38,5 @@ MySQL adds files at  2023-07-19  18:43:09
 # naujas-serveris
 
 
+Cron job running at  2023-07-22  15:54:18   Cron job running at  2023-07-22  15:54:18   Cron job running at  2023-07-22  16:00:00   ('Connection broken: IncompleteRead(428 bytes read, 3668 more expected)', IncompleteRead(428 bytes read, 3668 more expected))
+['Verkkokouppa.csv', 'Domitech.xml', 'Apollo.csv', 'Gitana.xml', 'Nzd.xml', 'Action.csv', 'B2B_full.xml']
