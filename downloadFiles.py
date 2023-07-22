@@ -14,6 +14,8 @@ import menageSQL
 async def downloadFiles(timestamp: datetime) -> None:
     sys.stdout = open("/var/pythonapps/_downloadFiles.out", 'a')
     print(f"Cron job running at {datetime.now(pytz.timezone('Europe/Vilnius')): %Y-%m-%d  %H:%M:%S}", end='   ')
+    
+    cwd = os.getcwd()
     downloadedFiles = []
 # def downloadFiles() -> None:
 #     sys.stdout = open("/var/pythonapps/_downloadFiles.out", 'a')
@@ -25,7 +27,7 @@ async def downloadFiles(timestamp: datetime) -> None:
         ftp_server = ftplib.FTP(HOSTNAME, USERNAME, PASSWORD, timeout=3600)
         ftp_server.encoding = "utf-8"
         filename = "pricelist-107377840.csv"
-        os.chdir("/var/pythonapps/DataFiles")
+        os.chdir(f"{cwd}/DataFiles")
         with open(filename, "wb") as file:
             ftp_server.retrbinary(f"RETR {filename}", file.write)
         ren_filename = "Verkkokouppa.csv"
@@ -45,7 +47,7 @@ async def downloadFiles(timestamp: datetime) -> None:
         ftp_server = ftplib.FTP(HOSTNAME, USERNAME, PASSWORD, timeout=3600)
         ftp_server.encoding = "utf-8"
         filename = "KARTOTEKI.XML"
-        os.chdir("/var/pythonapps/DataFiles")
+        os.chdir(f"{cwd}/DataFiles")
         with open(filename, "wb") as file:
             ftp_server.retrbinary(f"RETR {filename}", file.write)
         ren_filename = "Domitech.xml"
@@ -66,7 +68,7 @@ async def downloadFiles(timestamp: datetime) -> None:
     #     ftp_server = ftplib.FTP(HOSTNAME, USERNAME, PASSWORD, PORT, timeout=3600)
     #     ftp_server.encoding = "utf-8"
     #     filename = "eeteuroparts.csv"
-    #     os.chdir("/var/pythonapps/DataFiles")
+    #     os.chdir(f"{cwd}/DataFiles")
     #     with open(filename, "wb") as file:
     #         ftp_server.retrbinary(f"RETR {filename}", file.write)
     #     ren_filename = "Eeteuroparts.csv"
@@ -86,6 +88,7 @@ async def downloadFiles(timestamp: datetime) -> None:
         ftp_server.encoding = "utf-8"
         ftp_server.cwd('/MD FTP')
         filename = "Apollo_pricelist.csv"
+        os.chdir(f"{cwd}/DataFiles")
         with open(filename, "wb") as file:
             ftp_server.retrbinary(f"RETR {filename}", file.write)
         ren_filename = "Apollo.csv"
@@ -102,6 +105,7 @@ async def downloadFiles(timestamp: datetime) -> None:
         url = "https://www.gitana.lt/modules/exportproducts/out/g7mnFLTUvvPJixYf.xml"
         request = requests.get(url, allow_redirects=True, timeout=3600)
         filename = "Gitana.xml"
+        os.chdir(f"{cwd}/DataFiles")
         open(filename, 'wb').write(request.content)
         downloadedFiles.append(filename)
     except Exception as e:
@@ -113,6 +117,7 @@ async def downloadFiles(timestamp: datetime) -> None:
         url = "https://aw-narzedzia.com.pl/xlm/AW-Narzedzia-XML-45635674.xml"
         request = requests.get(url, allow_redirects=True, timeout=3600)
         filename = "Nzd.xml"
+        os.chdir(f"{cwd}/DataFiles")
         open(filename, 'wb').write(request.content)
         downloadedFiles.append(filename)
     except Exception as e:
@@ -124,6 +129,7 @@ async def downloadFiles(timestamp: datetime) -> None:
         url = "http://xml.action.pl/Export_CSV.aspx?ActionCustomerId=80827&ActionUserName=ledynas8812&ActionXmlAuthKey=v3OFlXRDoDaIe8TlbONFccfxjqd81g9AH%2baiwxgGDyI%3d&Language=en&Currency=EUR"
         request = requests.get(url, allow_redirects=True, timeout=3600)
         filename = "Action.csv"
+        os.chdir(f"{cwd}/DataFiles")
         open(filename, 'wb').write(request.content)
         downloadedFiles.append(filename)
     except Exception as e:
@@ -135,6 +141,7 @@ async def downloadFiles(timestamp: datetime) -> None:
         url = "https://www.jacob.de/content/csvTool/haendler_netto.csv"
         request = requests.get(url, allow_redirects=True, timeout=3600)
         filename = "Jacob.csv"
+        os.chdir(f"{cwd}/DataFiles")
         open(filename, 'wb').write(request.content)
         downloadedFiles.append(filename)
     except Exception as e:
@@ -146,6 +153,7 @@ async def downloadFiles(timestamp: datetime) -> None:
         url = "https://b2bsportswholesale.net/v2/xml/download/format/partner_b2b_full/key/78d2afad8f1fa4c0098dc6b9721f63df/lang/en"
         request = requests.get(url, allow_redirects=True, timeout=3600)
         filename = "B2B_full.xml"
+        os.chdir(f"{cwd}/DataFiles")
         open(filename, 'wb').write(request.content)
         downloadedFiles.append(filename)
     except Exception as e:
