@@ -9,8 +9,7 @@ from Classes.ModifyFiles import ModifyFiles
 from Classes.MenageSQL import MenageSQL
 import menageSQL
 
-
-@pycron.cron('*/40 * * * *')
+@pycron.cron('*/30 * * * *')
 async def downloadFiles(timestamp: datetime) -> None:
     cwd = os.getcwd()
     sys.stdout = open(f"{cwd}/_downloadFiles.out", 'a')

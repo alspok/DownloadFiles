@@ -15,5 +15,5 @@ def menageSQL() -> None:
 
     pass
 
-if __name__ == '__main__':
-    menageSQL()
+# if __name__ == '__main__':
+#     menageSQL()
