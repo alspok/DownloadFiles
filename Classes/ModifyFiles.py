@@ -5,13 +5,13 @@ import pprint
 from xml.etree import ElementTree as ET
 
 class ModifyFiles():
-   
-#---------------------------- CSV Files modification ----------------------------
+    cwd = os.getcwd()
+    
+    #---------------------------- CSV Files modification ----------------------------
     # 1
     def verkkokouppaMod(self):
-        cwd = os.getcwd()
-        in_file_name = f"{cwd}/DataFiles/Verkkokouppa.csv"
-        out_file_name = f"{cwd}/ModDataFiles/Verkkokouppa.mod.csv"
+        in_file_name = f"{self.cwd}/DataFiles/Verkkokouppa.csv"
+        out_file_name = f"{self.cwd}/ModDataFiles/Verkkokouppa.mod.csv"
         company = 'Verkkokouppa'
         min_stock = 1
 
@@ -57,9 +57,8 @@ class ModifyFiles():
 
     # 2
     def apolloMod(self) -> None:
-        cwd = os.getcwd()
-        in_file_name = f"{cwd}/DataFiles/Apollo.csv"
-        out_file_name = f"{cwd}/ModDataFiles/Apollo.mod.csv"
+        in_file_name = f"{self.cwd}/DataFiles/Apollo.csv"
+        out_file_name = f"{self.cwd}/ModDataFiles/Apollo.mod.csv"
         company = 'Apollo'
         min_stock = 1
 
@@ -75,12 +74,12 @@ class ModifyFiles():
             subst_dict = {}
             subst_dict['company'] = company
             subst_dict['ean'] = item['EAN']
-            subst_dict['sku'] = item['\ufeffPart number']
-            subst_dict['manufacturer'] = item['Producer']
+            subst_dict['sku'] = item['Part Number']
+            subst_dict['manufacturer'] = item['Vendor']
             subst_dict['title'] = item['Name']
-            subst_dict['stock'] = item['Quantity']
-            subst_dict['price'] = item['Price EURO EXW']
-            subst_dict['weight'] = ''
+            subst_dict['stock'] = item['Qty']
+            subst_dict['price'] = item['EUR EXW']
+            subst_dict['weight'] = '0'
 
             subst_dict_list.append(subst_dict)
 
@@ -296,7 +295,7 @@ class ModifyFiles():
                         if float(stock) <= min_stock:
                             continue
                         price = item.find('PRICE').text
-                        weight = ''
+                        weight = '0'
                         csv_line = [company, ean, sku, manufacturer, title, stock, price, weight]
 
                         csvfile_writer.writerow(csv_line)
@@ -334,7 +333,7 @@ class ModifyFiles():
                         if float(stock) <= min_stock:
                             continue
                         price = item.find('price').text
-                        weight = ''
+                        weight = '0'
                         csv_line = [company, ean, sku, manufacturer, title, stock, price, weight]
 
                         csvfile_writer.writerow(csv_line)
@@ -382,8 +381,8 @@ class ModifyFiles():
     # 8
     def b2bsportsMod(self) -> None:
         cwd = os.getcwd()
-        in_file_name = f"{cwd}/DataFiles/B2B_full.xml"
-        out_file_name = f"{cwd}/ModDataFiles/B2B_full.mod.csv"
+        in_file_name = f"{cwd}/DataFiles/B2B_sports.xml"
+        out_file_name = f"{cwd}/ModDataFiles/B2B_sports.mod.csv"
         company = "B2B_sports"
         min_stock = 1
 

@@ -8,13 +8,14 @@ import pytz
 from Classes.ModifyFiles import ModifyFiles
 from Classes.MenageSQL import MenageSQL
 import menageSQL
+from urllib.request import urlretrieve
 
-@pycron.cron('*/30 * * * *')
-async def downloadFiles(timestamp: datetime) -> None:
+# @pycron.cron('*/3 * * * *')
+# async def downloadFiles(timestamp: datetime) -> None:
+def downloadFiles() -> None:
     cwd = os.getcwd()
     sys.stdout = open(f"{cwd}/_downloadFiles.out", 'a')
-    print(f"Cron job running at {datetime.now(pytz.timezone('Europe/Vilnius')): %Y-%m-%d  %H:%M:%S}", end='   ')
-    
+    # print(f"Cron job running at {datetime.now(pytz.timezone('Europe/Vilnius')): %Y-%m-%d  %H:%M:%S}", end='   ')
 
     downloadedFiles = []
 # def downloadFiles() -> None:
@@ -99,14 +100,12 @@ async def downloadFiles(timestamp: datetime) -> None:
         print(e)
         pass
 
-
     # Download URL GITANA file Gitana.xml outputfile Gitana.xml
     try:
         url = "https://www.gitana.lt/modules/exportproducts/out/g7mnFLTUvvPJixYf.xml"
-        request = requests.get(url, allow_redirects=True, timeout=3600)
         filename = "Gitana.xml"
         os.chdir(f"{cwd}/DataFiles")
-        open(filename, 'wb').write(request.content)
+        urlretrieve(url, filename)
         downloadedFiles.append(filename)
     except Exception as e:
         print(e)
@@ -115,22 +114,32 @@ async def downloadFiles(timestamp: datetime) -> None:
     # Download URL NZD file Nzd.xml output file Nzd.xml
     try:
         url = "https://aw-narzedzia.com.pl/xlm/AW-Narzedzia-XML-45635674.xml"
-        request = requests.get(url, allow_redirects=True, timeout=3600)
         filename = "Nzd.xml"
         os.chdir(f"{cwd}/DataFiles")
-        open(filename, 'wb').write(request.content)
+        urlretrieve(url, filename)
         downloadedFiles.append(filename)
     except Exception as e:
         print(e)
         pass
 
+    # Download URL NZD file Nzd.xml output file Nzd.xml
+    # try:
+    #     url = "https://aw-narzedzia.com.pl/xlm/AW-Narzedzia-XML-45635674.xml"
+    #     request = requests.get(url, allow_redirects=True, timeout=3600)
+    #     filename = "Nzd.xml"
+    #     os.chdir(f"{cwd}/DataFiles")
+    #     open(filename, 'wb').write(request.content)
+    #     downloadedFiles.append(filename)
+    # except Exception as e:
+    #     print(e)
+    #     pass
+
     # Download URL ACTION file Action.csv output file Action.csv
     try:
         url = "http://xml.action.pl/Export_CSV.aspx?ActionCustomerId=80827&ActionUserName=ledynas8812&ActionXmlAuthKey=v3OFlXRDoDaIe8TlbONFccfxjqd81g9AH%2baiwxgGDyI%3d&Language=en&Currency=EUR"
-        request = requests.get(url, allow_redirects=True, timeout=3600)
         filename = "Action.csv"
         os.chdir(f"{cwd}/DataFiles")
-        open(filename, 'wb').write(request.content)
+        urlretrieve(url, filename)
         downloadedFiles.append(filename)
     except Exception as e:
         print(e)
@@ -139,26 +148,46 @@ async def downloadFiles(timestamp: datetime) -> None:
     # Download URL JACOB file haendler_netto.csv output file Jacob.csv
     try:
         url = "https://www.jacob.de/content/csvTool/haendler_netto.csv"
-        request = requests.get(url, allow_redirects=True, timeout=3600)
         filename = "Jacob.csv"
         os.chdir(f"{cwd}/DataFiles")
-        open(filename, 'wb').write(request.content)
+        urlretrieve(url, filename)
         downloadedFiles.append(filename)
     except Exception as e:
-        print(e)
+        print(e) 
         pass
+    
+    # try:
+    #     url = "https://www.jacob.de/content/csvTool/haendler_netto.csv"
+    #     request = requests.get(url, allow_redirects=True, timeout=3600)
+    #     filename = "Jacob.csv"
+    #     os.chdir(f"{cwd}/DataFiles")
+    #     open(filename, 'wb').write(request.content)
+    #     downloadedFiles.append(filename)
+    # except Exception as e:
+    #     print(e)
+    #     pass
 
     # Download URL B2B_SPORTS_WHOLESALE partner_b2b_full.xml output file B2B_full.xml
     try:
         url = "https://b2bsportswholesale.net/v2/xml/download/format/partner_b2b_full/key/78d2afad8f1fa4c0098dc6b9721f63df/lang/en"
-        request = requests.get(url, allow_redirects=True, timeout=3600)
-        filename = "B2B_full.xml"
+        filename = "B2B_sports.xml"
         os.chdir(f"{cwd}/DataFiles")
-        open(filename, 'wb').write(request.content)
+        urlretrieve(url, filename)
         downloadedFiles.append(filename)
     except Exception as e:
-        print(e)
+        print(e) 
         pass
+    
+        
+        
+    #     request = requests.get(url, allow_redirects=True, timeout=3600)
+    #     filename = "B2B_full.xml"
+    #     os.chdir(f"{cwd}/DataFiles")
+    #     open(filename, 'wb').write(request.content)
+    #     downloadedFiles.append(filename)
+    # except Exception as e:
+    #     print(e)
+    #     pass
 
     print(downloadedFiles)
     sys.stdout.close()
@@ -178,4 +207,5 @@ async def downloadFiles(timestamp: datetime) -> None:
 
 
 if __name__ == '__main__':
-    pycron.start()
+    # pycron.start()
+    downloadFiles()
