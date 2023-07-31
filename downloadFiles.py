@@ -15,7 +15,7 @@ from urllib.request import urlretrieve
 def downloadFiles() -> None:
     cwd = os.getcwd()
     sys.stdout = open(f"{cwd}/_downloadFiles.out", 'a')
-    # print(f"Cron job running at {datetime.now(pytz.timezone('Europe/Vilnius')): %Y-%m-%d  %H:%M:%S}", end='   ')
+    print(f"Cron job running at {datetime.now(pytz.timezone('Europe/Vilnius')): %Y-%m-%d  %H:%M:%S}", end='   ')
 
     downloadedFiles = []
 # def downloadFiles() -> None:

@@ -1,8 +1,9 @@
 import os
 import csv
 import xmltodict
-import pprint
+import pandas as pd
 from xml.etree import ElementTree as ET
+from bigxml import Parser, xml_handle_element, xml_handle_text
 
 class ModifyFiles():
     cwd = os.getcwd()
@@ -75,7 +76,8 @@ class ModifyFiles():
             subst_dict['company'] = company
             subst_dict['ean'] = item['EAN']
             subst_dict['sku'] = item['Part Number']
-            subst_dict['manufacturer'] = item['Vendor']
+            # item['Vendor'] = item['\ufeffVendor'].replace('\ufeff', '')
+            subst_dict['manufacturer'] = item['\ufeffVendor']
             subst_dict['title'] = item['Name']
             subst_dict['stock'] = item['Qty']
             subst_dict['price'] = item['EUR EXW']
@@ -94,7 +96,7 @@ class ModifyFiles():
 
         fieldnames = unique_item_dict[0].keys()
 
-        with open(f"{out_file_name}", mode='w', encoding='utf-8', newline='') as mcsvfh:
+        with open(f"{out_file_name}", mode='w', encoding='utf-8-sig', newline='') as mcsvfh:
             writer = csv.DictWriter(mcsvfh, fieldnames=fieldnames, delimiter=';')
             writer.writeheader()
             writer.writerows(unique_item_dict)
@@ -342,42 +344,60 @@ class ModifyFiles():
 
     # 7
     def nzdMod(self) -> None:
+        from xml.etree.ElementTree import iterparse
+        #from cElementTree import iterparse
+        import pandas as pd
+        import csv
+
         cwd = os.getcwd()
         in_file_name = f"{cwd}/DataFiles/Nzd.xml"
         out_file_name = f"{cwd}/ModDataFiles/Nzd.mod.csv"
         company = 'NZD'
         min_stock = 1
-        
-        try:
-            xml_tree = ET.parse(in_file_name)
-            xml_root = xml_tree.getroot()
-        except Exception as e:
-            print(e)
 
-        with open(f"{out_file_name}", mode='w', encoding='utf-8') as csvfh:
-            csvfile_writer = csv.writer(csvfh, delimiter=';')
+        dict_list = []
+        dict_tag = {}
+        for _, elem in iterparse(in_file_name, events=("end",)):
+            # if elem.tag == "product":
+            if elem.tag == 'kod_kreskowy':
+                dict_tag['ean'] = elem.text
+            if elem.tag == 'indeks_handlowy':
+                dict_tag['sku'] = elem.text
+            if elem.tag == 'producent':
+                dict_tag['manufacturer'] = elem.text
+            if elem.tag == 'nazwa':
+                dict_tag['title'] = elem.text
+            if elem.tag == 'nazwa':
+                dict_tag['title'] = elem.text
+            if elem.tag == 'stan_liczbowy':
+                dict_tag['stock'] = elem.text
+            if elem.tag == 'cena_waluta':
+                dict_tag['price'] = elem.text
+            if elem.tag == 'waga':
+                dict_tag['weight'] = elem.text
 
-            csvfile_writer.writerow(['company', 'ean', 'sku', 'manufacturer', 'title', 'stock', 'price', 'weight'])
+            if elem.tag == 'zdjecia_list':
+                dict_tag['company'] = company
+                dict_list.append(dict_tag)
+                dict_tag = {}
 
-            ean_unique = []
-            for item in xml_root.findall('produkt'):
-                if item[5].text in ean_unique or item[5].text == None or float(item[9].text.replace(',', '.')) <= min_stock:
-                        continue
-                else:
-                    ean_unique.append(item[5].text)
-                    ean = item[5].text
-                    sku = item[2].text
-                    manufacturer = item[8].text
-                    title = item[6].text
-                    stock = item[9].text
-                    price = item[0].text
-                    weight = item[10].text
-                    csv_line = [company, ean, sku, manufacturer, title, stock, price, weight]
+            elem.clear()
 
-                    csvfile_writer.writerow(csv_line)
+        i = 0
+        for item in dict_list:
+            if 'ean' not in item.keys():
+                del dict_list[i]
+            i += 1
+
+        with open(out_file_name, mode='w', encoding='utf-8') as csvfh:
+            csv_header = ['company', 'ean', 'sku', 'manufacturer', 'title', 'stock', 'price', 'weight']
+            writer = csv.DictWriter(csvfh, fieldnames=csv_header, delimiter=';')
+            writer.writeheader()
+            for row in dict_list:
+                writer.writerow(row)
 
         pass
-   
+    
     # 8
     def b2bsportsMod(self) -> None:
         cwd = os.getcwd()
@@ -417,12 +437,12 @@ class ModifyFiles():
         pass
 
 # if __name__ == '__main__':
-    # ModifyFiles().b2bsportsMod()
+        # ModifyFiles().b2bsportsMod()
     # ModifyFiles().verkkokouppaMod()
     # ModifyFiles().apolloMod()
     # ModifyFiles().actionMod()
     # ModifyFiles().domitechMod()
     # ModifyFiles().gitanaMod()
     # ModifyFiles().nzdMod()
-    # ModifyFiles().eeteuropartsMod()
+        # ModifyFiles().eeteuropartsMod()
     # ModifyFiles().jacobMod()
