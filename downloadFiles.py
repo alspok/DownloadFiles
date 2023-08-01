@@ -10,9 +10,9 @@ from Classes.MenageSQL import MenageSQL
 import menageSQL
 from urllib.request import urlretrieve
 
-# @pycron.cron('*/3 * * * *')
-# async def downloadFiles(timestamp: datetime) -> None:
-def downloadFiles() -> None:
+@pycron.cron('*/10 * * * *')
+async def downloadFiles(timestamp: datetime) -> None:
+# def downloadFiles() -> None:
     cwd = os.getcwd()
     sys.stdout = open(f"{cwd}/_downloadFiles.out", 'a')
     print(f"Cron job running at {datetime.now(pytz.timezone('Europe/Vilnius')): %Y-%m-%d  %H:%M:%S}", end='   ')
@@ -168,15 +168,15 @@ def downloadFiles() -> None:
     #     pass
 
     # Download URL B2B_SPORTS_WHOLESALE partner_b2b_full.xml output file B2B_full.xml
-    try:
-        url = "https://b2bsportswholesale.net/v2/xml/download/format/partner_b2b_full/key/78d2afad8f1fa4c0098dc6b9721f63df/lang/en"
-        filename = "B2B_sports.xml"
-        os.chdir(f"{cwd}/DataFiles")
-        urlretrieve(url, filename)
-        downloadedFiles.append(filename)
-    except Exception as e:
-        print(e) 
-        pass
+    # try:
+    #     url = "https://b2bsportswholesale.net/v2/xml/download/format/partner_b2b_full/key/78d2afad8f1fa4c0098dc6b9721f63df/lang/en"
+    #     filename = "B2B_sports.xml"
+    #     os.chdir(f"{cwd}/DataFiles")
+    #     urlretrieve(url, filename)
+    #     downloadedFiles.append(filename)
+    # except Exception as e:
+    #     print(e) 
+    #     pass
     
         
         
@@ -200,12 +200,12 @@ def downloadFiles() -> None:
     ModifyFiles().gitanaMod() # 5
     ModifyFiles().nzdMod() # 6
     ModifyFiles().jacobMod() # 7
-    ModifyFiles().b2bsportsMod() # 8
+    # ModifyFiles().b2bsportsMod() # 8
     # ModifyFiles().eeteuropartsMod()
 
     menageSQL()
 
 
 if __name__ == '__main__':
-    # pycron.start()
-    downloadFiles()
+    pycron.start()
+    # downloadFiles()
