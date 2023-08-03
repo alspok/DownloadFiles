@@ -1,4 +1,5 @@
 import os
+import sys
 import csv
 import xmltodict
 # import pandas as pd
@@ -7,7 +8,9 @@ from bigxml import Parser, xml_handle_element, xml_handle_text
 
 class ModifyFiles():
     cwd = os.getcwd()
-    
+    path = f"{cwd}/_downloadFiles.out"
+    sys.stdout = open(f"{path}", 'a')
+
     #---------------------------- CSV Files modification ----------------------------
     # 1
     def verkkokouppaMod(self):
@@ -58,7 +61,7 @@ class ModifyFiles():
 
     # 2
     def apolloMod(self) -> None:
-        in_file_name = f"{self.cwd}/DataFiles/Apollo_pricelist.csv"
+        in_file_name = f"{self.cwd}/DataFiles/Apollo.csv"
         out_file_name = f"{self.cwd}/ModDataFiles/Apollo.mod.csv"
         company = 'Apollo'
         min_stock = 1
@@ -105,9 +108,8 @@ class ModifyFiles():
 
     # 3
     def actionMod(self) -> None:
-        cwd = os.getcwd()
-        in_file_name = f"{cwd}/DataFiles/Action.csv"
-        out_file_name = f"{cwd}/ModDataFiles/Action.mod.csv"
+        in_file_name = f"{self.cwd}/DataFiles/Action.csv"
+        out_file_name = f"{self.cwd}/ModDataFiles/Action.mod.csv"
         company = 'Action'
         min_stock = 1
 
@@ -217,14 +219,14 @@ class ModifyFiles():
         from datetime import datetime
         from pprint import pprint
 
-        cwd = os.getcwd()
-        in_file_name = f"{cwd}/DataFiles/Jacob.csv"
-        out_file_name = f"{cwd}/ModDataFiles/Jacob.mod.csv"
+        # cwd = os.getcwd()
+        in_file_name = f"{self.cwd}/DataFiles/Jacob.csv"
+        out_file_name = f"{self.cwd}/ModDataFiles/Jacob.mod.csv"
         file_name = "Jacob.mod.csv"
         company = "Jacob"
         min_stock = 1
 
-        if file_name in os.listdir("ModDataFiles"):
+        if file_name in os.listdir(f"{self.cwd}/ModDataFiles"):
             os.remove(out_file_name)
 
         fieldnames = ['company', 'ean', 'sku', 'manufacturer', 'title', 'stock', 'price', 'weight']
@@ -259,10 +261,11 @@ class ModifyFiles():
                         pass
 
                     dict_list.append(dict_item)
+
                 writer.writerows(dict_list)
                 print(f"{i} Chunk writed")
                 i += 1
-                if(i == 100):
+                if(i == 30):
                     break
         
                 
@@ -376,9 +379,9 @@ class ModifyFiles():
 
     # 5
     def domitechMod(self) -> None:
-        cwd = os.getcwd()
-        in_file_name = f"{cwd}/DataFiles/Domitech.xml"
-        out_file_name = f"{cwd}/ModDataFiles/Domitech.mod.csv"
+        # cwd = os.getcwd()
+        in_file_name = f"{self.cwd}/DataFiles/Domitech.xml"
+        out_file_name = f"{self.cwd}/ModDataFiles/Domitech.mod.csv"
         company = 'Domitech'
         min_stock = 1
 
@@ -412,9 +415,9 @@ class ModifyFiles():
 
     # 6
     def gitanaMod(self) -> None:
-        cwd = os.getcwd()
-        in_file_name = f"{cwd}/DataFiles/Gitana.xml"
-        out_file_name = f"{cwd}/ModDataFiles/Gitana.mod.csv"
+        # cwd = os.getcwd()
+        in_file_name = f"{self.cwd}/DataFiles/Gitana.xml"
+        out_file_name = f"{self.cwd}/ModDataFiles/Gitana.mod.csv"
         company = 'Gitana'
         min_stock = 1
 
@@ -455,9 +458,9 @@ class ModifyFiles():
         import pandas as pd
         import csv
 
-        cwd = os.getcwd()
-        in_file_name = f"{cwd}/DataFiles/Nzd.xml"
-        out_file_name = f"{cwd}/ModDataFiles/Nzd.mod.csv"
+        # cwd = os.getcwd()
+        in_file_name = f"{self.cwd}/DataFiles/Nzd.xml"
+        out_file_name = f"{self.cwd}/ModDataFiles/Nzd.mod.csv"
         company = 'NZD'
         min_stock = 1
 
@@ -504,6 +507,7 @@ class ModifyFiles():
 
         pass
     
+    sys.stdout.close()
     # 8
     # def b2bsportsMod(self) -> None:
     #     cwd = os.getcwd()
@@ -541,6 +545,7 @@ class ModifyFiles():
     #                 #     ean_unique.append(ean)
 
     #     pass
+
 
 # if __name__ == '__main__':
         # ModifyFiles().b2bsportsMod()

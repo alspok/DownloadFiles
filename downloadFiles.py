@@ -8,7 +8,7 @@ from datetime import datetime
 import pytz
 from Classes.ModifyFiles import ModifyFiles
 from Classes.MenageSQL import MenageSQL
-import menageSQL
+from menageSQL import menageSQL
 from urllib.request import urlretrieve
 
 # @pycron.cron('*/20 * * * *')
@@ -192,36 +192,44 @@ def downloadFiles() -> None:
 
     print(downloadedFiles)
 
-    # 
-    start = time.time()
-    ModifyFiles().verkkokouppaMod() # 1
-    print(f"Verkkokouppa modified: {time.time() - start}")
+    # start = time.time()
+    # ModifyFiles().verkkokouppaMod() # 1
+    # elapsed_time = time.time() - start
+    # print(f"Verkkokouppa modified: {elapsed_time}")
     
-    start = time.time()
-    ModifyFiles().apolloMod() # 2
-    print(f"Apollo modified: {time.time() - start}")
+    # start = time.time()
+    # ModifyFiles().apolloMod() # 2
+    # elapsed_time = time.time() - start
+    # print(f"Apollo modified: {elapsed_time}")
 
-    start = time.time()
-    ModifyFiles().actionMod() # 3
-    print(f"Action modified: {time.time() - start}")
+    # start = time.time()
+    # ModifyFiles().actionMod() # 3
+    # elapsed_time = time.time() - start
+    # print(f"Action modified: {elapsed_time}")
 
-    start = time.time()
-    ModifyFiles().domitechMod() # 4
-    print(f"Domitech modified: {time.time() - start}")
+    # start = time.time()
+    # ModifyFiles().domitechMod() # 4
+    # elapsed_time = time.time() - start
+    # print(f"Domitech modified: {elapsed_time}")
 
-    start = time.time()
-    ModifyFiles().gitanaMod() # 5
-    print(f"Gitana modified: {time.time() - start}")
+    # start = time.time()
+    # ModifyFiles().gitanaMod() # 5
+    # elapsed_time = time.time() - start
+    # print(f"Gitana modified: {elapsed_time}")
 
-    start = time.time()
-    ModifyFiles().nzdMod() # 6
-    print(f"Nzd modified: {time.time() - start}")
+    # start = time.time()
+    # ModifyFiles().nzdMod() # 6
+    # elapsed_time = time.time() - start
+    # print(f"Nzd modified: {elapsed_time}")
 
-    start = time.time()
-    ModifyFiles().jacobMod() # 7
-    print(f"Jacob : {time.time() - start}")
-    # ModifyFiles().b2bsportsMod() # 8
-    # ModifyFiles().eeteuropartsMod()
+    # start = time.time()
+    # ModifyFiles().jacobMod() # 7
+    # elapsed_time = time.time() - start
+    # print(f"Jacob : {elapsed_time}")
+    # # ModifyFiles().b2bsportsMod() # 8
+    # # ModifyFiles().eeteuropartsMod()
+
+    # pass
 
     menageSQL()
     sys.stdout.close()
