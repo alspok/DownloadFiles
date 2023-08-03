@@ -11,12 +11,14 @@ from Classes.MenageSQL import MenageSQL
 from menageSQL import menageSQL
 from urllib.request import urlretrieve
 
-# @pycron.cron('*/20 * * * *')
-# async def downloadFiles(timestamp: datetime) -> None:
-def downloadFiles() -> None:
+@pycron.cron('*/60 * * * *')
+async def downloadFiles(timestamp: datetime) -> None:
+# def downloadFiles() -> None:
     cwd = os.getcwd()
-    sys.stdout = open(f"{cwd}/_downloadFiles.out", 'a')
+    print_out = f"{cwd}/_downloadFiles.out"
+    sys.stdout = open(print_out, 'a')
     print(f"Cron job running at {datetime.now(pytz.timezone('Europe/Vilnius')): %Y-%m-%d  %H:%M:%S}", end='   ')
+    sys.stdout.flush()
 
     downloadedFiles = []
 # def downloadFiles() -> None:
@@ -60,27 +62,6 @@ def downloadFiles() -> None:
         print(e)
         pass
 
-    #Download FTP EETEUROPARTS file eeteuroparts.csv output file Eeteuroparts.csv
-    # try:
-    #     HOSTNAME = "ftp.eetgroup.com"
-    #     USERNAME = "Ledynas"
-    #     PASSWORD = "I1Um77Ignl9Fh172y7DPRjMf"
-    #     PORT = 22
-
-    #     ftp_server = ftplib.FTP(HOSTNAME, USERNAME, PASSWORD, PORT, timeout=3600)
-    #     ftp_server.encoding = "utf-8"
-    #     filename = "eeteuroparts.csv"
-    #     os.chdir(f"{cwd}/DataFiles")
-    #     with open(filename, "wb") as file:
-    #         ftp_server.retrbinary(f"RETR {filename}", file.write)
-    #     ren_filename = "Eeteuroparts.csv"
-    #     os.rename(filename, ren_filename)
-    #     downloadedFiles.append(ren_filename)
-    #     ftp_server.close()
-    # except Exception as e:
-    #     print(e)
-    #     pass
-
     # Donwload FTP APOLO file /MD%20FTP/Apollo%20offer%20CSV.csv
     try:
         HOSTNAME = "apollowroclawnas.myqnapcloud.com"
@@ -123,18 +104,6 @@ def downloadFiles() -> None:
         print(e)
         pass
 
-    # Download URL NZD file Nzd.xml output file Nzd.xml
-    # try:
-    #     url = "https://aw-narzedzia.com.pl/xlm/AW-Narzedzia-XML-45635674.xml"
-    #     request = requests.get(url, allow_redirects=True, timeout=3600)
-    #     filename = "Nzd.xml"
-    #     os.chdir(f"{cwd}/DataFiles")
-    #     open(filename, 'wb').write(request.content)
-    #     downloadedFiles.append(filename)
-    # except Exception as e:
-    #     print(e)
-    #     pass
-
     # Download URL ACTION file Action.csv output file Action.csv
     try:
         url = "http://xml.action.pl/Export_CSV.aspx?ActionCustomerId=80827&ActionUserName=ledynas8812&ActionXmlAuthKey=v3OFlXRDoDaIe8TlbONFccfxjqd81g9AH%2baiwxgGDyI%3d&Language=en&Currency=EUR"
@@ -156,84 +125,62 @@ def downloadFiles() -> None:
     except Exception as e:
         print(e) 
         pass
-    
-    # try:
-    #     url = "https://www.jacob.de/content/csvTool/haendler_netto.csv"
-    #     request = requests.get(url, allow_redirects=True, timeout=3600)
-    #     filename = "Jacob.csv"
-    #     os.chdir(f"{cwd}/DataFiles")
-    #     open(filename, 'wb').write(request.content)
-    #     downloadedFiles.append(filename)
-    # except Exception as e:
-    #     print(e)
-    #     pass
-
-    # Download URL B2B_SPORTS_WHOLESALE partner_b2b_full.xml output file B2B_full.xml
-    # try:
-    #     url = "https://b2bsportswholesale.net/v2/xml/download/format/partner_b2b_full/key/78d2afad8f1fa4c0098dc6b9721f63df/lang/en"
-    #     filename = "B2B_sports.xml"
-    #     os.chdir(f"{cwd}/DataFiles")
-    #     urlretrieve(url, filename)
-    #     downloadedFiles.append(filename)
-    # except Exception as e:
-    #     print(e) 
-    #     pass
-    
-        
-        
-    #     request = requests.get(url, allow_redirects=True, timeout=3600)
-    #     filename = "B2B_full.xml"
-    #     os.chdir(f"{cwd}/DataFiles")
-    #     open(filename, 'wb').write(request.content)
-    #     downloadedFiles.append(filename)
-    # except Exception as e:
-    #     print(e)
-    #     pass
 
     print(downloadedFiles)
+    sys.stdout.flush()
 
     # start = time.time()
-    # ModifyFiles().verkkokouppaMod() # 1
+    ModifyFiles().verkkokouppaMod() # 1
     # elapsed_time = time.time() - start
-    # print(f"Verkkokouppa modified: {elapsed_time}")
+    # print(f"Verkkokouppa modified in {elapsed_time} sec")
+    # sys.stdout.flush()
     
     # start = time.time()
-    # ModifyFiles().apolloMod() # 2
+    ModifyFiles().apolloMod() # 2
     # elapsed_time = time.time() - start
-    # print(f"Apollo modified: {elapsed_time}")
+    # print(f"Apollo modified in {elapsed_time} sec")
+    # sys.stdout.flush()
 
     # start = time.time()
-    # ModifyFiles().actionMod() # 3
+    ModifyFiles().actionMod() # 3
     # elapsed_time = time.time() - start
-    # print(f"Action modified: {elapsed_time}")
+    # print(f"Action modified in {elapsed_time} sec")
 
     # start = time.time()
-    # ModifyFiles().domitechMod() # 4
+    ModifyFiles().domitechMod() # 4
     # elapsed_time = time.time() - start
-    # print(f"Domitech modified: {elapsed_time}")
+    # print(f"Domitech modified in {elapsed_time} sec")
+    # sys.stdout.flush()
 
     # start = time.time()
-    # ModifyFiles().gitanaMod() # 5
+    ModifyFiles().gitanaMod() # 5
     # elapsed_time = time.time() - start
-    # print(f"Gitana modified: {elapsed_time}")
+    # print(f"Gitana modified in {elapsed_time} sec")
+    # sys.stdout.flush()
 
     # start = time.time()
-    # ModifyFiles().nzdMod() # 6
+    ModifyFiles().nzdMod() # 6
     # elapsed_time = time.time() - start
-    # print(f"Nzd modified: {elapsed_time}")
+    # print(f"Nzd modified in {elapsed_time} sec")
+    # sys.stdout.flush()
 
     # start = time.time()
-    # ModifyFiles().jacobMod() # 7
+    ModifyFiles().jacobMod() # 7
     # elapsed_time = time.time() - start
-    # print(f"Jacob : {elapsed_time}")
-    # # ModifyFiles().b2bsportsMod() # 8
-    # # ModifyFiles().eeteuropartsMod()
+    # print(f"Jacob modified in {elapsed_time} sec")
+    # sys.stdout.flush()
 
-    # pass
+    # ModifyFiles().b2bsportsMod() # 8
+    # ModifyFiles().eeteuropartsMod()
 
+    pass
+
+    start =time.time()
     menageSQL()
-    sys.stdout.close()
+    elapsed_time = time.time() - start
+    print(f"DB made in {elapsed_time} sec")
+    sys.stdout.flush()
 
 if __name__ == '__main__':
-    # pycron.start()
-    downloadFiles()
+    pycron.start()
+    # downloadFiles()

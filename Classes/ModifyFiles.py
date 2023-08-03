@@ -154,63 +154,6 @@ class ModifyFiles():
         pass
 
     # 4
-    # def eeteuropartsMod(self) -> None:
-    #     cwd = os.getcwd()
-    #     in_file_name = f"{cwd}/DataFiles/Eeteuroparts.csv"
-    #     out_file_name = f"{cwd}/ModDataFiles/Eeteuroparts.mod.csv"
-    #     company = 'Eeteuroparts'
-    #     min_stock = 1.0
-
-    #     dict_list = []
-    #     with open(in_file_name, mode='r', encoding='utf-8', errors='ignore') as csvfh:
-    #         # next(csvfh)
-    #         csv_reader = csv.DictReader(csvfh, delimiter=';')
-    #         for row in csv_reader:
-    #             dict_list.append(row)
-
-    #     subst_dict_list = []
-    #     for item in dict_list:
-    #         subst_dict = {}
-    #         subst_dict['company'] = company
-    #         subst_dict['ean'] = item['EAN/UPC']
-    #         if subst_dict['ean'] == '':
-    #             continue
-    #         subst_dict['sku'] = item['Item Nr']
-    #         subst_dict['manufacturer'] = item['Brand Name']
-    #         subst_dict['title'] = item['Description']
-    #         subst_dict['stock'] = item['Available for sale'].replace(',', '.')
-    #         if float(subst_dict['stoce']) < min_stock:
-    #             continue
-    #         subst_dict['price'] = item['Price'].replace(',', '.')
-    #         subst_dict['weight'] = item['Gross Weight'].replace(',', '.')
-
-    #         subst_dict_list.append(subst_dict)
-
-    #     unique_ean_list = []
-    #     unique_item_dict = []
-    #     for item in subst_dict_list:
-    #         try:
-    #             if int(item['ean']) not in unique_ean_list:
-    #                 unique_item_dict.append(item)
-    #         except Exception as e:
-    #             print(e)
-    #             pass
-
-    #     fieldnames = unique_item_dict[0].keys()
-
-    #     with open(f"{out_file_name}", mode='w', encoding='utf-8', newline='') as mcsvfh:
-    #         writer = csv.DictWriter(mcsvfh, fieldnames=fieldnames, delimiter=';')
-    #         writer.writeheader()
-    #         writer.writerows(unique_item_dict)
-
-    #         dict_list = []
-    #         with open(in_file_name, mode='r', encoding='utf-8', errors='ignore') as csvfh:
-    #             csv_reader = csv.DictReader(csvfh, delimiter=';')
-    #             for row in csv_reader:
-    #                 dict_list.append(row)
-
-    #     pass
-
     def jacobMod(self) -> None:
         import pandas as pd
         import csv
@@ -263,119 +206,11 @@ class ModifyFiles():
                     dict_list.append(dict_item)
 
                 writer.writerows(dict_list)
-                print(f"{i} Chunk writed")
                 i += 1
                 if(i == 30):
                     break
-        
                 
-            elapsed_time = time.time() - start
-            print(f"Read csv in: {elapsed_time} sec")
-
         pass
-
-
-    # def daskJacobMod(self) -> None:
-    #     import dask.dataframe as dd
-    #     import time
-
-    #     cwd = os.getcwd()
-    #     in_file_name = f"{cwd}/DataFiles/Jacob.csv"
-    #     out_file_name = f"{cwd}/ModDataFiles/Jacob.mod.csv"
-    #     file_name = "Jacob.mod.csv"
-    #     company = "Jacob"
-    #     min_stock = 1
-
-    #     start = time.time()
-    #     df = dd.read_csv(in_file_name, usecols=["EAN/UPC", "Sku", "Preis netto"])
-    #     end = time.time()
-    #     print("Read csv with dask: ",(end-start),"sec")
-    #     print(df.head())
-    #     csv_reader = csv.DictReader(dask_df, delimiter=';')
-
-    #     dict_list = []
-    #     for row in csv_reader:
-    #         dict_list.append(row)
-
-    #     chunksize = 5
-    #     dict_list = []
-    #     for chunk in pd.read_csv(in_file_name, sep=';', chunksize=chunksize):
-    #         chunk_dict = chunk.to_dict('records') #'records'
-    #         df = pd.DataFrame.from_dict(chunk_dict)
-    #         print(df)
-
-    #         for row in chunk_dict:
-    #             row_dict = {
-    #                 'company': company,
-    #                 'ean': row['EAN/UPC'],
-    #                 'sku': row['Sku'],
-    #                 'manufactureer': row['Hersteller'],
-    #                 'stock': row['Bestand'],
-    #                 'price': row['Preis netto']
-    #             }
-    #             dict_list.append(row_dict)
-    #         pass
-
-    #     pass
-
-    # def jacobMod(self) -> None:
-    #     cwd = os.getcwd()
-    #     in_file_name = f"{cwd}/DataFiles/Jacob.csv"
-    #     out_file_name = f"{cwd}/ModDataFiles/Jacob.mod.csv"
-    #     company = "Jacob"
-    #     min_stock = 1
-
-    #     dict_list = []
-    #     with open(in_file_name, mode='r', encoding='utf-8', errors='ignore') as csvfh:
-    #         # next(csvfh)
-    #         csv_reader = csv.DictReader(csvfh, delimiter=';')
-    #         for row in csv_reader:
-    #             dict_list.append(row)
-
-    #     subst_dict_list = []
-    #     for item in dict_list:
-    #         subst_dict = {}
-    #         subst_dict['company'] = company
-    #         subst_dict['ean'] = item['EAN/UPC']
-    #         if subst_dict['ean'] == '':
-    #             continue
-    #         subst_dict['sku'] = item['\ufeffSku']
-    #         subst_dict['manufacturer'] = item['Hersteller']
-    #         subst_dict['title'] = item['Kurzbezeichnung']
-    #         subst_dict['stock'] = item['Bestand']
-    #         if float(subst_dict['stock']) < min_stock:
-    #             continue
-    #         subst_dict['price'] = item['Preis netto']
-    #         subst_dict['weight'] = '0'
-
-    #         subst_dict_list.append(subst_dict)
-
-    #     unique_ean_list = []
-    #     unique_item_dict = []
-    #     for item in subst_dict_list:
-    #         try:
-    #             if int(item['ean']) not in unique_ean_list:
-    #                 unique_item_dict.append(item)
-    #         except Exception as e:
-    #             print(e)
-    #             pass
-
-    #     fieldnames = unique_item_dict[0].keys()
-
-    #     with open(f"{out_file_name}", mode='w', encoding='utf-8', newline='') as mcsvfh:
-    #         writer = csv.DictWriter(mcsvfh, fieldnames=fieldnames, delimiter=';')
-    #         writer.writeheader()
-    #         writer.writerows(unique_item_dict)
-
-    #         dict_list = []
-    #         with open(in_file_name, mode='r', encoding='utf-8', errors='ignore') as csvfh:
-    #             csv_reader = csv.DictReader(csvfh, delimiter=';')
-    #             for row in csv_reader:
-    #                 dict_list.append(row)
-
-    #     pass
-
-#---------------------------- XML Files modification ----------------------------
 
     # 5
     def domitechMod(self) -> None:
@@ -507,46 +342,6 @@ class ModifyFiles():
 
         pass
     
-    sys.stdout.close()
-    # 8
-    # def b2bsportsMod(self) -> None:
-    #     cwd = os.getcwd()
-    #     in_file_name = f"{cwd}/DataFiles/B2B_sports.xml"
-    #     out_file_name = f"{cwd}/ModDataFiles/B2B_sports.mod.csv"
-    #     company = "B2B_sports"
-    #     min_stock = 1
-
-    #     try:
-    #         xml_tree = ET.parse(in_file_name)
-    #         xml_root = xml_tree.getroot()
-    #     except Exception as e:
-    #         print(e)
-
-    #     with open(f"{out_file_name}", mode='w', encoding='utf-8') as csvfh:
-    #         csvfile_writer = csv.writer(csvfh, delimiter=';')
-
-    #         csvfile_writer.writerow(['company', 'ean', 'sku', 'manufacturer', 'title', 'stock', 'price', 'weight'])
-
-    #         ean_unique = []
-
-    #         for stock in xml_root.iter('stock'):
-    #             for item in stock.iter('item'):
-    #                 if((item.attrib['ean'] in ean_unique) or (float(item.attrib['quantity']) <= min_stock)):
-    #                     continue
-    #                 else:
-    #                     ean_unique.append(item.attrib['ean'])
-    #                     print(item.attrib['ean'], item.attrib['quantity'])
-                
-    #             pass
-
-    #                 # if ean == None or ean in ean_unique:
-    #                 #     continue
-    #                 # else:
-    #                 #     ean_unique.append(ean)
-
-    #     pass
-
-
 # if __name__ == '__main__':
         # ModifyFiles().b2bsportsMod()
     # ModifyFiles().verkkokouppaMod()
