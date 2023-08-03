@@ -1,5 +1,6 @@
 import os
 import sys
+import time
 import pycron
 import ftplib
 import requests
@@ -10,9 +11,9 @@ from Classes.MenageSQL import MenageSQL
 import menageSQL
 from urllib.request import urlretrieve
 
-@pycron.cron('*/10 * * * *')
-async def downloadFiles(timestamp: datetime) -> None:
-# def downloadFiles() -> None:
+@pycron.cron('*/20 * * * *')
+# async def downloadFiles(timestamp: datetime) -> None:
+def downloadFiles() -> None:
     cwd = os.getcwd()
     sys.stdout = open(f"{cwd}/_downloadFiles.out", 'a')
     print(f"Cron job running at {datetime.now(pytz.timezone('Europe/Vilnius')): %Y-%m-%d  %H:%M:%S}", end='   ')
@@ -190,22 +191,41 @@ async def downloadFiles(timestamp: datetime) -> None:
     #     pass
 
     print(downloadedFiles)
-    sys.stdout.close()
 
     # 
+    start = time.time()
     ModifyFiles().verkkokouppaMod() # 1
+    print(f"Verkkokouppa download: {time.time() - start}")
+    
+    start = time.time()
     ModifyFiles().apolloMod() # 2
+    print(f"Apollo download: {time.time() - start}")
+
+    start = time.time()
     ModifyFiles().actionMod() # 3
+    print(f"Action download: {time.time() - start}")
+
+    start = time.time()
     ModifyFiles().domitechMod() # 4
+    print(f"Domitech download: {time.time() - start}")
+
+    start = time.time()
     ModifyFiles().gitanaMod() # 5
+    print(f"Gitana download: {time.time() - start}")
+
+    start = time.time()
     ModifyFiles().nzdMod() # 6
+    print(f"Nzd download: {time.time() - start}")
+
+    start = time.time()
     ModifyFiles().jacobMod() # 7
+    print(f"Jacob download: {time.time() - start}")
     # ModifyFiles().b2bsportsMod() # 8
     # ModifyFiles().eeteuropartsMod()
 
     menageSQL()
-
+    sys.stdout.close()
 
 if __name__ == '__main__':
-    pycron.start()
-    # downloadFiles()
+    # pycron.start()
+    downloadFiles()

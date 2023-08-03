@@ -214,6 +214,7 @@ class ModifyFiles():
         import csv
         from dask import dataframe as dd
         import time
+        from datetime import datetime
         from pprint import pprint
 
         cwd = os.getcwd()
@@ -227,67 +228,92 @@ class ModifyFiles():
             os.remove(out_file_name)
 
         fieldnames = ['company', 'ean', 'sku', 'manufacturer', 'title', 'stock', 'price', 'weight']
+        ean_unique = []
         with open(out_file_name, mode='a', encoding='utf-8') as mcsvfh:
             writer = csv.DictWriter(mcsvfh, fieldnames=fieldnames, delimiter=';')
             writer.writeheader()
             start = time.time()
+            i = 1
             for df in pd.read_csv(in_file_name, sep=';', header=0, chunksize=10000):
                 df = df.fillna(0)
                 ddf = df.to_dict('records')
                 dict_list = []
                 for item in ddf:
                     try:
-                        dict_item = {
-                        'company': company,
-                        'ean': int(item['EAN/UPC']),
-                        'sku': item['Sku'],
-                        'manufacturer': item['Hersteller'],
-                        'title': item['Kurzbezeichnung'],
-                        'stock': item['Bestand'],
-                        'price': item['Preis netto'],
-                        'weight': 0
-                        }
-                    except:
-                        continue
+                        if((int(item['EAN/UPC']) != 0) and (int(item['Bestand']) > min_stock) and (int(item['EAN/UPC']) not in ean_unique)):
+                            dict_item = {
+                            'company': company,
+                            'ean': int(item['EAN/UPC']),
+                            'sku': item['Sku'],
+                            'manufacturer': item['Hersteller'],
+                            'title': item['Kurzbezeichnung'],
+                            'stock': item['Bestand'],
+                            'price': item['Preis netto'],
+                            'weight': 0
+                            }
+                            ean_unique.append(int(item['EAN/UPC']))
+                        else:
+                            continue
+                    except Exception as e:
+                        print(e)
+                        pass
 
-                    ean = int(item['EAN/UPC'])
                     dict_list.append(dict_item)
                 writer.writerows(dict_list)
+                print(f"{i} Chunk writed")
+                i += 1
+                if(i == 100):
+                    break
+        
                 
-            end = time.time()
-            print(f"Read csv in: {end-start} sec")
-
-
-        start = time.time()
-        dask_df = dd.read_csv(in_file_name)
-        end = time.time()
-        print("Read csv with dask: ",(end-start),"sec")
-        csv_reader = csv.DictReader(dask_df, delimiter=';')
-
-        dict_list = []
-        for row in csv_reader:
-            dict_list.append(row)
-
-        chunksize = 5
-        dict_list = []
-        for chunk in pd.read_csv(in_file_name, sep=';', chunksize=chunksize):
-            chunk_dict = chunk.to_dict('records') #'records'
-            df = pd.DataFrame.from_dict(chunk_dict)
-            print(df)
-
-            for row in chunk_dict:
-                row_dict = {
-                    'company': company,
-                    'ean': row['EAN/UPC'],
-                    'sku': row['Sku'],
-                    'manufactureer': row['Hersteller'],
-                    'stock': row['Bestand'],
-                    'price': row['Preis netto']
-                }
-                dict_list.append(row_dict)
-            pass
+            elapsed_time = time.time() - start
+            print(f"Read csv in: {elapsed_time} sec")
 
         pass
+
+
+    # def daskJacobMod(self) -> None:
+    #     import dask.dataframe as dd
+    #     import time
+
+    #     cwd = os.getcwd()
+    #     in_file_name = f"{cwd}/DataFiles/Jacob.csv"
+    #     out_file_name = f"{cwd}/ModDataFiles/Jacob.mod.csv"
+    #     file_name = "Jacob.mod.csv"
+    #     company = "Jacob"
+    #     min_stock = 1
+
+    #     start = time.time()
+    #     df = dd.read_csv(in_file_name, usecols=["EAN/UPC", "Sku", "Preis netto"])
+    #     end = time.time()
+    #     print("Read csv with dask: ",(end-start),"sec")
+    #     print(df.head())
+    #     csv_reader = csv.DictReader(dask_df, delimiter=';')
+
+    #     dict_list = []
+    #     for row in csv_reader:
+    #         dict_list.append(row)
+
+    #     chunksize = 5
+    #     dict_list = []
+    #     for chunk in pd.read_csv(in_file_name, sep=';', chunksize=chunksize):
+    #         chunk_dict = chunk.to_dict('records') #'records'
+    #         df = pd.DataFrame.from_dict(chunk_dict)
+    #         print(df)
+
+    #         for row in chunk_dict:
+    #             row_dict = {
+    #                 'company': company,
+    #                 'ean': row['EAN/UPC'],
+    #                 'sku': row['Sku'],
+    #                 'manufactureer': row['Hersteller'],
+    #                 'stock': row['Bestand'],
+    #                 'price': row['Preis netto']
+    #             }
+    #             dict_list.append(row_dict)
+    #         pass
+
+    #     pass
 
     # def jacobMod(self) -> None:
     #     cwd = os.getcwd()
@@ -526,3 +552,4 @@ if __name__ == '__main__':
     # ModifyFiles().nzdMod()
         # ModifyFiles().eeteuropartsMod()
     ModifyFiles().jacobMod()
+        # ModifyFiles().daskJacobMod()
