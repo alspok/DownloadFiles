@@ -28,7 +28,7 @@ class ModifyFiles():
             ean_list = item['eans'].split(':')
             tail_dict = {
                 'sku': item['manufsku'],
-                'manufcturer': item['brand'],
+                'manufacturer': item['brand'],
                 'title': item['description'],
                 'stock': item['availability_jatkasaari'],
                 'price': item['price_wotax'],
@@ -47,7 +47,7 @@ class ModifyFiles():
             if int(item['ean']) not in unique_ean_list and int(item['stock']) >= min_stock :
                 unique_item_dict.append(item)
 
-        fieldnames = unique_item_dict[0].keys()
+        fieldnames = ["company","ean", "sku", "manufacturer", "title", "stock", "price", "weight"]
 
         with open(f"{out_file_name}", mode='w', encoding='utf-8', newline='') as mcsvfh:
             writer = csv.DictWriter(mcsvfh, fieldnames=fieldnames, delimiter=';')
@@ -58,7 +58,7 @@ class ModifyFiles():
 
     # 2
     def apolloMod(self) -> None:
-        in_file_name = f"{self.cwd}/DataFiles/Apollo.csv"
+        in_file_name = f"{self.cwd}/DataFiles/Apollo_pricelist.csv"
         out_file_name = f"{self.cwd}/ModDataFiles/Apollo.mod.csv"
         company = 'Apollo'
         min_stock = 1
@@ -94,7 +94,7 @@ class ModifyFiles():
             except:
                 pass
 
-        fieldnames = unique_item_dict[0].keys()
+        fieldnames = ["company", "ean", "sku", "manufacturer", "title", "stock", "price", "weight"]
 
         with open(f"{out_file_name}", mode='w', encoding='utf-8-sig', newline='') as mcsvfh:
             writer = csv.DictWriter(mcsvfh, fieldnames=fieldnames, delimiter=';')
@@ -142,7 +142,7 @@ class ModifyFiles():
                 print(e)
                 pass
 
-        fieldnames = unique_item_dict[0].keys()
+        fieldnames = ["company", "ean", "sku", "manufacturer", "title", "stock", "price", "weight"]
 
         with open(f"{out_file_name}", mode='w', encoding='utf-8', newline='') as mcsvfh:
             writer = csv.DictWriter(mcsvfh, fieldnames=fieldnames, delimiter=';')
@@ -542,7 +542,7 @@ class ModifyFiles():
 
     #     pass
 
-if __name__ == '__main__':
+# if __name__ == '__main__':
         # ModifyFiles().b2bsportsMod()
     # ModifyFiles().verkkokouppaMod()
     # ModifyFiles().apolloMod()
@@ -551,5 +551,5 @@ if __name__ == '__main__':
     # ModifyFiles().gitanaMod()
     # ModifyFiles().nzdMod()
         # ModifyFiles().eeteuropartsMod()
-    ModifyFiles().jacobMod()
+    # ModifyFiles().jacobMod()
         # ModifyFiles().daskJacobMod()

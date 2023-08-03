@@ -11,7 +11,7 @@ from Classes.MenageSQL import MenageSQL
 import menageSQL
 from urllib.request import urlretrieve
 
-@pycron.cron('*/20 * * * *')
+# @pycron.cron('*/20 * * * *')
 # async def downloadFiles(timestamp: datetime) -> None:
 def downloadFiles() -> None:
     cwd = os.getcwd()
@@ -195,31 +195,31 @@ def downloadFiles() -> None:
     # 
     start = time.time()
     ModifyFiles().verkkokouppaMod() # 1
-    print(f"Verkkokouppa download: {time.time() - start}")
+    print(f"Verkkokouppa modified: {time.time() - start}")
     
     start = time.time()
     ModifyFiles().apolloMod() # 2
-    print(f"Apollo download: {time.time() - start}")
+    print(f"Apollo modified: {time.time() - start}")
 
     start = time.time()
     ModifyFiles().actionMod() # 3
-    print(f"Action download: {time.time() - start}")
+    print(f"Action modified: {time.time() - start}")
 
     start = time.time()
     ModifyFiles().domitechMod() # 4
-    print(f"Domitech download: {time.time() - start}")
+    print(f"Domitech modified: {time.time() - start}")
 
     start = time.time()
     ModifyFiles().gitanaMod() # 5
-    print(f"Gitana download: {time.time() - start}")
+    print(f"Gitana modified: {time.time() - start}")
 
     start = time.time()
     ModifyFiles().nzdMod() # 6
-    print(f"Nzd download: {time.time() - start}")
+    print(f"Nzd modified: {time.time() - start}")
 
     start = time.time()
     ModifyFiles().jacobMod() # 7
-    print(f"Jacob download: {time.time() - start}")
+    print(f"Jacob : {time.time() - start}")
     # ModifyFiles().b2bsportsMod() # 8
     # ModifyFiles().eeteuropartsMod()
 
