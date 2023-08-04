@@ -315,6 +315,8 @@ class ModifyFiles():
                 dict_tag['title'] = elem.text
             if elem.tag == 'stan_liczbowy' and elem.tag.text > min_stock:
                 dict_tag['stock'] = elem.text
+            else:
+                continue
             if elem.tag == 'cena_waluta':
                 dict_tag['price'] = elem.text
             if elem.tag == 'waga':
