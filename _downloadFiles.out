@@ -82,3 +82,12 @@ DB made in 256.88688588142395 sec
 Cron job running at  2023-08-03  19:20:00   ['Verkkokouppa.csv', 'Domitech.xml', 'Apollo.csv', 'Gitana.xml', 'Nzd.xml', 'Action.csv', 'Jacob.csv']
 
 
+Cron job running at  2023-08-03  20:00:00   HTTP Error 503: Service Unavailable
+['Verkkokouppa.csv', 'Domitech.xml', 'Apollo.csv', 'Gitana.xml', 'Nzd.xml', 'Jacob.csv']
+invalid literal for int() with base 10: '5704327157069X'
+DB made in 258.90797686576843 sec
+
+
+Cron job running at  2023-08-03  21:59:00   ['Verkkokouppa.csv', 'Domitech.xml', 'Apollo.csv', 'Gitana.xml', 'Nzd.xml', 'Action.csv', 'Jacob.csv']
+Cron job running at  2023-08-04  10:40:00   ['Verkkokouppa.csv', 'Domitech.xml', 'Apollo.csv', 'Gitana.xml', 'Nzd.xml', 'Action.csv', 'Jacob.csv']
+DB made in 269.47325468063354 sec

@@ -313,7 +313,7 @@ class ModifyFiles():
                 dict_tag['title'] = elem.text
             if elem.tag == 'nazwa':
                 dict_tag['title'] = elem.text
-            if elem.tag == 'stan_liczbowy':
+            if elem.tag == 'stan_liczbowy' and elem.tag.text > min_stock:
                 dict_tag['stock'] = elem.text
             if elem.tag == 'cena_waluta':
                 dict_tag['price'] = elem.text
@@ -342,14 +342,14 @@ class ModifyFiles():
 
         pass
     
-# if __name__ == '__main__':
+if __name__ == '__main__':
         # ModifyFiles().b2bsportsMod()
     # ModifyFiles().verkkokouppaMod()
     # ModifyFiles().apolloMod()
     # ModifyFiles().actionMod()
     # ModifyFiles().domitechMod()
     # ModifyFiles().gitanaMod()
-    # ModifyFiles().nzdMod()
+    ModifyFiles().nzdMod()
         # ModifyFiles().eeteuropartsMod()
     # ModifyFiles().jacobMod()
         # ModifyFiles().daskJacobMod()

@@ -11,7 +11,7 @@ from Classes.MenageSQL import MenageSQL
 from menageSQL import menageSQL
 from urllib.request import urlretrieve
 
-@pycron.cron('*/60 * * * *')
+@pycron.cron('*/40 * * * *')
 async def downloadFiles(timestamp: datetime) -> None:
 # def downloadFiles() -> None:
     cwd = os.getcwd()
