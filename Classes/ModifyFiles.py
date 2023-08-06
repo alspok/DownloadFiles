@@ -299,10 +299,11 @@ class ModifyFiles():
         company = 'NZD'
         min_stock = 1
 
+        dicts_list = []
         dict_list = []
         dict_tag = {}
+
         for _, elem in iterparse(in_file_name, events=("end",)):
-            # if elem.tag == "product":
             if elem.tag == 'kod_kreskowy':
                 dict_tag['ean'] = elem.text
             if elem.tag == 'indeks_handlowy':
@@ -313,33 +314,29 @@ class ModifyFiles():
                 dict_tag['title'] = elem.text
             if elem.tag == 'nazwa':
                 dict_tag['title'] = elem.text
-            if elem.tag == 'stan_liczbowy' and elem.tag.text > min_stock:
+            if elem.tag == 'stan_liczbowy':
                 dict_tag['stock'] = elem.text
-            else:
-                continue
             if elem.tag == 'cena_waluta':
                 dict_tag['price'] = elem.text
             if elem.tag == 'waga':
                 dict_tag['weight'] = elem.text
-
-            if elem.tag == 'zdjecia_list':
-                dict_tag['company'] = company
+            if elem.tag == 'produkt':
                 dict_list.append(dict_tag)
+                dicts_list.append(dict_list)
+                dict_list = []
                 dict_tag = {}
-
             elem.clear()
 
-        i = 0
-        for item in dict_list:
-            if 'ean' not in item.keys():
-                del dict_list[i]
-            i += 1
+        for item in dicts_list:
+            for itm in item:
+                if 'ean' not in itm:
+                    dicts_list.remove(item)
 
         with open(out_file_name, mode='w', encoding='utf-8') as csvfh:
             csv_header = ['company', 'ean', 'sku', 'manufacturer', 'title', 'stock', 'price', 'weight']
             writer = csv.DictWriter(csvfh, fieldnames=csv_header, delimiter=';')
             writer.writeheader()
-            for row in dict_list:
+            for row in dicts_list:
                 writer.writerow(row)
 
         pass
