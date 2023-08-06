@@ -337,14 +337,14 @@ class ModifyFiles():
 
         pass
     
-if __name__ == '__main__':
+# if __name__ == '__main__':
         # ModifyFiles().b2bsportsMod()
     # ModifyFiles().verkkokouppaMod()
     # ModifyFiles().apolloMod()
     # ModifyFiles().actionMod()
     # ModifyFiles().domitechMod()
     # ModifyFiles().gitanaMod()
-    ModifyFiles().nzdMod()
+    # ModifyFiles().nzdMod()
         # ModifyFiles().eeteuropartsMod()
     # ModifyFiles().jacobMod()
         # ModifyFiles().daskJacobMod()
