@@ -299,7 +299,6 @@ class ModifyFiles():
         company = 'NZD'
         min_stock = 1
 
-        dicts_list = []
         dict_list = []
         dict_tag = {}
 
@@ -321,23 +320,20 @@ class ModifyFiles():
             if elem.tag == 'waga':
                 dict_tag['weight'] = elem.text
             if elem.tag == 'produkt':
+                dict_tag['company'] = company
                 dict_list.append(dict_tag)
-                dicts_list.append(dict_list)
-                dict_list = []
                 dict_tag = {}
             elem.clear()
 
-        for item in dicts_list:
-            for itm in item:
-                if 'ean' not in itm:
-                    dicts_list.remove(item)
+        for item in dict_list:
+            if ('ean' not in item) or (int(item['stock']) < min_stock):
+                dict_list.remove(item)
 
         with open(out_file_name, mode='w', encoding='utf-8') as csvfh:
             csv_header = ['company', 'ean', 'sku', 'manufacturer', 'title', 'stock', 'price', 'weight']
             writer = csv.DictWriter(csvfh, fieldnames=csv_header, delimiter=';')
             writer.writeheader()
-            for row in dicts_list:
-                writer.writerow(row)
+            writer.writerows(dict_list)
 
         pass
     
