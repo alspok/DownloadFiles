@@ -21,6 +21,7 @@ class MenageSQL():
                         "company char(255)," \
                         "ean char(255)," \
                         "sku char(255)," \
+                        "category char(255)," \
                         "manufacturer varchar(500)," \
                         "title varchar(2000)," \
                         "stock char(255), " \
@@ -35,10 +36,10 @@ class MenageSQL():
 
         pass
 
-    def dropTable(self, conn, table_name) -> None:
+    def dropTable(self, conn: object, table_name: str) -> None:
         query = f"drop table if exists {table_name}"
         cursor = conn.cursor()
-        cursor. execute(query)
+        cursor.execute(query)
         conn.commit()
 
         cursor.close()
@@ -60,7 +61,7 @@ class MenageSQL():
                     reader = csv.reader(csvfh, delimiter=';')
                     cursor = conn.cursor()
                     for row in reader:
-                        query = f"insert into {table_name} (company, ean, sku, manufacturer, title, stock, price, weight) values (%s,%s,%s,%s,%s,%s,%s,%s)"
+                        query = f"insert into {table_name} (company, ean, sku, category, manufacturer, title, stock, price, weight) values (%s,%s,%s,%s,%s,%s,%s,%s,%s)"
                         cursor.execute(query, row)
                     conn.commit()
 
