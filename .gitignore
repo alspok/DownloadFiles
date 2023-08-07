@@ -1,7 +1,9 @@
 /DataFiles/**
 /ModDataFiles/**
+/Temp/**
 !DataFiles/.gitkeep
 !ModDataFiles/.gitkeep
+!Temp/.gitkeep
 _downloadFiles.out
 nohup.out
 **/__pycache__/

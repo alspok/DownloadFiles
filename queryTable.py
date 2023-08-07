@@ -4,16 +4,21 @@ def queryTable(table_name: str, output_filename: str) -> None:
     conn = msql().connectDB()
     query = f"select manufacturer from {table_name}"
     cursor = conn.cursor()
-    result = cursor.execute(query)
-    conn.commit()
-    cursor.close()
+    cursor.execute(query)
+    result = cursor.fetchall()
+    set_result = list(set(result))
+
+    duplicate_result = {}
+    for i in set(result):
+        duplicate_result[i] = result.count(i)
 
     with open(output_filename, mode='w', encoding='utf-8') as outfh:
-        for row in result:
-            outfh.writeline(row)
+        i = 1
+        for key, value in duplicate_result.items():
+            outfh.write(f"{i}\t{key}\t{value}\n")
+            i += 1
 
-    pass
 
-if '__name__' == '__main':
+if __name__ == '__main__':
     queryTable('e_deals_tbl', 'Temp/data.txt')
     
