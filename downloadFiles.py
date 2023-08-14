@@ -125,7 +125,7 @@ def downloadFiles() -> None:
         #     print(e, file=outfh, end=' ') 
         #     pass
 
-        print(downloadedFiles, end=' ', file=outfh)
+        print(downloadedFiles, file=outfh, end=' ')
         # sys.stdout.flush()
 
         # start = time.time()
@@ -177,7 +177,7 @@ def downloadFiles() -> None:
         start =time.time()
         menageSQL()
         elapsed_time = time.time() - start
-        selapsed_time = round(elapsed_time, 1)
+        selapsed_time = round(elapsed_time, 2)
         print(f"DB made in {selapsed_time} sec", file=outfh)
         # sys.stdout.flush()
 
