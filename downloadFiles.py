@@ -125,7 +125,7 @@ def downloadFiles() -> None:
         #     print(e, file=outfh, end=' ') 
         #     pass
 
-        # print(downloadedFiles, end=' ', file=outfh)
+        print(downloadedFiles, end=' ', file=outfh)
         # sys.stdout.flush()
 
         # start = time.time()
