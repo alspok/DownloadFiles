@@ -115,17 +115,17 @@ def downloadFiles() -> None:
             pass
 
         # Download URL JACOB file haendler_netto.csv output file Jacob.csv
-        try:
-            url = "https://www.jacob.de/content/csvTool/haendler_netto.csv"
-            filename = "Jacob.csv"
-            os.chdir(f"{cwd}/DataFiles")
-            urlretrieve(url, filename)
-            downloadedFiles.append(filename)
-        except Exception as e:
-            print(e, file=outfh, end=' ') 
-            pass
+        # try:
+        #     url = "https://www.jacob.de/content/csvTool/haendler_netto.csv"
+        #     filename = "Jacob.csv"
+        #     os.chdir(f"{cwd}/DataFiles")
+        #     urlretrieve(url, filename)
+        #     downloadedFiles.append(filename)
+        # except Exception as e:
+        #     print(e, file=outfh, end=' ') 
+        #     pass
 
-        print(downloadedFiles, end=' ', file=outfh)
+        # print(downloadedFiles, end=' ', file=outfh)
         # sys.stdout.flush()
 
         # start = time.time()
