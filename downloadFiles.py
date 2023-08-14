@@ -126,49 +126,14 @@ def downloadFiles() -> None:
         #     pass
 
         print(downloadedFiles, file=outfh, end=' ')
-        # sys.stdout.flush()
 
-        # start = time.time()
         ModifyFiles().verkkokouppaMod() # 1
-        # elapsed_time = time.time() - start
-        # print(f"Verkkokouppa modified in {elapsed_time} sec")
-        # sys.stdout.flush()
-        
-        # start = time.time()
         ModifyFiles().apolloMod() # 2
-        # elapsed_time = time.time() - start
-        # print(f"Apollo modified in {elapsed_time} sec")
-        # sys.stdout.flush()
-
-        # start = time.time()
         ModifyFiles().actionMod() # 3
-        # elapsed_time = time.time() - start
-        # print(f"Action modified in {elapsed_time} sec")
-
-        # start = time.time()
         ModifyFiles().domitechMod() # 4
-        # elapsed_time = time.time() - start
-        # print(f"Domitech modified in {elapsed_time} sec")
-        # sys.stdout.flush()
-
-        # start = time.time()
         ModifyFiles().gitanaMod() # 5
-        # elapsed_time = time.time() - start
-        # print(f"Gitana modified in {elapsed_time} sec")
-        # sys.stdout.flush()
-
-        # start = time.time()
         ModifyFiles().nzdMod() # 6
-        # elapsed_time = time.time() - start
-        # print(f"Nzd modified in {elapsed_time} sec")
-        # sys.stdout.flush()
-
-        # start = time.time()
         # ModifyFiles().jacobMod() # 7
-        # elapsed_time = time.time() - start
-        # print(f"Jacob modified in {elapsed_time} sec")
-        # sys.stdout.flush()
-
         # ModifyFiles().b2bsportsMod() # 8
         # ModifyFiles().eeteuropartsMod()
 

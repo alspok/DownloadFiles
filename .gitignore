@@ -10,4 +10,3 @@ nohup.out
 *.py[cod]
 *$py.class
 **/site-packages/*
-
