@@ -9,7 +9,7 @@ def downloadSched() -> None:
     # fdt = dt.strftime("%Y-%m-%d %H:%M:%S")
     # print(f"downloadSched.py runs at: {fdt}")
 
-schedule.every().day.at("00:05").do(downloadSched)
+schedule.every().day.at("05:00").do(downloadSched)
 
 while True:
     schedule.run_pending()
