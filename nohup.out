@@ -1085,3 +1085,66 @@ Traceback (most recent call last):
   File "/var/DownloadFiles/downloadFiles.py", line 168, in downloadFiles
     ModifyFiles().jacobMod() # 7
 AttributeError: 'ModifyFiles' object has no attribute 'jacobMod'
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/dist-packages/croniter/croniter.py", line 190, in _alphaconv
+    return cls.ALPHACONV[index][key]
+KeyError: '/10'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/var/DownloadFiles/downloadFiles.py", line 150, in <module>
+    pycron.start()
+  File "/usr/local/lib/python3.10/dist-packages/pycron/__init__.py", line 79, in start
+    next_run_timestamp: int = croniter(scheduled_function.cron_str, last_run).get_next(float)
+  File "/usr/local/lib/python3.10/dist-packages/croniter/croniter.py", line 183, in __init__
+    self.expanded, self.nth_weekday_of_month = self.expand(expr_format, hash_id=hash_id)
+  File "/usr/local/lib/python3.10/dist-packages/croniter/croniter.py", line 807, in expand
+    return cls._expand(expr_format, hash_id=hash_id)
+  File "/usr/local/lib/python3.10/dist-packages/croniter/croniter.py", line 749, in _expand
+    t = cls._alphaconv(i, t, expressions)
+  File "/usr/local/lib/python3.10/dist-packages/croniter/croniter.py", line 192, in _alphaconv
+    raise CroniterNotAlphaError(
+croniter.croniter.CroniterNotAlphaError: [/10 * * * *] is not acceptable
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/dist-packages/croniter/croniter.py", line 190, in _alphaconv
+    return cls.ALPHACONV[index][key]
+KeyError: '/10'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/var/DownloadFiles/downloadFiles.py", line 150, in <module>
+    pycron.start()
+  File "/usr/local/lib/python3.10/dist-packages/pycron/__init__.py", line 79, in start
+    next_run_timestamp: int = croniter(scheduled_function.cron_str, last_run).get_next(float)
+  File "/usr/local/lib/python3.10/dist-packages/croniter/croniter.py", line 183, in __init__
+    self.expanded, self.nth_weekday_of_month = self.expand(expr_format, hash_id=hash_id)
+  File "/usr/local/lib/python3.10/dist-packages/croniter/croniter.py", line 807, in expand
+    return cls._expand(expr_format, hash_id=hash_id)
+  File "/usr/local/lib/python3.10/dist-packages/croniter/croniter.py", line 749, in _expand
+    t = cls._alphaconv(i, t, expressions)
+  File "/usr/local/lib/python3.10/dist-packages/croniter/croniter.py", line 192, in _alphaconv
+    raise CroniterNotAlphaError(
+croniter.croniter.CroniterNotAlphaError: [/10 * * * *] is not acceptable
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/dist-packages/croniter/croniter.py", line 190, in _alphaconv
+    return cls.ALPHACONV[index][key]
+KeyError: '/10'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/var/DownloadFiles/downloadFiles.py", line 150, in <module>
+    pycron.start()
+  File "/usr/local/lib/python3.10/dist-packages/pycron/__init__.py", line 79, in start
+    next_run_timestamp: int = croniter(scheduled_function.cron_str, last_run).get_next(float)
+  File "/usr/local/lib/python3.10/dist-packages/croniter/croniter.py", line 183, in __init__
+    self.expanded, self.nth_weekday_of_month = self.expand(expr_format, hash_id=hash_id)
+  File "/usr/local/lib/python3.10/dist-packages/croniter/croniter.py", line 807, in expand
+    return cls._expand(expr_format, hash_id=hash_id)
+  File "/usr/local/lib/python3.10/dist-packages/croniter/croniter.py", line 749, in _expand
+    t = cls._alphaconv(i, t, expressions)
+  File "/usr/local/lib/python3.10/dist-packages/croniter/croniter.py", line 192, in _alphaconv
+    raise CroniterNotAlphaError(
+croniter.croniter.CroniterNotAlphaError: [/10 * * * *] is not acceptable

@@ -11,13 +11,14 @@ from Classes.MenageSQL import MenageSQL
 from menageSQL import menageSQL
 from urllib.request import urlretrieve
 
-# @pycron.cron('2 04,18 * * *')
+# @pycron.cron('*/10 * * * *')
 # async def downloadFiles(timestamp: datetime) -> None:
 def downloadFiles() -> None:
     cwd = os.getcwd()
     with open('_downloadFiles.out', 'a') as outfh:
         date_now = datetime.now(pytz.timezone('Europe/Vilnius'))
         print(f"Cron job started at {date_now}", end=' ', file=outfh)
+        # print(f"Cron job started at {date_now}")
 
         downloadedFiles = []
     # def downloadFiles() -> None:
@@ -146,6 +147,6 @@ def downloadFiles() -> None:
         print(f"DB made in {selapsed_time} sec", file=outfh)
         # sys.stdout.flush()
 
-if __name__ == '__main__':
+# if __name__ == '__main__':
     # pycron.start()
-    downloadFiles()
+    # downloadFiles()
