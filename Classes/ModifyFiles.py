@@ -148,7 +148,52 @@ class ModifyFiles():
                 pass
 
         fieldnames = ["company","ean", "sku", "category", "manufacturer", "title", "stock", "price", "weight"]
+        with open(f"{out_file_name}", mode='w', encoding='utf-8', newline='') as mcsvfh:
+            writer = csv.DictWriter(mcsvfh, fieldnames=fieldnames, delimiter=';')
+            writer.writeheader()
+            writer.writerows(unique_item_dict)
 
+        pass
+
+    def cyberportMod() -> None:
+        in_file_name = f"{self.cwd}/DataFiles/Cyberport.csv"
+        out_file_name = f"{self.cwd}/ModDataFiles/Cyberport.mod.csv"
+        company = 'Cyberport'
+        min_stock = 1
+
+        dict_list = []
+        with open(in_file_name, mode='r', encoding='utf-8', errors='ignore') as csvfh:
+            # next(csvfh)
+            csv_reader = csv.DictReader(csvfh, delimiter='|')
+            for row in csv_reader:
+                dict_list.append(row)
+
+        subst_dict_list = []
+        for item in dict_list:
+            subst_dict = {}
+            subst_dict['company'] = company
+            subst_dict['ean'] = item['EAN']
+            subst_dict['sku'] = item['HBNR']
+            subst_dict['category'] = item['Produktgruppe']
+            subst_dict['manufacturer'] = item['Hersteller']
+            subst_dict['title'] = item['Artikelname']
+            subst_dict['stock'] = item['Menge']
+            subst_dict['price'] = item['Preis']
+            subst_dict['weight'] = '0'
+
+            subst_dict_list.append(subst_dict)
+
+        unique_ean_list = []
+        unique_item_dict = []
+        for item in subst_dict_list:
+            try:
+                if (item['ean'] != '') and (int(item['ean']) not in unique_ean_list) and (int(item['stock']) >= min_stock):
+                    unique_item_dict.append(item)
+            except Exception as e:
+                print(e)
+                pass
+
+        fieldnames = ["company","ean", "sku", "category", "manufacturer", "title", "stock", "price", "weight"]
         with open(f"{out_file_name}", mode='w', encoding='utf-8', newline='') as mcsvfh:
             writer = csv.DictWriter(mcsvfh, fieldnames=fieldnames, delimiter=';')
             writer.writeheader()

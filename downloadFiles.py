@@ -82,6 +82,17 @@ def downloadFiles() -> None:
             print(e, file=outfh, end=' ')
             pass
 
+        # Download URL CYBERPORT file. Output Cyberport.csv
+        try:
+            url = "https://get.cpexp.de/4LvAgFKkpGX2n_gyLU-UMrIyjYw44aLrJgrBIz3hyMvH_jpj4A5ufGUNbYrxAjZs/cyberport-feedsmitmengen_resellervertriebnewde.csv"
+            filename = "Cyberport.csv"
+            os.chdir(f"{cwd}/DataFiles")
+            urlretrieve(url, filename)
+            downloadedFiles.append(filename)
+        except Exception as e:
+            print(e, file=outfh, end=' ')
+            pass
+
         # Download URL GITANA file Gitana.xml outputfile Gitana.xml
         try:
             url = "https://www.gitana.lt/modules/exportproducts/out/g7mnFLTUvvPJixYf.xml"
@@ -147,6 +158,6 @@ def downloadFiles() -> None:
         print(f"DB made in {selapsed_time} sec", file=outfh)
         # sys.stdout.flush()
 
-# if __name__ == '__main__':
+if __name__ == '__main__':
     # pycron.start()
-    # downloadFiles()
+    downloadFiles()
