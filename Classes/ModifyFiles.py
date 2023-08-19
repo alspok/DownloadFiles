@@ -155,7 +155,7 @@ class ModifyFiles():
 
         pass
 
-    def cyberportMod() -> None:
+    def cyberportMod(self) -> None:
         in_file_name = f"{self.cwd}/DataFiles/Cyberport.csv"
         out_file_name = f"{self.cwd}/ModDataFiles/Cyberport.mod.csv"
         company = 'Cyberport'
