@@ -30,7 +30,7 @@ class MenageAmazonSQL():
 
         pass
 
-    def dropTable(self, conn: object, table_name: str) -> None:
+    def dropAmazonTable(self, conn: object, table_name: str) -> None:
         query = f"drop table if exists {table_name}"
         cursor = conn.cursor()
         cursor.execute(query)
@@ -40,8 +40,7 @@ class MenageAmazonSQL():
 
         pass
 
-    def insertAmazon
-    Table(self, conn: object, table_name: str, path: str) -> None:
+    def insertAmazonTable(self, conn: object, table_name: str, path: str) -> None:
         import csv
         import os
 

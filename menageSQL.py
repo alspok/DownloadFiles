@@ -15,10 +15,6 @@ def menageSQL() -> None:
 
     pass
 
-def menageAmazonSQL() -> None:
-    table_name = "e_amazon_tbl"
-    path = "/var/DownloadFiles/AmazonFiles"
-    /var/DownloadFiles/AmazonFiles
 
 if __name__ == '__main__':
     menageSQL()
