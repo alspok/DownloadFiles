@@ -1,6 +1,6 @@
 import mysql.connector
 
-class MenageSQL():
+class MenageAmazonSQL():
 
     def connectDB(self) -> object:
         conn = mysql.connector.connect(
@@ -10,25 +10,19 @@ class MenageSQL():
             port = 25060,
             database = 'e_deals_db'
         )
-
+        
         cursor = conn.cursor()
         cursor.execute("set time_zone = 'Europe/Vilnius'")
 
         return conn
-    
-    def createTable(self, conn: object, table_name: str) -> None:
-        table_columns = f"(id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY," \
-                        "company char(255)," \
+
+    def createAmazonTable(self, conn: object, table_name: str) -> None:
+        table_columns = f"(id INT(11) )NOT NULL AUTO_INCREMENT PRIMARY KEY," \
                         "ean char(255)," \
-                        "sku char(255)," \
-                        "category char(255)," \
-                        "manufacturer varchar(500)," \
-                        "title varchar(2000)," \
-                        "stock char(255), " \
-                        "price char(255)," \
-                        "weight char(255)," \
-                        "time_stamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP);"
-        
+                        "asins char(255)," \
+                        "name varchar(2000)," \
+                        "cost char(255));"
+
         cursor = conn.cursor()
         query = f"Create table if not exists {table_name} {table_columns}"
         cursor.execute(query)
@@ -36,7 +30,18 @@ class MenageSQL():
 
         pass
 
-    def insertTable(self, conn: object, table_name: str, path: str) -> None:
+    def dropTable(self, conn: object, table_name: str) -> None:
+        query = f"drop table if exists {table_name}"
+        cursor = conn.cursor()
+        cursor.execute(query)
+        conn.commit()
+
+        cursor.close()
+
+        pass
+
+    def insertAmazon
+    Table(self, conn: object, table_name: str, path: str) -> None:
         import csv
         import os
 
@@ -51,10 +56,11 @@ class MenageSQL():
                     reader = csv.reader(csvfh, delimiter=';')
                     cursor = conn.cursor()
                     for row in reader:
-                        query = f"insert into {table_name} (company, ean, sku, category, manufacturer, title, stock, price, weight) values (%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+                        query = f"insert into {table_name} (ean, asins, name, cost) values (%s,%s,%s,%s)"
                         cursor.execute(query, row)
                     conn.commit()
 
         cursor.close()
 
         pass
+
