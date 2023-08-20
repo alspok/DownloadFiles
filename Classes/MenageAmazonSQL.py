@@ -17,7 +17,7 @@ class MenageAmazonSQL():
         return conn
 
     def createAmazonTable(self, conn: object, table_name: str) -> None:
-        table_columns = f"(id INT(11) )NOT NULL AUTO_INCREMENT PRIMARY KEY," \
+        table_columns = f"(id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY," \
                         "ean char(255)," \
                         "asins char(255)," \
                         "name varchar(2000)," \
