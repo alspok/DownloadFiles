@@ -139,13 +139,14 @@ def downloadFiles() -> None:
 
         print(downloadedFiles, file=outfh, end=' ')
 
+        ModifyFiles().cyberportMod() # 7
         ModifyFiles().verkkokouppaMod() # 1
         ModifyFiles().apolloMod() # 2
         ModifyFiles().actionMod() # 3
         ModifyFiles().domitechMod() # 4
         ModifyFiles().gitanaMod() # 5
         ModifyFiles().nzdMod() # 6
-        ModifyFiles().cyberportMod() # 7
+        
         # ModifyFiles().jacobMod()
         # ModifyFiles().b2bsportsMod()
         # ModifyFiles().eeteuropartsMod()
