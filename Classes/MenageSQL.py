@@ -36,6 +36,20 @@ class MenageSQL():
 
         pass
 
+    def createAmazonTable(self, conn: object, table_name: str) -> None:
+        table_columns = f"(id INT(11) )NOT NULL AUTO_INCREMENT PRIMARY KEY," \
+                        "ean char(255)," \
+                        "asins char(255)," \
+                        "name varchar(2000)," \
+                        "cost char(255));"
+
+        cursor = conn.cursor()
+        query = f"Create table if not exists {table_name} {table_columns}"
+        cursor.execute(query)
+        conn.commit()
+
+        pass
+
     def dropTable(self, conn: object, table_name: str) -> None:
         query = f"drop table if exists {table_name}"
         cursor = conn.cursor()
