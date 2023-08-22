@@ -61,7 +61,7 @@ class MenageSQL():
                     reader = csv.reader(csvfh, delimiter=';')
                     cursor = conn.cursor()
                     for row in reader:
-                        row['title'] = row['title'].replase(';', '').replase('&', '').replase(',', '')
+                        row[5] = row[5].replace(';', '').replace('&', '')
                         query = f"insert into {table_name} (company, ean, sku, category, manufacturer, title, stock, price, weight) values (%s,%s,%s,%s,%s,%s,%s,%s,%s)"
                         cursor.execute(query, row)
                     conn.commit()
