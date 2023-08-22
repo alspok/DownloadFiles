@@ -36,6 +36,16 @@ class MenageSQL():
 
         pass
 
+    def dropTable(self, conn: object, table_name: str) -> None:
+        query = f"drop table if exists {table_name}"
+        cursor = conn.cursor()
+        cursor.execute(query)
+        conn.commit()
+
+        cursor.close()
+
+        pass
+
     def insertTable(self, conn: object, table_name: str, path: str) -> None:
         import csv
         import os
@@ -51,6 +61,7 @@ class MenageSQL():
                     reader = csv.reader(csvfh, delimiter=';')
                     cursor = conn.cursor()
                     for row in reader:
+                        row['title'] = row['title'].replase(';', '').replase('&', '').replase(',', '')
                         query = f"insert into {table_name} (company, ean, sku, category, manufacturer, title, stock, price, weight) values (%s,%s,%s,%s,%s,%s,%s,%s,%s)"
                         cursor.execute(query, row)
                     conn.commit()
