@@ -70,17 +70,35 @@ def downloadFiles() -> None:
             ftp_server = ftplib.FTP(HOSTNAME, USERNAME, PASSWORD, timeout=3600)
             ftp_server.encoding = "utf-8"
             ftp_server.cwd('/MD FTP')
-            filename = "Apollo_pricelist.csv"
+            file_name = "Apollo_pricelist.csv"
             os.chdir(f"{cwd}/DataFiles")
-            with open(filename, "wb") as file:
-                ftp_server.retrbinary(f"RETR {filename}", file.write)
-            ren_filename = "Apollo.csv"
-            os.rename(filename, ren_filename)
-            downloadedFiles.append(ren_filename)
+            with open(file_name, "wb") as file:
+                ftp_server.retrbinary(f"RETR {file_name}", file.write)
+            ren_file_name = "Apollo.csv"
+            os.rename(file_name, ren_file_name)
+            downloadedFiles.append(ren_file_name)
             ftp_server.close()
         except Exception as e:
             print(e, file=outfh, end=' ')
             pass
+        
+        # Download FTP eeteuroparts.csv file. Output file EETeuroparts.csv
+        try:
+            HOSTNAME = "ftp.eetgroup.com"
+            USERNAME = "Ledynas"
+            PASSWORD = "I1Um77Ignl9Fh172y7DPRjMf"
+            ftp_server = ftplib.FTP(HOSTNAME, USERNAME, PASSWORD, timeout=3600)
+            ftp_server.encoding = "utf-8"
+            file_name = "eeteuroparts.csv"
+            os.chdir(f"{cwd}/DataFiles")
+            with open(file_name, "wb") as file:
+                ftp_server.retrbinary(f"RETR {file_name}", file.write)
+            ren_file_name = "EETeuroparts.csv"    
+            os.rename(file_name, ren_file_name)
+            downloadedFiles.append(ren_file_name)
+            ftp_server.close()
+        except Exception as e:
+            print(e, file=outfh, end=' ')
 
         # Download URL CYBERPORT file. Output Cyberport.csv
         try:
