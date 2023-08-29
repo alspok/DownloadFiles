@@ -69,7 +69,6 @@ class ModifyFiles():
 
         dict_list = []
         with open(in_file_name, mode='r', encoding='utf-8', errors='ignore') as csvfh:
-            # next(csvfh)
             csv_reader = csv.DictReader(csvfh, delimiter=';')
             for row in csv_reader:
                 dict_list.append(row)
@@ -81,7 +80,6 @@ class ModifyFiles():
             subst_dict['ean'] = item['EAN']
             subst_dict['sku'] = item['Part Number']
             subst_dict['category'] = ''
-            # item['Vendor'] = item['\ufeffVendor'].replace('\ufeff', '')
             subst_dict['manufacturer'] = item['\ufeffVendor']
             subst_dict['title'] = item['Name']
             subst_dict['stock'] = item['Qty']
@@ -223,10 +221,9 @@ class ModifyFiles():
             subst_dict['category'] = item['Web Category Name']
             subst_dict['manufacturer'] = item['Brand Name']
             subst_dict['title'] = item['Description']
-            subst_dict['stock'] = item['Available for sale']
-            subst_dict['price'] = item['Price'].replace(',', '.')
-            subst_dict['weight'] = item['Gross Weight']
-            subst_dict['check_for'] = item['Beskrivelse 2']
+            subst_dict['stock'] = float(item['Available for sale'].replace(',', '.'))
+            subst_dict['price'] = float(item['Price'].replace(',', '.'))
+            subst_dict['weight'] = float(item['Gross Weight'].replace(',', '.'))
             if "Refurbished" in item['Beskrivelse 2']:
                 continue
             else:
@@ -250,8 +247,8 @@ class ModifyFiles():
 
         pass
 
-    # 4
-    # 5
+    
+        #---------------------------- XML Files modification ----------------------------
     def domitechMod(self) -> None:
         # cwd = os.getcwd()
         in_file_name = f"{self.cwd}/DataFiles/Domitech.xml"
@@ -385,7 +382,7 @@ class ModifyFiles():
 
         
     
-if __name__ == '__main__':
+# if __name__ == '__main__':
         # ModifyFiles().b2bsportsMod()
     # ModifyFiles().verkkokouppaMod()
     # ModifyFiles().apolloMod()
@@ -393,6 +390,6 @@ if __name__ == '__main__':
     # ModifyFiles().domitechMod()
     # ModifyFiles().gitanaMod()
     # ModifyFiles().nzdMod()
-    ModifyFiles().eeteuropartsMod()
+    # ModifyFiles().eetMod()
         # ModifyFiles().jacobMod()
         # ModifyFiles().daskJacobMod()

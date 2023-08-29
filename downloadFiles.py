@@ -105,6 +105,8 @@ def downloadFiles() -> None:
 
             open_ftp.close()
             ssh_client.close()
+            
+            downloadedFiles.append(local_file_name)
         except Exception as e:
             print(e, file=outfh, end=' ')
 
@@ -165,18 +167,18 @@ def downloadFiles() -> None:
 
         print(downloadedFiles, file=outfh, end=' ')
 
-        ModifyFiles().cyberportMod() # 7
         ModifyFiles().verkkokouppaMod() # 1
         ModifyFiles().apolloMod() # 2
         ModifyFiles().actionMod() # 3
         ModifyFiles().domitechMod() # 4
         ModifyFiles().gitanaMod() # 5
         ModifyFiles().nzdMod() # 6
-        ModifyFiles().eetMod()
+        ModifyFiles().eetMod() # 7
+        ModifyFiles().cyberportMod() # 8
+
         
         # ModifyFiles().jacobMod()
         # ModifyFiles().b2bsportsMod()
-        # ModifyFiles().eeteuropartsMod()
 
         pass
 
