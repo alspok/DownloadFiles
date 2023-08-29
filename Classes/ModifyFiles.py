@@ -201,65 +201,56 @@ class ModifyFiles():
 
         pass
 
+    def eetMod(self) -> None:
+        in_file_name = f"{self.cwd}/DataFiles/EETeuroparts.csv"
+        out_file_name = f"{self.cwd}/ModDataFiles/EETeuroparts.mod.csv"
+        company = 'EETeuroparts'
+        min_stock = 1
+
+        dict_list = []
+        with open(in_file_name, mode='r', encoding='utf-8', errors='ignore') as csvfh:
+            # next(csvfh)
+            csv_reader = csv.DictReader(csvfh, delimiter=';')
+            for row in csv_reader:
+                dict_list.append(row)
+
+        subst_dict_list = []
+        for item in dict_list:
+            subst_dict = {}
+            subst_dict['company'] = company
+            subst_dict['ean'] = item['EAN/UPC']
+            subst_dict['sku'] = item['Item Nr']
+            subst_dict['category'] = item['Web Category Name']
+            subst_dict['manufacturer'] = item['Brand Name']
+            subst_dict['title'] = item['Description']
+            subst_dict['stock'] = item['Available for sale']
+            subst_dict['price'] = item['Price'].replace(',', '.')
+            subst_dict['weight'] = item['Gross Weight']
+            subst_dict['check_for'] = item['Beskrivelse 2']
+            if "Refurbished" in item['Beskrivelse 2']:
+                continue
+            else:
+                subst_dict_list.append(subst_dict)
+
+        unique_ean_list = []
+        unique_item_dict = []
+        for item in subst_dict_list:
+            try:
+                if (item['ean'] != '') and (int(item['ean']) not in unique_ean_list) and (int(item['stock']) >= min_stock):
+                    unique_item_dict.append(item)
+            except Exception as e:
+                print(e)
+                pass
+
+        fieldnames = ["company","ean", "sku", "category", "manufacturer", "title", "stock", "price", "weight"]
+        with open(f"{out_file_name}", mode='w', encoding='utf-8', newline='') as mcsvfh:
+            writer = csv.DictWriter(mcsvfh, fieldnames=fieldnames, delimiter=';')
+            writer.writeheader()
+            writer.writerows(unique_item_dict)
+
+        pass
+
     # 4
-    # def jacobMod(self) -> None:
-    #     import pandas as pd
-    #     import csv
-    #     from dask import dataframe as dd
-    #     import time
-    #     from datetime import datetime
-    #     from pprint import pprint
-
-    #     # cwd = os.getcwd()
-    #     in_file_name = f"{self.cwd}/DataFiles/Jacob.csv"
-    #     out_file_name = f"{self.cwd}/ModDataFiles/Jacob.mod.csv"
-    #     file_name = "Jacob.mod.csv"
-    #     company = "Jacob"
-    #     min_stock = 1
-
-    #     if file_name in os.listdir(f"{self.cwd}/ModDataFiles"):
-    #         os.remove(out_file_name)
-
-    #     fieldnames = ['company', 'ean', 'sku', 'manufacturer', 'title', 'stock', 'price', 'weight']
-    #     ean_unique = []
-    #     with open(out_file_name, mode='a', encoding='utf-8') as mcsvfh:
-    #         writer = csv.DictWriter(mcsvfh, fieldnames=fieldnames, delimiter=';')
-    #         writer.writeheader()
-    #         start = time.time()
-    #         i = 1
-    #         for df in pd.read_csv(in_file_name, sep=';', header=0, chunksize=10000):
-    #             df = df.fillna(0)
-    #             ddf = df.to_dict('records')
-    #             dict_list = []
-    #             for item in ddf:
-    #                 try:
-    #                     if((int(item['EAN/UPC']) != 0) and (int(item['Bestand']) > min_stock) and (int(item['EAN/UPC']) not in ean_unique)):
-    #                         dict_item = {
-    #                         'company': company,
-    #                         'ean': int(item['EAN/UPC']),
-    #                         'sku': item['Sku'],
-    #                         'manufacturer': item['Hersteller'],
-    #                         'title': item['Kurzbezeichnung'],
-    #                         'stock': item['Bestand'],
-    #                         'price': item['Preis netto'],
-    #                         'weight': 0
-    #                         }
-    #                         ean_unique.append(int(item['EAN/UPC']))
-    #                     else:
-    #                         continue
-    #                 except Exception as e:
-    #                     print(e)
-    #                     pass
-
-    #                 dict_list.append(dict_item)
-
-    #             writer.writerows(dict_list)
-    #             i += 1
-    #             if(i == 30):
-    #                 break
-                
-    #     pass
-
     # 5
     def domitechMod(self) -> None:
         # cwd = os.getcwd()
@@ -391,8 +382,10 @@ class ModifyFiles():
             writer.writerows(fdict_list)
 
         pass
+
+        
     
-# if __name__ == '__main__':
+if __name__ == '__main__':
         # ModifyFiles().b2bsportsMod()
     # ModifyFiles().verkkokouppaMod()
     # ModifyFiles().apolloMod()
@@ -400,6 +393,6 @@ class ModifyFiles():
     # ModifyFiles().domitechMod()
     # ModifyFiles().gitanaMod()
     # ModifyFiles().nzdMod()
-        # ModifyFiles().eeteuropartsMod()
+    ModifyFiles().eeteuropartsMod()
         # ModifyFiles().jacobMod()
         # ModifyFiles().daskJacobMod()

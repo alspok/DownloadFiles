@@ -1,8 +1,8 @@
 import os
 import sys
 import time
-import pycron
 import ftplib
+import pysftp
 import requests
 from datetime import datetime
 import pytz
@@ -82,21 +82,29 @@ def downloadFiles() -> None:
             print(e, file=outfh, end=' ')
             pass
         
-        # Download FTP eeteuroparts.csv file. Output file EETeuroparts.csv
+        # Download SFTP eeteuroparts.csv file. Output file EETeuroparts.csv
         try:
+            import paramiko
+
+            ssh_client = paramiko.SSHClient()
+
             HOSTNAME = "ftp.eetgroup.com"
             USERNAME = "Ledynas"
             PASSWORD = "I1Um77Ignl9Fh172y7DPRjMf"
-            ftp_server = ftplib.FTP(HOSTNAME, USERNAME, PASSWORD, timeout=3600)
-            ftp_server.encoding = "utf-8"
-            file_name = "eeteuroparts.csv"
+            PORT = 22
+
+            remote_file_name = "eeteuroparts.csv"
+            local_file_name = "EETeuroparts.csv"
             os.chdir(f"{cwd}/DataFiles")
-            with open(file_name, "wb") as file:
-                ftp_server.retrbinary(f"RETR {file_name}", file.write)
-            ren_file_name = "EETeuroparts.csv"    
-            os.rename(file_name, ren_file_name)
-            downloadedFiles.append(ren_file_name)
-            ftp_server.close()
+
+            ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+            ssh_client.connect(hostname=HOSTNAME, port=PORT, username=USERNAME, password=PASSWORD)
+
+            open_ftp = ssh_client.open_sftp()
+            file = open_ftp.get(remote_file_name, local_file_name)
+
+            open_ftp.close()
+            ssh_client.close()
         except Exception as e:
             print(e, file=outfh, end=' ')
 
@@ -164,6 +172,7 @@ def downloadFiles() -> None:
         ModifyFiles().domitechMod() # 4
         ModifyFiles().gitanaMod() # 5
         ModifyFiles().nzdMod() # 6
+        ModifyFiles().eetMod()
         
         # ModifyFiles().jacobMod()
         # ModifyFiles().b2bsportsMod()
