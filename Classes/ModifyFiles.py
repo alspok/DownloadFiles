@@ -385,9 +385,9 @@ class ModifyFiles():
 
         
     
-if __name__ == '__main__':
+# if __name__ == '__main__':
         # ModifyFiles().b2bsportsMod()
-    ModifyFiles().verkkokouppaMod()
+    # ModifyFiles().verkkokouppaMod()
     # ModifyFiles().apolloMod()
     # ModifyFiles().actionMod()
     # ModifyFiles().domitechMod()
