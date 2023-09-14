@@ -48,7 +48,7 @@ class ModifyFiles():
         unique_ean_list = []
         unique_item_dict = []
         for item in subst_dict_list:
-            if int(item['ean']) not in unique_ean_list and int(item['stock']) >= min_stock :
+            if (int(item['ean']) not in unique_ean_list) and (int(item['stock']) >= min_stock) and ('222000' not in item['ean']) :
                 unique_item_dict.append(item)
 
         fieldnames = ["company","ean", "sku", "category", "manufacturer", "title", "stock", "price", "weight"]
@@ -382,10 +382,10 @@ class ModifyFiles():
 
         
     
-# if __name__ == '__main__':
+if __name__ == '__main__':
         # ModifyFiles().b2bsportsMod()
     # ModifyFiles().verkkokouppaMod()
-    # ModifyFiles().apolloMod()
+    ModifyFiles().apolloMod()
     # ModifyFiles().actionMod()
     # ModifyFiles().domitechMod()
     # ModifyFiles().gitanaMod()
