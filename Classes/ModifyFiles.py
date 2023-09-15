@@ -39,11 +39,14 @@ class ModifyFiles():
                 'weight': item['weight']
                 }
             for ean in ean_list:
-                ean_dict = {}
-                ean_dict.update({'company': company})
-                ean_dict.update({'ean': ean})
-                ean_dict.update(tail_dict)
-                subst_dict_list.append(ean_dict)
+                if '222000' in ean:
+                    continue
+                else:
+                    ean_dict = {}
+                    ean_dict.update({'company': company})
+                    ean_dict.update({'ean': ean})
+                    ean_dict.update(tail_dict)
+                    subst_dict_list.append(ean_dict)
 
         unique_ean_list = []
         unique_item_dict = []
