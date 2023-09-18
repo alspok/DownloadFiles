@@ -36,20 +36,20 @@ class MenageSQL():
 
         pass
     
-    def createLinkTable(self, conn: object, table_name: str) -> None:
-        table_columns = f"(id INT(11) NOT NULL AURO_INCREMENT PRIMARY KEY," \
-                        "company char(255)," \
-                        "margin char(255)," \
-                        "min_price char(255)," \
-                        "stock char(255)," \
-                        "time_stamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP);"
+    # def createLinkTable(self, conn: object, table_name: str) -> None:
+    #     table_columns = f"(id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY," \
+    #                     "company char(255)," \
+    #                     "margin char(255)," \
+    #                     "min_price char(255)," \
+    #                     "stock char(255)," \
+    #                     "time_stamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP);"
                         
-        cursor = conn.cursor()
-        query = f"Create table if not exists {table_name} {table_columns}"
-        cursor.execute(query)
-        conn.commit()
+    #     cursor = conn.cursor()
+    #     query = f"Create table if not exists {table_name} {table_columns}"
+    #     cursor.execute(query)
+    #     conn.commit()
         
-        pass
+    #     pass
 
     def dropTable(self, conn: object, table_name: str) -> None:
         query = f"drop table if exists {table_name}"
@@ -83,4 +83,9 @@ class MenageSQL():
 
         cursor.close()
 
+        pass
+    
+    def updateTable(self, conn: object, table_name: str) -> None:
+        
+        
         pass
