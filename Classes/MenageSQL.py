@@ -36,7 +36,7 @@ class MenageSQL():
 
         pass
     
-    def createLinkTable(self, conn: object, table_name: str) -> None
+    def createLinkTable(self, conn: object, table_name: str) -> None:
         table_columns = f"(id INT(11) NOT NULL AURO_INCREMENT PRIMARY KEY," \
                         "company char(255)," \
                         "margin char(255)," \
